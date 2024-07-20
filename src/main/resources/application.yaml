@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: TatkoSpringDemoBotBackEnd
+
+telegram:
+  bot:
+    name: TatkoSpringDemoBot
+    token: 7453378508:AAGyiD9WW0iqPmU1TlSZ3CGbpUW5Lz2lolk
+
+
