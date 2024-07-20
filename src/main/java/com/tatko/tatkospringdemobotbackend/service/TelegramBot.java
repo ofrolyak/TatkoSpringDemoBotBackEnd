@@ -1,8 +1,11 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,6 +22,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
 
+        log.info("Received update: {}", update);
+
         if (update.hasMessage() && update.getMessage().hasText()) {
 
             long chatId = update.getMessage().getChatId();
@@ -30,33 +35,33 @@ public class TelegramBot extends TelegramLongPollingBot {
                     startCommandReceived(chatId, firstName);
                     break;
                 default:
-                    //sendMessage(chatId, "Sorry, command was not recognized!!!");
                     sendMessage(chatId, "Головне в нашому житті - не тупікувати!!!");
-
+                    break;
             }
         }
 
     }
 
     void startCommandReceived(long chatId, String name) {
-        String message = "Hi " + name + " from " + chatId + "!" +
-                " Nice to meet you!!!";
+
+        log.info("Starting command received: {}", name);
+
+        String message = "Hi " + name + " from " + chatId + "! Nice to meet you!!!";
 
         sendMessage(chatId, message);
     }
 
+    @SneakyThrows
+    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
     void sendMessage(long chatId, String message) {
+
+        log.info("Sending message: {}", message);
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
 
-        try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
-
+        execute(sendMessage);
 
     }
 
