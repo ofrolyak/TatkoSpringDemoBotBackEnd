@@ -5,7 +5,7 @@ spring:
 telegram:
   bot:
     name: TatkoSpringDemoBot
-    token: 7453378508:AAGyiD9WW0iqPmU1TlSZ3CGbpUW5Lz2lolk
+    token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
 logging:
   level:
