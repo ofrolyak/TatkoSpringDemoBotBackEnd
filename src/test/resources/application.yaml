@@ -1,0 +1,12 @@
+telegram:
+  bot:
+    name: TELEGRAM_BOT_NAME_STUB
+    token: TELEGRAM_BOT_TOKEN_STUB
+
+logging:
+  level:
+    root: OFF
+
+spring:
+  profiles:
+    active: test
