@@ -3,7 +3,6 @@ package com.tatko.tatkospringdemobotbackend.service;
 import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
 import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import com.tatko.tatkospringdemobotbackend.entity.User;
-import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,10 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -33,11 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     UserDao userDao;
 
-//    @PostConstruct
-//    public void postConstructInit(){
-//
-//        addCommandToBot();
-//    }
+    private final Set<BotCommandCustom> botCommandsSet = buildBotCommandsMap();
 
     public void registerUser(Message message) {
 
@@ -55,50 +51,69 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
+    public void processReceivedSpecificMessage(Update update, Action action) {
+
+        botCommandsSet.stream()
+                .filter(botCommandCustom -> botCommandCustom.getAction().equals(action))
+                .map(BotCommandCustom::getConsumer)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new)
+                .accept(update);
+    }
+
+    public void processReceivedMessage(Update update) {
+
+        long chatId = update.getMessage().getChatId();
+        String messageText = update.getMessage().getText();
+
+        Optional<Action> actionOptional = botCommandsSet.stream()
+                .filter(botCommand -> botCommand.getMessageText().equals(messageText))
+                .map(BotCommandCustom::getAction)
+                .findFirst();
+
+        actionOptional.ifPresentOrElse(_ -> processReceivedSpecificMessage(update, actionOptional.get()), () -> sendMessage(chatId, "Головне в нашому житті - не тупікувати!!!"));
+
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
 
         log.info("Received update: {}", update);
 
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage() && update.getMessage().hasText())
+            processReceivedMessage(update);
 
+    }
+
+    private Set<BotCommandCustom> buildBotCommandsMap() {
+        Set<BotCommandCustom> botCommandSet = new HashSet<>();
+        botCommandSet.add(new BotCommandCustom(Action.START, "/start", "get welcome message", update -> {
+            Message message = update.getMessage();
             long chatId = update.getMessage().getChatId();
             String firstName = update.getMessage().getChat().getFirstName();
-            String messageText = update.getMessage().getText();
+            registerUser(message);
+            startCommandReceived(chatId, firstName);
+        }));
+        botCommandSet.add(new BotCommandCustom(Action.GET_MY_DATA, "/getmydata", "get your data", update -> {}));
+        botCommandSet.add(new BotCommandCustom(Action.DELETE_MY_DATA, "/deletemydata", "delete your data", update -> {}));
+        botCommandSet.add(new BotCommandCustom(Action.HELP, "/help", "how to use this bot", update -> {
+            long chatId = update.getMessage().getChatId();
+            sendMessage(chatId, "This is bot for demonstration how to Spring Boot works with Telegram.");
+        }));
+        botCommandSet.add(new BotCommandCustom(Action.SETTINGS, "/settings", "settings and preferences", update -> {}));
+        return botCommandSet;
+    }
 
-
-            Optional<Action> actionOptional = Action.fromString(messageText);
-
-            if (actionOptional.isEmpty())
-                sendMessage(chatId, "Головне в нашому житті - не тупікувати!!!");
-            else {
-                switch (actionOptional.get()) {
-                    case START:
-                        registerUser(update.getMessage());
-                        startCommandReceived(chatId, firstName);
-                        break;
-                    case HELP:
-                        sendMessage(chatId, "This is bot for demonstration how to Spring Boot works with Telegram.");
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-                }
-            }
-
-
-
-        }
-
+    public List<BotCommand> buildBotCommands() {
+        return buildBotCommandsMap()
+                .stream()
+                .map(botCommandCustom -> new BotCommand(botCommandCustom.getMessageText(), botCommandCustom.getDescription()))
+                .toList();
     }
 
     @SneakyThrows
     public void addCommandToBot() {
-        List<BotCommand> botCommandList = new ArrayList<>();
-        botCommandList.add(new BotCommand("/start", "get welcome message"));
-        botCommandList.add(new BotCommand("/getmydata", "get your data"));
-        botCommandList.add(new BotCommand("/deletemydata", "delete your data"));
-        botCommandList.add(new BotCommand("/help", "how to use this bot"));
-        botCommandList.add(new BotCommand("/settings", "settings and preferences"));
+        List<BotCommand> botCommandList = buildBotCommands();
         execute(new SetMyCommands(botCommandList, new BotCommandScopeDefault(), null));
     }
 

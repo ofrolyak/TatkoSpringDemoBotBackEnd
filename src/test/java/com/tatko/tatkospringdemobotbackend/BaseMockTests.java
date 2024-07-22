@@ -1,5 +1,6 @@
 package com.tatko.tatkospringdemobotbackend;
 
+import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest
@@ -22,4 +24,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class BaseMockTests {
 
     public EasyRandomCustom gen = new EasyRandomCustom();
+
+    @MockBean
+    UserDao userDao;
+
+
 }
