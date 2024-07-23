@@ -130,7 +130,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         log.info("Starting command received: {}", name);
 
-        String message = "Hi " + name + " from " + chatId + "! Nice to meet you!!!";
+        String message = "Hi " + name + " from " + chatId + "! Nice to meet you!!!" + "\uD83C\uDF4C";
 
         sendMessage(chatId, message);
     }

@@ -39,6 +39,7 @@
         <jaxb.api.version>2.3.0</jaxb.api.version>
         <flyway.database.postgresql.version>10.16.0</flyway.database.postgresql.version>
         <log4jdbc.version>1.1.0</log4jdbc.version>
+        <emoji.java.version>5.1.0</emoji.java.version>
     </properties>
 
     <dependencyManagement>
@@ -92,6 +93,11 @@
                 <groupId>ru.vasiand</groupId>
                 <artifactId>spring-boot-starter-log4jdbc</artifactId>
                 <version>${log4jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vdurmont</groupId>
+                <artifactId>emoji-java</artifactId>
+                <version>${emoji.java.version}</version>
             </dependency>
 
         </dependencies>
@@ -157,7 +163,10 @@
             <groupId>ru.vasiand</groupId>
             <artifactId>spring-boot-starter-log4jdbc</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>emoji-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
