@@ -1,0 +1,50 @@
+package com.tatko.tatkospringdemobotbackend.service;
+
+import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.telegram.telegrambots.meta.api.objects.Chat;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.util.function.Consumer;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+class TelegramBot_acceptBotCommandCustom_Test extends BaseMockTests {
+
+    @Spy
+    BotCommandCustom botCommandCustom;
+    @InjectMocks
+    TelegramBot telegramBot;
+
+    @Test
+    void acceptBotCommandCustom_Test() {
+
+        // Before
+        Update update = new Update();
+        Message message = new Message();
+        Chat chat = new Chat();
+        chat.setId(gen.nextLong());
+        message.setChat(chat);
+        message.setText("sth");
+        update.setMessage(message);
+
+        // When
+        doReturn((Consumer<Object>) _ -> {})
+                .when(botCommandCustom)
+                .getConsumer();
+
+        // Action
+        telegramBot.acceptBotCommandCustom(botCommandCustom, update);
+
+        // Verify
+        verify(botCommandCustom, times(1)).getConsumer();
+
+    }
+
+}

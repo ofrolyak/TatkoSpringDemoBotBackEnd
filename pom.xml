@@ -177,14 +177,7 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-<!--                        <exclude>com/ericsson/cnum/apis/models/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/refdata/apis/models/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/inventory/models/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/selection/model/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/pool/model/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/summary/models/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/lock/model/**.class</exclude>-->
-<!--                        <exclude>com/ericsson/cnum/config/**.class</exclude>-->
+                        <exclude>com/tatko/tatkospringdemobotbackend/entity/**.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -200,14 +193,9 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <!--                        <configuration>-->
-                        <!--                            <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>-->
-                        <!--                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>-->
-                        <!--                        </configuration>-->
                     </execution>
                     <execution>
                         <id>check-coverage</id>
-                        <!--                        <phase>verify</phase>-->
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>check</goal>
