@@ -16,4 +16,6 @@ public class BotCommandCustom {
     private String messageText;
     private String description;
     private Consumer<Update> consumer;
+
+
 }
