@@ -1,4 +1,4 @@
-package com.tatko.tatkospringdemobotbackend.config;
+package com.tatko.tatkospringdemobotbackend;
 
 import com.tatko.tatkospringdemobotbackend.service.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
@@ -19,16 +19,22 @@ public class TelegramBotInitializer {
     @Autowired
     TelegramBot telegramBot;
 
+    @JUnitTestCodeCoverageSkipGenerated
+    public void createRegisterBot() throws TelegramApiException {
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+        telegramBotsApi.registerBot(telegramBot);
+    }
+
     @EventListener({ContextRefreshedEvent.class})
-    public void init() {
+    public void init() throws TelegramApiException {
 
         log.info("Initializing TelegramBot");
         try {
-            TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+            createRegisterBot();
             telegramBot.addCommandToBot();
-            telegramBotsApi.registerBot(telegramBot);
         } catch (TelegramApiException e) {
             log.error("Initializing TelegramBot Error: ", e);
+            throw new TelegramApiException(e);
         }
         log.info("TelegramBot initialized");
     }

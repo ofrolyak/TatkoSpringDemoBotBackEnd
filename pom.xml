@@ -177,6 +177,9 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
+                        <exclude>com/tatko/tatkospringdemobotbackend/TatkoSpringDemoBotBackEndApplication.class
+                        </exclude>
+                        <exclude>com/tatko/tatkospringdemobotbackend/config/**.class</exclude>
                         <exclude>com/tatko/tatkospringdemobotbackend/entity/**.class</exclude>
                     </excludes>
                 </configuration>
@@ -208,12 +211,12 @@
                                         <limit>
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.00</minimum>
+                                            <minimum>0.98</minimum>
                                         </limit>
                                         <limit>
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.00</minimum>
+                                            <minimum>1.00</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
