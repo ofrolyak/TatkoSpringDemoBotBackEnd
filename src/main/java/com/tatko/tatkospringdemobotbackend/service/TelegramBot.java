@@ -17,9 +17,12 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +39,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Getter
     private final Set<BotCommandCustom> botCommandsSet = buildBotCommandsMap();
+
+    private final ReplyKeyboardMarkup replyKeyboardMarkup = buildReplyKeyboardMarkup();
 
     public void registerUser(Message message) {
 
@@ -95,7 +100,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public void processHelpAction(Update update) {
         long chatId = update.getMessage().getChatId();
-        sendMessage(chatId, "This is bot for demonstration how to Spring Boot works with Telegram.");
+        sendMessage(chatId, "This is bot for demonstration how to Spring Boot works with Telegram.", replyKeyboardMarkup);
 
     }
 
@@ -135,6 +140,26 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage(chatId, message);
     }
 
+    public ReplyKeyboardMarkup buildReplyKeyboardMarkup() {
+
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboardRowList = new ArrayList<>();
+        KeyboardRow keyboardRow1 = new KeyboardRow();
+        keyboardRow1.add("weather");
+        keyboardRow1.add("get random joke");
+        keyboardRowList.add(keyboardRow1);
+
+        KeyboardRow keyboardRow2 = new KeyboardRow();
+        keyboardRow2.add("register");
+        keyboardRow2.add("check my data");
+        keyboardRow2.add("delete my data");
+        keyboardRowList.add(keyboardRow2);
+
+        replyKeyboardMarkup.setKeyboard(keyboardRowList);
+
+        return replyKeyboardMarkup;
+    }
+
     @SneakyThrows
     @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
     public void sendMessage(long chatId, String message) {
@@ -144,6 +169,21 @@ public class TelegramBot extends TelegramLongPollingBot {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
+
+        execute(sendMessage);
+
+    }
+
+    @SneakyThrows
+    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
+    public void sendMessage(long chatId, String message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+
+        log.info("Sending message: {}", message);
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(message);
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
 
         execute(sendMessage);
 

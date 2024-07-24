@@ -7,8 +7,10 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -39,13 +41,13 @@ class TelegramBot_processHelpAction_Test extends BaseMockTests {
         // When
         doNothing()
                 .when(telegramBot)
-                .sendMessage(anyLong(), anyString());
+                .sendMessage(eq(chat.getId()), anyString(), any(ReplyKeyboardMarkup.class));
 
         // Then
         assertThatCode(() -> telegramBot.processHelpAction(update))
                 .doesNotThrowAnyException();
         verify(telegramBot, times(1))
-                .sendMessage(eq(chat.getId()), anyString());
+                .sendMessage(eq(chat.getId()), anyString(), any(ReplyKeyboardMarkup.class));
 
     }
 
