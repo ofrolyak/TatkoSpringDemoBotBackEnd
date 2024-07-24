@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class TelegramBot_sendMessage_Test extends BaseMockTests {
+class TelegramBot_sendMessage_2params_Test extends BaseMockTests {
 
     @Spy
     @InjectMocks
