@@ -1,20 +1,24 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-class TelegramBot_getBotUsername_Test extends BaseMockTests {
+class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
+
+    @Spy
+    @InjectMocks
+    TelegramBot telegramBot;
+
 
     @Mock
     TelegramBotConfig telegramBotConfig;
-    @InjectMocks
-    TelegramBot telegramBot;
 
     @Test
     void getBotUsername_Test() {

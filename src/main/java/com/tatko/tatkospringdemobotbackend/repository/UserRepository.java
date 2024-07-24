@@ -9,6 +9,11 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    /**
+     * Find User.
+     * @param chatId Identifier for Telegram Chat
+     * @return Optional<User> of Optional.empty() if the user is not found
+     */
     Optional<User> findByChatId(Long chatId);
 
 }

@@ -1,9 +1,8 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -15,10 +14,11 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_acceptBotCommandCustom_Test extends BaseMockTests {
+class TelegramBot_acceptBotCommandCustom_Test extends MockitoExtensionBaseMockTests {
 
     @Spy
     BotCommandCustom botCommandCustom;
+    @Spy
     @InjectMocks
     TelegramBot telegramBot;
 

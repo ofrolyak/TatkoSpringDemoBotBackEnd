@@ -1,18 +1,21 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-class TelegramBot_processNoAction_Test extends BaseMockTests {
+class TelegramBot_processNoAction_Test extends MockitoExtensionBaseMockTests {
 
+    @Spy
     @InjectMocks
     TelegramBot telegramBot;
+
 
     @Test
     void processNoAction_Test() {

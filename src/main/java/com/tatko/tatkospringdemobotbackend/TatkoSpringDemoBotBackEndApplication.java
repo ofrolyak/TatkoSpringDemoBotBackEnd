@@ -6,8 +6,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TatkoSpringDemoBotBackEndApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TatkoSpringDemoBotBackEndApplication.class, args);
-	}
+    /**
+     * MAIN method.
+     * @param args
+     */
+    public static void main(final String[] args) {
+        SpringApplication.run(
+            TatkoSpringDemoBotBackEndApplication.class, args);
+    }
 
+    /**
+     * DUMMY for hideutilityclassconstructor by CheckStyle.
+     */
+    public final void foo() {
+        throw new UnsupportedOperationException();
+    }
 }

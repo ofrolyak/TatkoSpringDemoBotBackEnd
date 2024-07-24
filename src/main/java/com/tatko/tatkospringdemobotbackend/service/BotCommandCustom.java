@@ -12,9 +12,21 @@ import java.util.function.Consumer;
 @NoArgsConstructor
 public class BotCommandCustom {
 
+    /**
+     * Action.
+     */
     private Action action;
+    /**
+     * Message text that referring for this action.
+     */
     private String messageText;
+    /**
+     * Description.
+     */
     private String description;
+    /**
+     * Consumer that process this action.
+     */
     private Consumer<Update> consumer;
 
 
