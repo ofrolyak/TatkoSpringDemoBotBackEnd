@@ -29,7 +29,7 @@ public class TelegramBotInitializer {
 
     /**
      * Create registered Telegram bot.
-     * @throws TelegramApiException
+     * @throws TelegramApiException Possible checked TelegramApiException
      */
     public void createRegisterBot() throws TelegramApiException {
         TelegramBotsApi telegramBotsApi

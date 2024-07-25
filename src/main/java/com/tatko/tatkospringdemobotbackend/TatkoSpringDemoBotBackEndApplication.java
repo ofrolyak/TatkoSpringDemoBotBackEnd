@@ -11,7 +11,7 @@ public class TatkoSpringDemoBotBackEndApplication {
 
     /**
      * MAIN method.
-     * @param args
+     * @param args Input arguments.
      */
     public static void main(final String[] args) {
         SpringApplication.run(
@@ -21,6 +21,7 @@ public class TatkoSpringDemoBotBackEndApplication {
     /**
      * DUMMY for hideutilityclassconstructor by CheckStyle.
      */
+    @SuppressWarnings("unused")
     public final void foo() {
         throw new UnsupportedOperationException();
     }
