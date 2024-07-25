@@ -7,6 +7,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.function.Consumer;
 
+/**
+ * Service information for specific action.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

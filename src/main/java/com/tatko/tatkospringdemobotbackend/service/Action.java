@@ -1,5 +1,8 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
+/**
+ * Actions.
+ */
 public enum Action {
 
     /**

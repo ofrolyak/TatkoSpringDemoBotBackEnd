@@ -30,6 +30,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Telegram Bot service.
+ */
 @NoArgsConstructor
 @Component
 @Slf4j

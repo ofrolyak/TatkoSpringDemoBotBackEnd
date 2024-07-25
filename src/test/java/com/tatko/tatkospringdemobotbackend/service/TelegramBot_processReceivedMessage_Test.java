@@ -10,6 +10,9 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+/**
+ * JUnit class for TelegramBot class processReceivedMessage method.
+ */
 class TelegramBot_processReceivedMessage_Test
         extends MockitoExtensionBaseMockTests {
 

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Data Access Object for User entity.
+ */
 @Service
 public class UserDao {
 

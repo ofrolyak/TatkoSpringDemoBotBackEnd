@@ -14,6 +14,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+/**
+ * JUnit class for TelegramBot class processStartAction method.
+ */
 class TelegramBot_processStartAction_Test
         extends MockitoExtensionBaseMockTests {
 

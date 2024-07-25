@@ -13,6 +13,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Collections;
 
+/**
+ * JUnit class for TelegramBot class addCommandToBot method.
+ */
 class TelegramBot_addCommandToBot_Test
         extends MockitoExtensionBaseMockTests {
 

@@ -11,6 +11,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.function.Consumer;
 
+/**
+ * JUnit class for TelegramBot class acceptBotCommandCustom method.
+ */
 class TelegramBot_acceptBotCommandCustom_Test
         extends MockitoExtensionBaseMockTests {
 

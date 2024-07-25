@@ -20,6 +20,9 @@ package com.tatko.tatkospringdemobotbackend;
 //import static org.mockito.Mockito.times;
 //import static org.mockito.Mockito.verify;
 
+/**
+ * JUnit test for TelegramBotInitializer class init method
+ */
 class TelegramBotInitializer_init_Test extends BaseMockTests {
 
 //    @MockBean
