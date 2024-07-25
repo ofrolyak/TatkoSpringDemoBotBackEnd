@@ -1,6 +1,6 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
@@ -13,11 +13,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_onUpdateReceived_Test extends BaseMockTests {
+class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
     TelegramBot telegramBot;
+
 
     @Test
     void onUpdateReceived_noMessage_Test() {

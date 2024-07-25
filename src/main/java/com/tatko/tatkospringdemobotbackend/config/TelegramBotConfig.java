@@ -10,10 +10,16 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 public class TelegramBotConfig {
 
+    /**
+     * Telegram Bot Name.
+     */
     @Value("${telegram.bot.name}")
-    String telegramBotName;
+    private String telegramBotName;
 
+    /**
+     * Telegram Bot Token.
+     */
     @Value("${telegram.bot.token}")
-    String telegramBotToken;
+    private String telegramBotToken;
 
 }

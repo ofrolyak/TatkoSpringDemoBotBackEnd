@@ -14,24 +14,35 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 @Profile("prod")
+@JUnitTestCodeCoverageSkipGenerated
 public class TelegramBotInitializer {
 
+    /**
+     * TelegramBot itself.
+     */
     @Autowired
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
-    @JUnitTestCodeCoverageSkipGenerated
+    /**
+     * Create registered Telegram bot.
+     * @throws TelegramApiException
+     */
     public void createRegisterBot() throws TelegramApiException {
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+        TelegramBotsApi telegramBotsApi
+                = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(telegramBot);
     }
 
+    /**
+     * Init registered Telegram bot.
+     */
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {
 
         log.info("Initializing TelegramBot");
         try {
             createRegisterBot();
-            telegramBot.addCommandToBot();
+            telegramBot.addPreparedBotCommandsToBot();
         } catch (TelegramApiException e) {
             log.error("Initializing TelegramBot Error: ", e);
             throw new TelegramApiException(e);

@@ -4,6 +4,8 @@ import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
 import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +30,47 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@NoArgsConstructor
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
 
+    /**
+     * TelegramBotConfig itself.
+     */
     @Autowired
-    TelegramBotConfig telegramBotConfig;
-    @Autowired
-    UserDao userDao;
+    private TelegramBotConfig telegramBotConfig;
 
+    /**
+     * UserDao itself.
+     */
+    @Setter
+    @Autowired
+    private UserDao userDao;
+
+    /**
+     * Created and filled collection with BotCommandCustom instances.
+     */
     @Getter
     private final Set<BotCommandCustom> botCommandsSet = buildBotCommandsMap();
 
-    private final ReplyKeyboardMarkup replyKeyboardMarkup = buildReplyKeyboardMarkup();
+    /**
+     * Created and filled ReplyKeyboardMarkup instance.
+     */
+    private final ReplyKeyboardMarkup replyKeyboardMarkupInstance1
+            = buildReplyKeyboardMarkup();
 
-    public void registerUser(Message message) {
+    /**
+     * A canonical backoff period is equal to 100 milliseconds.
+     */
+    public static final int RETRYABLE_BACKOFF_DELAY = 100;
+
+    /**
+     * Register User. If he's already registered do nothing.
+     *
+     * @param message
+     */
+    public void registerUser(final Message message) {
 
         if (userDao.findByChatId(message.getChatId()).isEmpty()) {
 
@@ -58,39 +86,74 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    public Optional<BotCommandCustom> parseBotCommandCustom(String messageText) {
+    /**
+     * Based on input text message from user parse it
+     * and return specific structure class.
+     *
+     * @param messageText
+     * @return Specific structure class
+     */
+    public Optional<BotCommandCustom> parseBotCommandCustom(
+            final String messageText) {
         return botCommandsSet.stream()
-                .filter(botCommand -> botCommand.getMessageText().equals(messageText))
+                .filter(botCommand
+                        -> botCommand.getMessageText().equals(messageText))
                 .findFirst();
     }
 
-    public void acceptBotCommandCustom(BotCommandCustom botCommandCustom, Update update) {
+    /**
+     * Accept passed botCommandCustom and launch actions based on it.
+     *
+     * @param botCommandCustom
+     * @param update
+     */
+    public void acceptBotCommandCustom(final BotCommandCustom botCommandCustom,
+                                       final Update update) {
         botCommandCustom.getConsumer().accept(update);
     }
 
-    public void processReceivedMessage(Update update) {
+    /**
+     * Process received message.
+     *
+     * @param update
+     */
+    public void processReceivedMessage(final Update update) {
 
         long chatId = update.getMessage().getChatId();
         String messageText = update.getMessage().getText();
 
-        Optional<BotCommandCustom> botCommandCustomOptional = parseBotCommandCustom(messageText);
+        Optional<BotCommandCustom> botCommandCustomOptional
+                = parseBotCommandCustom(messageText);
 
-        botCommandCustomOptional.ifPresentOrElse(_ -> acceptBotCommandCustom(botCommandCustomOptional.get(), update),
-                () -> sendMessage(chatId, "Головне в нашому житті - не тупікувати!!!"));
+        botCommandCustomOptional.ifPresentOrElse(_
+                        -> acceptBotCommandCustom(
+                        botCommandCustomOptional.get(), update),
+                () -> sendMessage(chatId,
+                        "Головне в нашому житті - не тупікувати!!!"));
 
     }
 
+    /**
+     * Sth.
+     * @param update Update received
+     */
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(final Update update) {
 
         log.info("Received update: {}", update);
 
-        if (update.hasMessage() && update.getMessage().hasText())
+        if (update.hasMessage() && update.getMessage().hasText()) {
             processReceivedMessage(update);
+        }
 
     }
 
-    public void processStartAction(Update update) {
+    /**
+     * Process START action.
+     *
+     * @param update
+     */
+    public void processStartAction(final Update update) {
         Message message = update.getMessage();
         long chatId = update.getMessage().getChatId();
         String firstName = update.getMessage().getChat().getFirstName();
@@ -98,48 +161,87 @@ public class TelegramBot extends TelegramLongPollingBot {
         startCommandReceived(chatId, firstName);
     }
 
-    public void processHelpAction(Update update) {
+    /**
+     * Process HELP action.
+     * @param update
+     */
+    public void processHelpAction(final Update update) {
         long chatId = update.getMessage().getChatId();
-        sendMessage(chatId, "This is bot for demonstration how to Spring Boot works with Telegram.", replyKeyboardMarkup);
+        sendMessage(chatId, "This is bot for demonstration how to Spring Boot"
+                + " works with Telegram.", replyKeyboardMarkupInstance1);
 
     }
 
-    public void processNoAction(Update update) {
+    /**
+     * Process no action.
+     * @param update
+     */
+    public void processNoAction(final Update update) {
 
     }
 
+    /**
+     * Build BotCommandCustom.
+     * @return Set of BotCommandCustom
+     */
     private Set<BotCommandCustom> buildBotCommandsMap() {
         Set<BotCommandCustom> botCommandSet = new HashSet<>();
-        botCommandSet.add(new BotCommandCustom(Action.START, "/start", "get welcome message", this::processStartAction));
-        botCommandSet.add(new BotCommandCustom(Action.GET_MY_DATA, "/getmydata", "get your data", this::processNoAction));
-        botCommandSet.add(new BotCommandCustom(Action.DELETE_MY_DATA, "/deletemydata", "delete your data", this::processNoAction));
-        botCommandSet.add(new BotCommandCustom(Action.HELP, "/help", "how to use this bot", this::processHelpAction));
-        botCommandSet.add(new BotCommandCustom(Action.SETTINGS, "/settings", "settings and preferences", this::processNoAction));
+        botCommandSet.add(new BotCommandCustom(Action.START,
+                "/start", "get welcome message", this::processStartAction));
+        botCommandSet.add(new BotCommandCustom(Action.GET_MY_DATA,
+                "/getmydata", "get your data", this::processNoAction));
+        botCommandSet.add(new BotCommandCustom(Action.DELETE_MY_DATA,
+                "/deletemydata", "delete your data", this::processNoAction));
+        botCommandSet.add(new BotCommandCustom(Action.HELP,
+                "/help", "how to use this bot", this::processHelpAction));
+        botCommandSet.add(new BotCommandCustom(Action.SETTINGS,
+                "/settings", "settings and preferences",
+                this::processNoAction));
         return botCommandSet;
     }
 
+    /**
+     * Build BotCommandList.
+     * @return List of BotCommand
+     */
     public List<BotCommand> buildBotCommands() {
         return buildBotCommandsMap()
                 .stream()
-                .map(botCommandCustom -> new BotCommand(botCommandCustom.getMessageText(), botCommandCustom.getDescription()))
+                .map(botCommandCustom -> new BotCommand(
+                        botCommandCustom.getMessageText(),
+                        botCommandCustom.getDescription()))
                 .toList();
     }
 
+    /**
+     * Add prepared bot commands to Telegram bot.
+     */
     @SneakyThrows
-    public void addCommandToBot() {
+    public void addPreparedBotCommandsToBot() {
         List<BotCommand> botCommandList = buildBotCommands();
-        execute(new SetMyCommands(botCommandList, new BotCommandScopeDefault(), null));
+        execute(new SetMyCommands(botCommandList, new BotCommandScopeDefault(),
+                null));
     }
 
-    public void startCommandReceived(long chatId, String name) {
+    /**
+     * React on START action.
+     * @param chatId
+     * @param name
+     */
+    public void startCommandReceived(final long chatId, final String name) {
 
         log.info("Starting command received: {}", name);
 
-        String message = "Hi " + name + " from " + chatId + "! Nice to meet you!!!" + "\uD83C\uDF4C";
+        String message = "Hi " + name + " from " + chatId
+                + "! Nice to meet you!!!" + "\uD83C\uDF4C";
 
         sendMessage(chatId, message);
     }
 
+    /**
+     * Build ReplyKeyboardMarkup.
+     * @return ReplyKeyboardMarkup
+     */
     public ReplyKeyboardMarkup buildReplyKeyboardMarkup() {
 
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
@@ -160,9 +262,15 @@ public class TelegramBot extends TelegramLongPollingBot {
         return replyKeyboardMarkup;
     }
 
+    /**
+     * Send message without keyboard.
+     * @param chatId
+     * @param message
+     */
     @SneakyThrows
-    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
-    public void sendMessage(long chatId, String message) {
+    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
+            backoff = @Backoff(delay = RETRYABLE_BACKOFF_DELAY))
+    public void sendMessage(final long chatId, final String message) {
 
         log.info("Sending message: {}", message);
 
@@ -174,9 +282,17 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
+    /**
+     * Send message with keyboard.
+     * @param chatId
+     * @param message
+     * @param replyKeyboardMarkup
+     */
     @SneakyThrows
-    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
-    public void sendMessage(long chatId, String message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
+            backoff = @Backoff(delay = RETRYABLE_BACKOFF_DELAY))
+    public void sendMessage(final long chatId, final String message,
+                            final ReplyKeyboardMarkup replyKeyboardMarkup) {
 
         log.info("Sending message: {}", message);
 
@@ -189,14 +305,22 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
-
+    /**
+     * Get Bot UserName.
+     * @return Bot UserName
+     */
     @Override
     public String getBotUsername() {
         return telegramBotConfig.getTelegramBotName();
     }
 
+    /**
+     * Get Bot Token.
+     * @return Bot Token
+     */
     @Override
     public String getBotToken() {
         return telegramBotConfig.getTelegramBotToken();
     }
+
 }

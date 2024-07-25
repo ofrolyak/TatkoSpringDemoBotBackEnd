@@ -10,3 +10,5 @@ logging:
 spring:
   profiles:
     active: test
+  flyway:
+    enabled: false

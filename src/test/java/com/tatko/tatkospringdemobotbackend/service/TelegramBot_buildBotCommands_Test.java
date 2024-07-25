@@ -1,6 +1,6 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
@@ -10,11 +10,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TelegramBot_buildBotCommands_Test extends BaseMockTests {
+class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
     TelegramBot telegramBot;
+
 
     @Test
     void buildBotCommands_verifySize_Test() {

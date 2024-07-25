@@ -1,18 +1,19 @@
 package com.tatko.tatkospringdemobotbackend.dao;
 
 import com.tatko.tatkospringdemobotbackend.BaseMockTests;
+import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import com.tatko.tatkospringdemobotbackend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-class UserDao_save_Test extends BaseMockTests {
+class UserDao_save_Test extends MockitoExtensionBaseMockTests {
 
     @Mock
     UserRepository userRepository;
