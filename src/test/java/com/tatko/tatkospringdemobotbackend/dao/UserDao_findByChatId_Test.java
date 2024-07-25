@@ -17,8 +17,15 @@ import org.mockito.Mockito;
  */
 class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * User Repository itself.
+     */
     @Mock
     UserRepository userRepository;
+
+    /**
+     * User Dao itself.
+     */
     @InjectMocks
     UserDao userDao;
 

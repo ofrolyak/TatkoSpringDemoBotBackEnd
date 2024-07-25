@@ -13,6 +13,9 @@ import org.mockito.Spy;
 class TelegramBot_startCommandReceived_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     private TelegramBot telegramBot;

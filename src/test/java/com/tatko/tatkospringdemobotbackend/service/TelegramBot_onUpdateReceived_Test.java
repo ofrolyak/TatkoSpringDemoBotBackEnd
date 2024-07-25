@@ -14,6 +14,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     private TelegramBot telegramBot;
