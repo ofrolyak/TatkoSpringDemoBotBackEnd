@@ -26,7 +26,7 @@ class TelegramBot_addCommandToBot_Test
 
     @SneakyThrows
     @Test
-    void addPreparedBotCommandsToBot_Test() {
+    void addPreparedBotCommandsToBot4Test() {
 
         // When
         Mockito.doReturn(Collections.emptyList())
@@ -45,7 +45,7 @@ class TelegramBot_addCommandToBot_Test
     }
 
     @Test
-    void addPreparedBotCommandsToBot_SneakyThrows_Test()
+    void addPreparedBotCommandsToBot4SneakyThrows4Test()
             throws TelegramApiException {
 
         // Action

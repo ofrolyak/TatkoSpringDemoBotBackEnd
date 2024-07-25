@@ -20,12 +20,12 @@ class TelegramBot_sendMessage_3params_Test
 
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @SneakyThrows
     @Test
-    void sendMessage_Test() {
+    void sendMessage4Test() {
 
         // Before
         long chatId = gen.nextLong();
@@ -45,7 +45,7 @@ class TelegramBot_sendMessage_3params_Test
     }
 
     @Test
-    void sendMessage_SneakyThrows_Test() throws TelegramApiException {
+    void sendMessage4SneakyThrows4Test() throws TelegramApiException {
 
         // Before
         long chatId = gen.nextLong();
@@ -61,7 +61,5 @@ class TelegramBot_sendMessage_3params_Test
                 .isInstanceOf(TelegramApiException.class);
 
     }
-
-
 
 }

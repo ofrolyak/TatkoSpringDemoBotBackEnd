@@ -15,11 +15,11 @@ class TelegramBot_startCommandReceived_Test
 
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void startCommandReceived_Test() {
+    void startCommandReceived4Test() {
 
         // When
         Mockito.doNothing()

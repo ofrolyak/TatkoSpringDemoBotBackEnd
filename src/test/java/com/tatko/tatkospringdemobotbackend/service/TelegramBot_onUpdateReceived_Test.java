@@ -16,11 +16,11 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void onUpdateReceived_noMessage_Test() {
+    void onUpdateReceived4noMessage4Test() {
 
         // Before
         Update update = new Update();
@@ -35,7 +35,7 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void onUpdateReceived_noMessageText_Test() {
+    void onUpdateReceived4noMessageText4Test() {
 
         // Before
         Update update = new Update();
@@ -52,7 +52,7 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void onUpdateReceived_Test() {
+    void onUpdateReceived4Test() {
 
         // Before
         Update update = new Update();

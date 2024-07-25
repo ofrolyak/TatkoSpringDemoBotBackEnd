@@ -18,11 +18,11 @@ class TelegramBot_processReceivedMessage_Test
 
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void processReceivedMessage_notActionMode_Test() {
+    void processReceivedMessage4notActionMode4Test() {
 
         // Before
         Update update = new Update();
@@ -50,7 +50,7 @@ class TelegramBot_processReceivedMessage_Test
     }
 
     @Test
-    void processReceivedMessage_ActionMode_Test() {
+    void processReceivedMessage4ActionMode4Test() {
 
         // Before
         Update update = new Update();

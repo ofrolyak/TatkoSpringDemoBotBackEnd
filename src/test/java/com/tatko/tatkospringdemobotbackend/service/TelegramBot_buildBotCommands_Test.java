@@ -20,7 +20,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
 
 
     @Test
-    void buildBotCommands_verifySize_Test() {
+    void buildBotCommands4verifySize4Test() {
 
         // Action
         List<BotCommand> botCommands = telegramBot.buildBotCommands();
@@ -31,7 +31,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void buildBotCommands_verifyContent_Test() {
+    void buildBotCommands4verifyContent4Test() {
 
         // Action
         List<BotCommand> botCommands = telegramBot.buildBotCommands();

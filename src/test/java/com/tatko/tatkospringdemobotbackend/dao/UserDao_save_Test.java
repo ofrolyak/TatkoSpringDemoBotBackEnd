@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 /**
  * JUnit class for UserDao class save method.
  */
-class UserDao_save_Test extends MockitoExtensionBaseMockTests {
+class UserDao4save4Test extends MockitoExtensionBaseMockTests {
 
     @Mock
     UserRepository userRepository;
