@@ -148,8 +148,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
-    static int counter;
-
     /**
      * Process START action.
      *
