@@ -1,5 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
+import java.util.Optional;
+
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import com.tatko.tatkospringdemobotbackend.entity.User;
@@ -12,8 +14,6 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.util.Optional;
-
 /**
  * JUnit class for TelegramBot class registerUser method.
  */
@@ -22,6 +22,7 @@ class TelegramBot_registerUser_Test
 
     @Mock
     private UserDao userDao;
+
     @Spy
     @InjectMocks
     private TelegramBot telegramBot;

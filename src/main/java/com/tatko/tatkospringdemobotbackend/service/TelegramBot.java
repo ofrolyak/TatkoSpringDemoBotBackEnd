@@ -160,7 +160,7 @@ public class TelegramBot extends TelegramLongPollingBot {
      */
     public void processStartAction(final Update update) {
         final Message message = update.getMessage();
-        long chatId = update.getMessage().getChatId();
+        final long chatId = update.getMessage().getChatId();
         final String firstName = update.getMessage().getChat().getFirstName();
         registerUser(message);
         startCommandReceived(chatId, firstName);
@@ -255,7 +255,7 @@ public class TelegramBot extends TelegramLongPollingBot {
      */
     public ReplyKeyboardMarkup buildReplyKeyboardMarkup() {
 
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         final List<KeyboardRow> keyboardRowList = new ArrayList<>();
         final KeyboardRow keyboardRow1 = new KeyboardRow();
         keyboardRow1.add("weather");

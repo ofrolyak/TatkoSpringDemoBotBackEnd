@@ -17,6 +17,7 @@ class UserDao_save_Test extends MockitoExtensionBaseMockTests {
 
     @Mock
     UserRepository userRepository;
+
     @InjectMocks
     UserDao userDao;
 
