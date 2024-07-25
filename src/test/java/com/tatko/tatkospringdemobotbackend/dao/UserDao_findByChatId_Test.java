@@ -1,5 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.dao;
 
+import java.util.Optional;
+
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import com.tatko.tatkospringdemobotbackend.repository.UserRepository;
@@ -9,8 +11,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.util.Optional;
 
 /**
  * JUnit class for UserDao class findByChatId method.
@@ -42,7 +42,7 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     void findByChatId4UserIsFound4Test() {
 
         // Before
-        long id = gen.nextInt();
+        final long id = gen.nextInt();
         final User user = gen.nextObject(User.class);
 
         // When
