@@ -1,5 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
+import java.util.Optional;
+
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import com.tatko.tatkospringdemobotbackend.entity.User;
@@ -12,30 +14,35 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.util.Optional;
-
 /**
  * JUnit class for TelegramBot class registerUser method.
  */
 class TelegramBot_registerUser_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * Mock for UserDao.
+     */
     @Mock
-    UserDao userDao;
+    private UserDao userDao;
+
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void registerUser_userExists_Test() {
+    void registerUser4userExists4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
@@ -50,14 +57,14 @@ class TelegramBot_registerUser_Test
     }
 
     @Test
-    void registerUser_userNotExists_Test() {
+    void registerUser4userNotExists4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))

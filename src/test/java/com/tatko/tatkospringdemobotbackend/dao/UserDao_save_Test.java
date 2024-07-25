@@ -15,8 +15,15 @@ import org.mockito.Mockito;
  */
 class UserDao_save_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * User Repository itself.
+     */
     @Mock
     UserRepository userRepository;
+
+    /**
+     * User Dao itself.
+     */
     @InjectMocks
     UserDao userDao;
 
@@ -24,7 +31,7 @@ class UserDao_save_Test extends MockitoExtensionBaseMockTests {
     void save_Test() {
 
         // Before
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userRepository.save(ArgumentMatchers.eq(user)))

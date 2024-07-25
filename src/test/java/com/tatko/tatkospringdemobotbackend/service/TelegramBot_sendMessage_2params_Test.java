@@ -17,18 +17,21 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 class TelegramBot_sendMessage_2params_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @SneakyThrows
     @Test
-    void sendMessage_Test() {
+    void sendMessage4Test() {
 
         // Before
-        long chatId = gen.nextLong();
-        String message = gen.nextString();
+        final long chatId = gen.nextLong();
+        final String message = gen.nextString();
 
         // When
         Mockito.doReturn(null)
@@ -43,11 +46,11 @@ class TelegramBot_sendMessage_2params_Test
     }
 
     @Test
-    void sendMessage_SneakyThrows_Test() throws TelegramApiException {
+    void sendMessage4SneakyThrows4Test() throws TelegramApiException {
 
         // Before
-        long chatId = gen.nextLong();
-        String message = gen.nextString();
+        final long chatId = gen.nextLong();
+        final String message = gen.nextString();
 
         Mockito.doThrow(TelegramApiException.class)
                 .when(telegramBot)

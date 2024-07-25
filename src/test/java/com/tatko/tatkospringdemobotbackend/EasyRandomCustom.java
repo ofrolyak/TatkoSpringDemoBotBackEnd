@@ -9,6 +9,7 @@ public class EasyRandomCustom extends EasyRandom {
 
     /**
      * Generate String object.
+     *
      * @return Get generated random String object.
      */
     public String nextString() {

@@ -13,13 +13,16 @@ import org.mockito.Spy;
 class TelegramBot_startCommandReceived_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void startCommandReceived_Test() {
+    void startCommandReceived4Test() {
 
         // When
         Mockito.doNothing()

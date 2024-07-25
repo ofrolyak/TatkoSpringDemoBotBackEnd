@@ -14,16 +14,19 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void onUpdateReceived_noMessage_Test() {
+    void onUpdateReceived4noMessage4Test() {
 
         // Before
-        Update update = new Update();
+        final Update update = new Update();
         update.setMessage(null);
 
         // Action
@@ -35,11 +38,11 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void onUpdateReceived_noMessageText_Test() {
+    void onUpdateReceived4noMessageText4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
+        final Update update = new Update();
+        final Message message = new Message();
         message.setText(null);
         update.setMessage(message);
 
@@ -52,11 +55,11 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void onUpdateReceived_Test() {
+    void onUpdateReceived4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
+        final Update update = new Update();
+        final Message message = new Message();
         message.setText(gen.nextString());
         update.setMessage(message);
 

@@ -1,5 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.dao;
 
+import java.util.Optional;
+
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import com.tatko.tatkospringdemobotbackend.repository.UserRepository;
@@ -10,23 +12,28 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.Optional;
-
 /**
  * JUnit class for UserDao class findByChatId method.
  */
 class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * User Repository itself.
+     */
     @Mock
     UserRepository userRepository;
+
+    /**
+     * User Dao itself.
+     */
     @InjectMocks
     UserDao userDao;
 
     @Test
-    void findByChatId_UserIsNotFound_Test() {
+    void findByChatId4UserIsNotFound4Test() {
 
         // Before
-        long id = gen.nextInt();
+        final long id = gen.nextInt();
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
@@ -39,11 +46,11 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void findByChatId_UserIsFound_Test() {
+    void findByChatId4UserIsFound4Test() {
 
         // Before
-        long id = gen.nextInt();
-        User user = gen.nextObject(User.class);
+        final long id = gen.nextInt();
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))

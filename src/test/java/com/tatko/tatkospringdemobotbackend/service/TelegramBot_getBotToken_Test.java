@@ -14,19 +14,24 @@ import org.mockito.Spy;
  */
 class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * Mock for TelegramBotConfig
+     */
+    @Mock
+    TelegramBotConfig telegramBotConfig;
+
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     TelegramBot telegramBot;
 
-
-    @Mock
-    TelegramBotConfig telegramBotConfig;
-
     @Test
-    void getBotToken_Test() {
+    void getBotToken4Test() {
 
         // Before
-        String telegramBotToken = gen.nextString();
+        final String telegramBotToken = gen.nextString();
 
         // When
         Mockito.when(telegramBotConfig.getTelegramBotToken())
@@ -39,3 +44,4 @@ class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
     }
 
 }
+

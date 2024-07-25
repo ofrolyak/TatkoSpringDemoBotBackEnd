@@ -15,21 +15,24 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 class TelegramBot_processNoAction_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void processNoAction_Test() {
+    void processNoAction4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Update update = new Update();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom
+        final BotCommandCustom botCommandCustom
                 = telegramBot.getBotCommandsSet().stream().findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);

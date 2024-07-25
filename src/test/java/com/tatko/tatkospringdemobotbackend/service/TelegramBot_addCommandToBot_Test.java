@@ -1,5 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
+import java.util.Collections;
+
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
@@ -11,14 +13,15 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.Collections;
-
 /**
  * JUnit class for TelegramBot class addCommandToBot method.
  */
 class TelegramBot_addCommandToBot_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     TelegramBot telegramBot;
@@ -26,7 +29,7 @@ class TelegramBot_addCommandToBot_Test
 
     @SneakyThrows
     @Test
-    void addPreparedBotCommandsToBot_Test() {
+    void addPreparedBotCommandsToBot4Test() {
 
         // When
         Mockito.doReturn(Collections.emptyList())
@@ -45,7 +48,7 @@ class TelegramBot_addCommandToBot_Test
     }
 
     @Test
-    void addPreparedBotCommandsToBot_SneakyThrows_Test()
+    void addPreparedBotCommandsToBot4SneakyThrows4Test()
             throws TelegramApiException {
 
         // Action
