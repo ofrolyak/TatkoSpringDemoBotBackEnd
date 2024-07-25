@@ -34,9 +34,10 @@ class TelegramBot_acceptBotCommandCustom_Test
         message.setChat(chat);
         message.setText("sth");
         update.setMessage(message);
+        Consumer<Update> updateConsumer = updateParam -> System.out.println(updateParam.toString());
 
         // When
-        Mockito.doReturn((Consumer<Object>) _ -> {})
+        Mockito.doReturn(updateConsumer)
                 .when(botCommandCustom)
                 .getConsumer();
 
