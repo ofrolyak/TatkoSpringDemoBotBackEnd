@@ -1,15 +1,15 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -39,20 +39,20 @@ class TelegramBot_processStartAction_Test
         // When
         doNothing()
                 .when(telegramBot)
-                .registerUser(eq(message));
+                .registerUser(ArgumentMatchers.eq(message));
         doNothing()
                 .when(telegramBot)
-                .startCommandReceived(eq(chat.getId()),
-                        eq(update.getMessage().getChat().getFirstName()));
+                .startCommandReceived(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.eq(update.getMessage().getChat().getFirstName()));
 
         // Then
-        assertThatCode(() -> telegramBot.processStartAction(update))
+        Assertions.assertThatCode(() -> telegramBot.processStartAction(update))
                 .doesNotThrowAnyException();
         verify(telegramBot, times(1))
-                .registerUser(eq(message));
+                .registerUser(ArgumentMatchers.eq(message));
         verify(telegramBot, times(1))
-                .startCommandReceived(eq(chat.getId()),
-                        eq(update.getMessage().getChat().getFirstName()));
+                .startCommandReceived(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.eq(update.getMessage().getChat().getFirstName()));
 
     }
 

@@ -1,23 +1,19 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-class TelegramBot_processHelpAction_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_processHelpAction_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
@@ -40,17 +36,19 @@ class TelegramBot_processHelpAction_Test extends MockitoExtensionBaseMockTests {
         update.setMessage(message);
 
         // When
-        doNothing()
+        Mockito.doNothing()
                 .when(telegramBot)
-                .sendMessage(eq(chat.getId()), anyString(),
-                        any(ReplyKeyboardMarkup.class));
+                .sendMessage(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.anyString(),
+                        ArgumentMatchers.any(ReplyKeyboardMarkup.class));
 
         // Then
-        assertThatCode(() -> telegramBot.processHelpAction(update))
+        Assertions.assertThatCode(() -> telegramBot.processHelpAction(update))
                 .doesNotThrowAnyException();
-        verify(telegramBot, times(1))
-                .sendMessage(eq(chat.getId()), anyString(),
-                        any(ReplyKeyboardMarkup.class));
+        Mockito.verify(telegramBot, Mockito.times(1))
+                .sendMessage(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.anyString(),
+                        ArgumentMatchers.any(ReplyKeyboardMarkup.class));
 
     }
 
