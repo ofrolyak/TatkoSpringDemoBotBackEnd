@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * User entity.
+ */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

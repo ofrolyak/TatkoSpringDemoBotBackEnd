@@ -11,6 +11,9 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+/**
+ * JUnit class for TelegramBot class sendMessage method (2 params).
+ */
 class TelegramBot_sendMessage_2params_Test
         extends MockitoExtensionBaseMockTests {
 

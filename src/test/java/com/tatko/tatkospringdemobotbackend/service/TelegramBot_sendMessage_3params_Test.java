@@ -12,6 +12,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+/**
+ * JUnit class for TelegramBot class sendMessage method (3 params).
+ */
 class TelegramBot_sendMessage_3params_Test
         extends MockitoExtensionBaseMockTests {
 

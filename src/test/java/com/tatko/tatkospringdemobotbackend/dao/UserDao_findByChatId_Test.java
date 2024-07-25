@@ -12,6 +12,9 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
+/**
+ * JUnit class for UserDao class findByChatId method.
+ */
 class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
 
     @Mock

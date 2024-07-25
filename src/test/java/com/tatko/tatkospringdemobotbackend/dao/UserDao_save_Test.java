@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+/**
+ * JUnit class for UserDao class save method.
+ */
 class UserDao_save_Test extends MockitoExtensionBaseMockTests {
 
     @Mock
