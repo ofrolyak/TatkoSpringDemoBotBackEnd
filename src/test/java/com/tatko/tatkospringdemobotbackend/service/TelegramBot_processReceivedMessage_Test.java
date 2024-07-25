@@ -77,7 +77,8 @@ class TelegramBot_processReceivedMessage_Test
 
         // Then
         verify(telegramBot, times(1))
-                .acceptBotCommandCustom(any(BotCommandCustom.class), any(Update.class));
+                .acceptBotCommandCustom(any(BotCommandCustom.class),
+                        any(Update.class));
         verify(telegramBot, never())
                 .sendMessage(anyLong(), anyString());
     }
