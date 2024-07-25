@@ -1,24 +1,24 @@
 package com.tatko.tatkospringdemobotbackend;
 
-import com.tatko.tatkospringdemobotbackend.dao.UserDao;
-import com.tatko.tatkospringdemobotbackend.service.TelegramBot;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockBeans;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+//import com.tatko.tatkospringdemobotbackend.dao.UserDao;
+//import com.tatko.tatkospringdemobotbackend.service.TelegramBot;
+//import lombok.SneakyThrows;
+//import org.junit.jupiter.api.Test;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
+//import org.mockito.Spy;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.mock.mockito.MockBean;
+//import org.springframework.boot.test.mock.mockito.MockBeans;
+//import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+//
+//import static org.assertj.core.api.Assertions.assertThatCode;
+//import static org.assertj.core.api.Assertions.assertThatThrownBy;
+//import static org.mockito.Mockito.doNothing;
+//import static org.mockito.Mockito.lenient;
+//import static org.mockito.Mockito.never;
+//import static org.mockito.Mockito.times;
+//import static org.mockito.Mockito.verify;
 
 class TelegramBotInitializer_init_Test extends BaseMockTests {
 

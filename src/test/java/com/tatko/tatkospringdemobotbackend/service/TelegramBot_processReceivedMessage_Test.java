@@ -2,19 +2,13 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class TelegramBot_processReceivedMessage_Test
         extends MockitoExtensionBaseMockTests {
@@ -37,19 +31,19 @@ class TelegramBot_processReceivedMessage_Test
         update.setMessage(message);
 
         // When
-        doNothing()
+        Mockito.doNothing()
                 .when(telegramBot)
-                .sendMessage(anyLong(), anyString());
+                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
 
         // Action
         telegramBot.processReceivedMessage(update);
 
         // Then
-        verify(telegramBot, never())
-                .acceptBotCommandCustom(any(BotCommandCustom.class),
-                        any(Update.class));
-        verify(telegramBot, times(1))
-                .sendMessage(anyLong(), anyString());
+        Mockito.verify(telegramBot, Mockito.never())
+                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                        ArgumentMatchers.any(Update.class));
+        Mockito.verify(telegramBot, Mockito.times(1))
+                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
     }
 
     @Test
@@ -67,20 +61,20 @@ class TelegramBot_processReceivedMessage_Test
         update.setMessage(message);
 
         // When
-        doNothing()
+        Mockito.doNothing()
                 .when(telegramBot)
-                .acceptBotCommandCustom(any(BotCommandCustom.class),
-                        any(Update.class));
+                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                        ArgumentMatchers.any(Update.class));
 
         // Action
         telegramBot.processReceivedMessage(update);
 
         // Then
-        verify(telegramBot, times(1))
-                .acceptBotCommandCustom(any(BotCommandCustom.class),
-                        any(Update.class));
-        verify(telegramBot, never())
-                .sendMessage(anyLong(), anyString());
+        Mockito.verify(telegramBot, Mockito.times(1))
+                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                        ArgumentMatchers.any(Update.class));
+        Mockito.verify(telegramBot, Mockito.never())
+                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
     }
 
 }

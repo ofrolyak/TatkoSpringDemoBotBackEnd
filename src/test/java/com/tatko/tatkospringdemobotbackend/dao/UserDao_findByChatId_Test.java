@@ -1,20 +1,16 @@
 package com.tatko.tatkospringdemobotbackend.dao;
 
-import com.tatko.tatkospringdemobotbackend.BaseMockTests;
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import com.tatko.tatkospringdemobotbackend.repository.UserRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mockito;
 
 import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
 
 class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
 
@@ -30,11 +26,11 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
         long id = gen.nextInt();
 
         // When
-        when(userRepository.findByChatId(anyLong()))
+        Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.empty());
 
         // Then
-        assertThat(userDao.findByChatId(id))
+        Assertions.assertThat(userDao.findByChatId(id))
                 .isEmpty();
 
     }
@@ -47,11 +43,11 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
         User user = gen.nextObject(User.class);
 
         // When
-        when(userRepository.findByChatId(anyLong()))
+        Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.of(user));
 
         // Then
-        assertThat(userDao.findByChatId(id).get())
+        Assertions.assertThat(userDao.findByChatId(id).get())
                 .isEqualTo(user);
 
     }

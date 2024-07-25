@@ -1,14 +1,13 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
 
@@ -24,7 +23,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
         List<BotCommand> botCommands = telegramBot.buildBotCommands();
 
         // Then
-        assertThat(botCommands)
+        Assertions.assertThat(botCommands)
                 .hasSize(5);
     }
 
@@ -38,7 +37,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
                 .toList();
 
         // Then
-        assertThat(collect)
+        Assertions.assertThat(collect)
                 .containsExactlyInAnyOrder("/start", "/getmydata",
                         "/deletemydata", "/help", "/settings");
     }

@@ -2,13 +2,12 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
 
@@ -27,11 +26,11 @@ class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
         String telegramBotToken = gen.nextString();
 
         // When
-        when(telegramBotConfig.getTelegramBotToken())
+        Mockito.when(telegramBotConfig.getTelegramBotToken())
                 .thenReturn(telegramBotToken);
 
         // Then
-        assertThat(telegramBot.getBotToken())
+        Assertions.assertThat(telegramBot.getBotToken())
                 .isEqualTo(telegramBotToken);
 
     }

@@ -1,6 +1,7 @@
 package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
@@ -8,9 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-
-class TelegramBot_processNoAction_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_processNoAction_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
@@ -32,7 +32,7 @@ class TelegramBot_processNoAction_Test extends MockitoExtensionBaseMockTests {
         update.setMessage(message);
 
         // Then
-        assertThatCode(() -> telegramBot.processNoAction(update))
+        Assertions.assertThatCode(() -> telegramBot.processNoAction(update))
                 .doesNotThrowAnyException();
 
     }

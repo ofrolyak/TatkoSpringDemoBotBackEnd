@@ -2,20 +2,16 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import lombok.SneakyThrows;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class TelegramBot_addCommandToBot_Test
         extends MockitoExtensionBaseMockTests {
@@ -30,18 +26,18 @@ class TelegramBot_addCommandToBot_Test
     void addPreparedBotCommandsToBot_Test() {
 
         // When
-        doReturn(Collections.emptyList())
+        Mockito.doReturn(Collections.emptyList())
                 .when(telegramBot)
                         .buildBotCommands();
-        doReturn(null)
+        Mockito.doReturn(null)
                 .when(telegramBot)
-                        .execute(any(SetMyCommands.class));
+                        .execute(ArgumentMatchers.any(SetMyCommands.class));
 
         // Action
         telegramBot.addPreparedBotCommandsToBot();
 
         // Then
-        verify(telegramBot, times(1)).execute(any(SetMyCommands.class));
+        Mockito.verify(telegramBot, Mockito.times(1)).execute(ArgumentMatchers.any(SetMyCommands.class));
 
     }
 
@@ -50,12 +46,12 @@ class TelegramBot_addCommandToBot_Test
             throws TelegramApiException {
 
         // Action
-        doThrow(TelegramApiException.class)
+        Mockito.doThrow(TelegramApiException.class)
                 .when(telegramBot)
-                .execute(any(SetMyCommands.class));
+                .execute(ArgumentMatchers.any(SetMyCommands.class));
 
         // Then
-        assertThatThrownBy(() -> telegramBot.addPreparedBotCommandsToBot())
+        Assertions.assertThatThrownBy(() -> telegramBot.addPreparedBotCommandsToBot())
                 .isInstanceOf(TelegramApiException.class);
 
     }

@@ -4,22 +4,18 @@ import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.dao.UserDao;
 import com.tatko.tatkospringdemobotbackend.entity.User;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-class TelegramBot_registerUser_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_registerUser_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Mock
     UserDao userDao;
@@ -39,14 +35,14 @@ class TelegramBot_registerUser_Test extends MockitoExtensionBaseMockTests {
         User user = gen.nextObject(User.class);
 
         // When
-        when(userDao.findByChatId(anyLong()))
+        Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.of(user));
 
         // Action
         telegramBot.registerUser(message);
 
         // Then
-        verify(userDao, never()).save(any(User.class));
+        Mockito.verify(userDao, Mockito.never()).save(ArgumentMatchers.any(User.class));
 
     }
 
@@ -61,16 +57,16 @@ class TelegramBot_registerUser_Test extends MockitoExtensionBaseMockTests {
         User user = gen.nextObject(User.class);
 
         // When
-        when(userDao.findByChatId(anyLong()))
+        Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
                 .thenReturn(Optional.empty());
-        when(userDao.save(any(User.class)))
+        Mockito.when(userDao.save(ArgumentMatchers.any(User.class)))
                 .thenReturn(user);
 
         // Action
         telegramBot.registerUser(message);
 
         // Then
-        verify(userDao, times(1)).save(any(User.class));
+        Mockito.verify(userDao, Mockito.times(1)).save(ArgumentMatchers.any(User.class));
 
     }
 

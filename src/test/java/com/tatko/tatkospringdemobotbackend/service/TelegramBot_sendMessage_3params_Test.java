@@ -2,19 +2,15 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import lombok.SneakyThrows;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class TelegramBot_sendMessage_3params_Test
         extends MockitoExtensionBaseMockTests {
@@ -34,15 +30,15 @@ class TelegramBot_sendMessage_3params_Test
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
         // When
-        doReturn(null)
+        Mockito.doReturn(null)
                 .when(telegramBot)
-                .execute(any(SendMessage.class));
+                .execute(ArgumentMatchers.any(SendMessage.class));
 
         // Action
         telegramBot.sendMessage(chatId, message, replyKeyboardMarkup);
 
         // Then
-        verify(telegramBot, times(1)).execute(any(SendMessage.class));
+        Mockito.verify(telegramBot, Mockito.times(1)).execute(ArgumentMatchers.any(SendMessage.class));
     }
 
     @Test
@@ -53,11 +49,11 @@ class TelegramBot_sendMessage_3params_Test
         String message = gen.nextString();
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
-        doThrow(TelegramApiException.class)
+        Mockito.doThrow(TelegramApiException.class)
                 .when(telegramBot)
-                .execute(any(SendMessage.class));
+                .execute(ArgumentMatchers.any(SendMessage.class));
 
-        assertThatThrownBy(() -> telegramBot.sendMessage(
+        Assertions.assertThatThrownBy(() -> telegramBot.sendMessage(
                 chatId, message, replyKeyboardMarkup))
                 .isInstanceOf(TelegramApiException.class);
 

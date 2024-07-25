@@ -2,14 +2,10 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
-
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class TelegramBot_startCommandReceived_Test
         extends MockitoExtensionBaseMockTests {
@@ -23,16 +19,16 @@ class TelegramBot_startCommandReceived_Test
     void startCommandReceived_Test() {
 
         // When
-        doNothing()
+        Mockito.doNothing()
                 .when(telegramBot)
-                .sendMessage(anyLong(), anyString());
+                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
 
         // Action
         telegramBot.startCommandReceived(gen.nextLong(), gen.nextString());
 
         // Then
-        verify(telegramBot, times(1))
-                .startCommandReceived(anyLong(), anyString());
+        Mockito.verify(telegramBot, Mockito.times(1))
+                .startCommandReceived(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
 
 
     }

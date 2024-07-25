@@ -2,13 +2,12 @@ package com.tatko.tatkospringdemobotbackend.service;
 
 import com.tatko.tatkospringdemobotbackend.MockitoExtensionBaseMockTests;
 import com.tatko.tatkospringdemobotbackend.config.TelegramBotConfig;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
 
@@ -27,11 +26,11 @@ class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
         String telegramBotName = gen.nextString();
 
         // When
-        when(telegramBotConfig.getTelegramBotName())
+        Mockito.when(telegramBotConfig.getTelegramBotName())
                 .thenReturn(telegramBotName);
 
         // Then
-        assertThat(telegramBot.getBotUsername())
+        Assertions.assertThat(telegramBot.getBotUsername())
                 .isEqualTo(telegramBotName);
 
     }
