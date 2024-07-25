@@ -26,7 +26,7 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     void findByChatId4UserIsNotFound4Test() {
 
         // Before
-        long id = gen.nextInt();
+        final long id = gen.nextInt();
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
@@ -43,7 +43,7 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
 
         // Before
         long id = gen.nextInt();
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))

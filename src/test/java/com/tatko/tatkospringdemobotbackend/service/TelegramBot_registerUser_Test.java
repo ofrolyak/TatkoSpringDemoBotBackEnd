@@ -31,11 +31,11 @@ class TelegramBot_registerUser_Test
     void registerUser4userExists4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
@@ -53,11 +53,11 @@ class TelegramBot_registerUser_Test
     void registerUser4userNotExists4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))

@@ -25,9 +25,9 @@ class TelegramBot_processReceivedMessage_Test
     void processReceivedMessage4notActionMode4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Update update = new Update();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
         message.setText("sth");
@@ -53,12 +53,12 @@ class TelegramBot_processReceivedMessage_Test
     void processReceivedMessage4ActionMode4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Update update = new Update();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom
+        final BotCommandCustom botCommandCustom
                 = telegramBot.getBotCommandsSet().stream().findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);

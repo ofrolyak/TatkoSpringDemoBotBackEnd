@@ -26,7 +26,7 @@ class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
     void getBotToken4Test() {
 
         // Before
-        String telegramBotToken = gen.nextString();
+        final String telegramBotToken = gen.nextString();
 
         // When
         Mockito.when(telegramBotConfig.getTelegramBotToken())

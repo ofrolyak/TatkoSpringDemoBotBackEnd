@@ -28,9 +28,9 @@ class TelegramBot_sendMessage_3params_Test
     void sendMessage4Test() {
 
         // Before
-        long chatId = gen.nextLong();
-        String message = gen.nextString();
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        final long chatId = gen.nextLong();
+        final String message = gen.nextString();
+        final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
         // When
         Mockito.doReturn(null)
@@ -48,9 +48,9 @@ class TelegramBot_sendMessage_3params_Test
     void sendMessage4SneakyThrows4Test() throws TelegramApiException {
 
         // Before
-        long chatId = gen.nextLong();
-        String message = gen.nextString();
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        final long chatId = gen.nextLong();
+        final String message = gen.nextString();
+        final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
         Mockito.doThrow(TelegramApiException.class)
                 .when(telegramBot)

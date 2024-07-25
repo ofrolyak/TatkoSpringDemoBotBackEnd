@@ -27,12 +27,12 @@ class TelegramBot_processHelpAction_Test
     void processHelpAction4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Update update = new Update();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom
+        final BotCommandCustom botCommandCustom
                 = telegramBot.getBotCommandsSet().stream()
                 .findAny().get();
         message.setText(botCommandCustom.getMessageText());

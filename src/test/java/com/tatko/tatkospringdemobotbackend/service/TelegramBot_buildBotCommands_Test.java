@@ -23,7 +23,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
     void buildBotCommands4verifySize4Test() {
 
         // Action
-        List<BotCommand> botCommands = telegramBot.buildBotCommands();
+        final List<BotCommand> botCommands = telegramBot.buildBotCommands();
 
         // Then
         Assertions.assertThat(botCommands)
@@ -35,7 +35,7 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
 
         // Action
         List<BotCommand> botCommands = telegramBot.buildBotCommands();
-        List<String> collect = botCommands.stream()
+        final List<String> collect = botCommands.stream()
                 .map(BotCommand::getCommand)
                 .toList();
 

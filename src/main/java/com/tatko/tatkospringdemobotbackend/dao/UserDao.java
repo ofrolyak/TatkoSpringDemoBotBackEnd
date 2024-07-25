@@ -23,6 +23,7 @@ public class UserDao {
 
     /**
      * Find User.
+     *
      * @param chatId Identifier for Telegram Chat.
      * @return {@code Optional<User>} of {@code Optional.empty()}
      * if the user is not found.
@@ -33,6 +34,7 @@ public class UserDao {
 
     /**
      * Save User entity into DB.
+     *
      * @param user entity
      * @return Saved User
      */

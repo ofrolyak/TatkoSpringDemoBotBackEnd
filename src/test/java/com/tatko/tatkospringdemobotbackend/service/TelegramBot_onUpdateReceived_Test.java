@@ -23,7 +23,7 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
     void onUpdateReceived4noMessage4Test() {
 
         // Before
-        Update update = new Update();
+        final Update update = new Update();
         update.setMessage(null);
 
         // Action
@@ -39,7 +39,7 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
 
         // Before
         Update update = new Update();
-        Message message = new Message();
+        final Message message = new Message();
         message.setText(null);
         update.setMessage(message);
 
