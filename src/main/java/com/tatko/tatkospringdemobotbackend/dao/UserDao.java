@@ -12,19 +12,20 @@ import java.util.Optional;
  * Data Access Object for User entity.
  */
 @Service
+@Setter
 public class UserDao {
 
     /**
      * UserRepository is used to get User based info.
      */
     @Autowired
-    @Setter
     private UserRepository userRepository;
 
     /**
      * Find User.
-     * @param chatId Identifier for Telegram Chat
-     * @return Optional<User> of Optional.empty() if the user is not found
+     * @param chatId Identifier for Telegram Chat.
+     * @return {@code Optional<User>} of {@code Optional.empty()}
+     * if the user is not found.
      */
     public Optional<User> findByChatId(final Long chatId) {
         return userRepository.findByChatId(chatId);

@@ -71,7 +71,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     /**
      * Register User. If he's already registered do nothing.
      *
-     * @param message
+     * @param message Message instance that has gotten from Telegram Bot.
      */
     public void registerUser(final Message message) {
 
@@ -93,7 +93,7 @@ public class TelegramBot extends TelegramLongPollingBot {
      * Based on input text message from user parse it
      * and return specific structure class.
      *
-     * @param messageText
+     * @param messageText Message text from Telegram bot.
      * @return Specific structure class
      */
     public Optional<BotCommandCustom> parseBotCommandCustom(
@@ -107,8 +107,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     /**
      * Accept passed botCommandCustom and launch actions based on it.
      *
-     * @param botCommandCustom
-     * @param update
+     * @param botCommandCustom BotCommandCustom instance
+     *                         that should be executed.
+     * @param update Update instance from Telegram Bot.
      */
     public void acceptBotCommandCustom(final BotCommandCustom botCommandCustom,
                                        final Update update) {
@@ -118,7 +119,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     /**
      * Process received message.
      *
-     * @param update
+     * @param update Update instance that has been gotten from Telegram user.
      */
     public void processReceivedMessage(final Update update) {
 
@@ -154,7 +155,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     /**
      * Process START action.
      *
-     * @param update
+     * @param update Prepared update instance for Telegram chat.
      */
     public void processStartAction(final Update update) {
         Message message = update.getMessage();
@@ -166,7 +167,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Process HELP action.
-     * @param update
+     * @param update Prepared update instance for Telegram chat.
      */
     public void processHelpAction(final Update update) {
         long chatId = update.getMessage().getChatId();
@@ -177,7 +178,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Process no action.
-     * @param update
+     * @param update Prepared update instance for Telegram chat.
      */
     public void processNoAction(final Update update) {
 
@@ -228,8 +229,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * React on START action.
-     * @param chatId
-     * @param name
+     * @param chatId Chat identifier in Telegram Bot.
+     * @param name Name for Telegram user.
      */
     public void startCommandReceived(final long chatId, final String name) {
 
@@ -267,8 +268,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Send message without keyboard.
-     * @param chatId
-     * @param message
+     * @param chatId Identifier for Telegram chat.
+     * @param message Prepared message instance for Telegram chat.
      */
     @SneakyThrows
     @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
@@ -287,8 +288,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Send message with keyboard.
-     * @param chatId
-     * @param message
+     * @param chatId Identifier for Telegram chat.
+     * @param message Prepared message instance for Telegram chat.
      * @param replyKeyboardMarkup
      */
     @SneakyThrows
