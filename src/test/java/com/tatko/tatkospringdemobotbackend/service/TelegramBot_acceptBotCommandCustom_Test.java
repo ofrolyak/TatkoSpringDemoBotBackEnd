@@ -27,14 +27,14 @@ class TelegramBot_acceptBotCommandCustom_Test
     void acceptBotCommandCustom4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
+        final Update update = new Update();
+        final Message message = new Message();
+        final Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
         message.setText("sth");
         update.setMessage(message);
-        Consumer<Update> updateConsumer = updateParam -> System.out.println(updateParam.toString());
+        final Consumer<Update> updateConsumer = updateParam -> System.out.println(updateParam.toString());
 
         // When
         Mockito.doReturn(updateConsumer)

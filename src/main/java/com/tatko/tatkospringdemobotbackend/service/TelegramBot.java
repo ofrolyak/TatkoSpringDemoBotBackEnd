@@ -77,7 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         if (userDao.findByChatId(message.getChatId()).isEmpty()) {
 
-            User user = User.builder()
+            final User user = User.builder()
                     .chatId(message.getChatId())
                     .firstName(message.getChat().getFirstName())
                     .lastName(message.getChat().getLastName())
@@ -123,10 +123,10 @@ public class TelegramBot extends TelegramLongPollingBot {
      */
     public void processReceivedMessage(final Update update) {
 
-        long chatId = update.getMessage().getChatId();
-        String messageText = update.getMessage().getText();
+        final long chatId = update.getMessage().getChatId();
+        final String messageText = update.getMessage().getText();
 
-        Optional<BotCommandCustom> botCommandCustomOptional
+        final Optional<BotCommandCustom> botCommandCustomOptional
                 = parseBotCommandCustom(messageText);
 
         botCommandCustomOptional.ifPresentOrElse(_
@@ -139,6 +139,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Sth.
+     *
      * @param update Update received
      */
     @Override
@@ -158,15 +159,16 @@ public class TelegramBot extends TelegramLongPollingBot {
      * @param update Prepared update instance for Telegram chat.
      */
     public void processStartAction(final Update update) {
-        Message message = update.getMessage();
+        final Message message = update.getMessage();
         long chatId = update.getMessage().getChatId();
-        String firstName = update.getMessage().getChat().getFirstName();
+        final String firstName = update.getMessage().getChat().getFirstName();
         registerUser(message);
         startCommandReceived(chatId, firstName);
     }
 
     /**
      * Process HELP action.
+     *
      * @param update Prepared update instance for Telegram chat.
      */
     public void processHelpAction(final Update update) {
@@ -178,6 +180,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Process no action.
+     *
      * @param update Prepared update instance for Telegram chat.
      */
     public void processNoAction(final Update update) {
@@ -186,10 +189,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Build BotCommandCustom.
+     *
      * @return Set of BotCommandCustom
      */
     private Set<BotCommandCustom> buildBotCommandsMap() {
-        Set<BotCommandCustom> botCommandSet = new HashSet<>();
+        final Set<BotCommandCustom> botCommandSet = new HashSet<>();
         botCommandSet.add(new BotCommandCustom(Action.START,
                 "/start", "get welcome message", this::processStartAction));
         botCommandSet.add(new BotCommandCustom(Action.GET_MY_DATA,
@@ -206,6 +210,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Build BotCommandList.
+     *
      * @return List of BotCommand
      */
     public List<BotCommand> buildBotCommands() {
@@ -222,13 +227,14 @@ public class TelegramBot extends TelegramLongPollingBot {
      */
     @SneakyThrows
     public void addPreparedBotCommandsToBot() {
-        List<BotCommand> botCommandList = buildBotCommands();
+        final List<BotCommand> botCommandList = buildBotCommands();
         execute(new SetMyCommands(botCommandList, new BotCommandScopeDefault(),
                 null));
     }
 
     /**
      * React on START action.
+     *
      * @param chatId Chat identifier in Telegram Bot.
      * @param name Name for Telegram user.
      */
@@ -236,7 +242,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         log.info("Starting command received: {}", name);
 
-        String message = "Hi " + name + " from " + chatId
+        final String message = "Hi " + name + " from " + chatId
                 + "! Nice to meet you!!!" + "\uD83C\uDF4C";
 
         sendMessage(chatId, message);
@@ -244,18 +250,19 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Build ReplyKeyboardMarkup.
+     *
      * @return ReplyKeyboardMarkup
      */
     public ReplyKeyboardMarkup buildReplyKeyboardMarkup() {
 
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardRow1 = new KeyboardRow();
+        final List<KeyboardRow> keyboardRowList = new ArrayList<>();
+        final KeyboardRow keyboardRow1 = new KeyboardRow();
         keyboardRow1.add("weather");
         keyboardRow1.add("get random joke");
         keyboardRowList.add(keyboardRow1);
 
-        KeyboardRow keyboardRow2 = new KeyboardRow();
+        final KeyboardRow keyboardRow2 = new KeyboardRow();
         keyboardRow2.add("register");
         keyboardRow2.add("check my data");
         keyboardRow2.add("delete my data");
@@ -268,6 +275,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Send message without keyboard.
+     *
      * @param chatId Identifier for Telegram chat.
      * @param message Prepared message instance for Telegram chat.
      */
@@ -278,7 +286,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         log.info("Sending message: {}", message);
 
-        SendMessage sendMessage = new SendMessage();
+        final SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
 
@@ -288,6 +296,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Send message with keyboard.
+     *
      * @param chatId Identifier for Telegram chat.
      * @param message Prepared message instance for Telegram chat.
      * @param replyKeyboardMarkup

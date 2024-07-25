@@ -26,7 +26,7 @@ class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
     void getBotUsername4Test() {
 
         // Before
-        String telegramBotName = gen.nextString();
+        final String telegramBotName = gen.nextString();
 
         // When
         Mockito.when(telegramBotConfig.getTelegramBotName())

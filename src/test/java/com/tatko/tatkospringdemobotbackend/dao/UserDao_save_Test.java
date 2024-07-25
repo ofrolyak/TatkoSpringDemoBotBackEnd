@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 /**
  * JUnit class for UserDao class save method.
  */
-class UserDao4save4Test extends MockitoExtensionBaseMockTests {
+class UserDao_save_Test extends MockitoExtensionBaseMockTests {
 
     @Mock
     UserRepository userRepository;
@@ -24,7 +24,7 @@ class UserDao4save4Test extends MockitoExtensionBaseMockTests {
     void save_Test() {
 
         // Before
-        User user = gen.nextObject(User.class);
+        final User user = gen.nextObject(User.class);
 
         // When
         Mockito.when(userRepository.save(ArgumentMatchers.eq(user)))
