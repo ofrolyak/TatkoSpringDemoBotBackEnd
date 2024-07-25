@@ -23,7 +23,7 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     UserDao userDao;
 
     @Test
-    void findByChatId_UserIsNotFound_Test() {
+    void findByChatId4UserIsNotFound4Test() {
 
         // Before
         long id = gen.nextInt();
@@ -39,7 +39,7 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     }
 
     @Test
-    void findByChatId_UserIsFound_Test() {
+    void findByChatId4UserIsFound4Test() {
 
         // Before
         long id = gen.nextInt();

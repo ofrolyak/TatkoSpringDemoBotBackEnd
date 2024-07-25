@@ -39,6 +39,11 @@ import java.util.Set;
 public class TelegramBot extends TelegramLongPollingBot {
 
     /**
+     * A canonical backoff period is equal to 100 milliseconds.
+     */
+    public static final int RETRYABLE_BACKOFF_DELAY = 100;
+
+    /**
      * TelegramBotConfig itself .
      */
     @Autowired
@@ -62,11 +67,6 @@ public class TelegramBot extends TelegramLongPollingBot {
      */
     private final ReplyKeyboardMarkup replyKeyboardMarkupInstance1
             = buildReplyKeyboardMarkup();
-
-    /**
-     * A canonical backoff period is equal to 100 milliseconds.
-     */
-    public static final int RETRYABLE_BACKOFF_DELAY = 100;
 
     /**
      * Register User. If he's already registered do nothing.

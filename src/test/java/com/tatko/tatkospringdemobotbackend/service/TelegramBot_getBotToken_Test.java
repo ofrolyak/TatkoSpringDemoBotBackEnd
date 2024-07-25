@@ -23,7 +23,7 @@ class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
     TelegramBotConfig telegramBotConfig;
 
     @Test
-    void getBotToken_Test() {
+    void getBotToken4Test() {
 
         // Before
         String telegramBotToken = gen.nextString();
@@ -39,3 +39,4 @@ class TelegramBot_getBotToken_Test extends MockitoExtensionBaseMockTests {
     }
 
 }
+

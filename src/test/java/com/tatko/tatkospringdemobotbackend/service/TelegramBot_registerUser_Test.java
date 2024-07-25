@@ -21,14 +21,14 @@ class TelegramBot_registerUser_Test
         extends MockitoExtensionBaseMockTests {
 
     @Mock
-    UserDao userDao;
+    private UserDao userDao;
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void registerUser_userExists_Test() {
+    void registerUser4userExists4Test() {
 
         // Before
         Message message = new Message();
@@ -50,7 +50,7 @@ class TelegramBot_registerUser_Test
     }
 
     @Test
-    void registerUser_userNotExists_Test() {
+    void registerUser4userNotExists4Test() {
 
         // Before
         Message message = new Message();

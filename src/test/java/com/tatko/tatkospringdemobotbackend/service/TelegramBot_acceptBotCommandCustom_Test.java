@@ -24,7 +24,7 @@ class TelegramBot_acceptBotCommandCustom_Test
     TelegramBot telegramBot;
 
     @Test
-    void acceptBotCommandCustom_Test() {
+    void acceptBotCommandCustom4Test() {
 
         // Before
         Update update = new Update();

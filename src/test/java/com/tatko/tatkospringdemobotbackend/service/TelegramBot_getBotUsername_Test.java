@@ -23,7 +23,7 @@ class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
     TelegramBotConfig telegramBotConfig;
 
     @Test
-    void getBotUsername_Test() {
+    void getBotUsername4Test() {
 
         // Before
         String telegramBotName = gen.nextString();

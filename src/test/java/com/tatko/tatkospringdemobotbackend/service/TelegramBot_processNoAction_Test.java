@@ -17,11 +17,11 @@ class TelegramBot_processNoAction_Test
 
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test
-    void processNoAction_Test() {
+    void processNoAction4Test() {
 
         // Before
         Update update = new Update();
