@@ -20,9 +20,15 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 class TelegramBot_registerUser_Test
         extends MockitoExtensionBaseMockTests {
 
+    /**
+     * Mock for UserDao.
+     */
     @Mock
     private UserDao userDao;
 
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     private TelegramBot telegramBot;

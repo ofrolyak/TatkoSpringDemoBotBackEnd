@@ -14,13 +14,18 @@ import org.mockito.Spy;
  */
 class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
 
+    /**
+     * Mock for TelegramBotConfig instance.
+     */
+    @Mock
+    TelegramBotConfig telegramBotConfig;
+
+    /**
+     * TelegramBot instance with injected mocks.
+     */
     @Spy
     @InjectMocks
     TelegramBot telegramBot;
-
-
-    @Mock
-    TelegramBotConfig telegramBotConfig;
 
     @Test
     void getBotUsername4Test() {
