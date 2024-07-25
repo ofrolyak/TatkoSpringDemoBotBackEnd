@@ -36,7 +36,7 @@ import java.util.Set;
 public class TelegramBot extends TelegramLongPollingBot {
 
     /**
-     * TelegramBotConfig itself.
+     * TelegramBotConfig itself .
      */
     @Autowired
     private TelegramBotConfig telegramBotConfig;
