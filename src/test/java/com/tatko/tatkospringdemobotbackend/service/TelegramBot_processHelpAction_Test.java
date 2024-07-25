@@ -33,7 +33,8 @@ class TelegramBot_processHelpAction_Test extends MockitoExtensionBaseMockTests {
         Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom = telegramBot.getBotCommandsSet().stream()
+        BotCommandCustom botCommandCustom
+                = telegramBot.getBotCommandsSet().stream()
                 .findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);
@@ -41,13 +42,15 @@ class TelegramBot_processHelpAction_Test extends MockitoExtensionBaseMockTests {
         // When
         doNothing()
                 .when(telegramBot)
-                .sendMessage(eq(chat.getId()), anyString(), any(ReplyKeyboardMarkup.class));
+                .sendMessage(eq(chat.getId()), anyString(),
+                        any(ReplyKeyboardMarkup.class));
 
         // Then
         assertThatCode(() -> telegramBot.processHelpAction(update))
                 .doesNotThrowAnyException();
         verify(telegramBot, times(1))
-                .sendMessage(eq(chat.getId()), anyString(), any(ReplyKeyboardMarkup.class));
+                .sendMessage(eq(chat.getId()), anyString(),
+                        any(ReplyKeyboardMarkup.class));
 
     }
 

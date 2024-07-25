@@ -15,7 +15,8 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_sendMessage_2params_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_sendMessage_2params_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks

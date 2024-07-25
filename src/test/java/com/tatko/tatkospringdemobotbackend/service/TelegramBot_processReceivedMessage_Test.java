@@ -16,7 +16,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_processReceivedMessage_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_processReceivedMessage_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
@@ -45,7 +46,8 @@ class TelegramBot_processReceivedMessage_Test extends MockitoExtensionBaseMockTe
 
         // Then
         verify(telegramBot, never())
-                .acceptBotCommandCustom(any(BotCommandCustom.class), any(Update.class));
+                .acceptBotCommandCustom(any(BotCommandCustom.class),
+                        any(Update.class));
         verify(telegramBot, times(1))
                 .sendMessage(anyLong(), anyString());
     }

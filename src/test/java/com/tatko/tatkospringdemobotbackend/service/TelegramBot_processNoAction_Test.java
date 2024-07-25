@@ -26,8 +26,8 @@ class TelegramBot_processNoAction_Test extends MockitoExtensionBaseMockTests {
         Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom = telegramBot.getBotCommandsSet().stream()
-                .findAny().get();
+        BotCommandCustom botCommandCustom
+                = telegramBot.getBotCommandsSet().stream().findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);
 
