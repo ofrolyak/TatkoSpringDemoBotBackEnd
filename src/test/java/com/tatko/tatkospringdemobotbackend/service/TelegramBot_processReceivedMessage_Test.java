@@ -61,15 +61,16 @@ class TelegramBot_processReceivedMessage_Test
         Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom = telegramBot.getBotCommandsSet().stream()
-                .findAny().get();
+        BotCommandCustom botCommandCustom
+                = telegramBot.getBotCommandsSet().stream().findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);
 
         // When
         doNothing()
                 .when(telegramBot)
-                .acceptBotCommandCustom(any(BotCommandCustom.class), any(Update.class));
+                .acceptBotCommandCustom(any(BotCommandCustom.class),
+                        any(Update.class));
 
         // Action
         telegramBot.processReceivedMessage(update);
