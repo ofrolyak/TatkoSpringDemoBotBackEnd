@@ -39,7 +39,8 @@ class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
 
         // Then
         assertThat(collect)
-                .containsExactlyInAnyOrder("/start", "/getmydata", "/deletemydata", "/help", "/settings");
+                .containsExactlyInAnyOrder("/start", "/getmydata",
+                        "/deletemydata", "/help", "/settings");
     }
 
 }

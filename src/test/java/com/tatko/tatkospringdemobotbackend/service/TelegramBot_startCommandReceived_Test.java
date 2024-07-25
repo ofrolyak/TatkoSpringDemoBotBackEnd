@@ -11,7 +11,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_startCommandReceived_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_startCommandReceived_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
@@ -30,7 +31,8 @@ class TelegramBot_startCommandReceived_Test extends MockitoExtensionBaseMockTest
         telegramBot.startCommandReceived(gen.nextLong(), gen.nextString());
 
         // Then
-        verify(telegramBot, times(1)).startCommandReceived(anyLong(), anyString());
+        verify(telegramBot, times(1))
+                .startCommandReceived(anyLong(), anyString());
 
 
     }

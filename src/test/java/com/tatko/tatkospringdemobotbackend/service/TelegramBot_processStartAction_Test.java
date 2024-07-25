@@ -14,7 +14,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_processStartAction_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_processStartAction_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     @InjectMocks
@@ -30,8 +31,8 @@ class TelegramBot_processStartAction_Test extends MockitoExtensionBaseMockTests 
         Chat chat = new Chat();
         chat.setId(gen.nextLong());
         message.setChat(chat);
-        BotCommandCustom botCommandCustom = telegramBot.getBotCommandsSet().stream()
-                .findAny().get();
+        BotCommandCustom botCommandCustom
+                = telegramBot.getBotCommandsSet().stream().findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);
 
@@ -41,7 +42,8 @@ class TelegramBot_processStartAction_Test extends MockitoExtensionBaseMockTests 
                 .registerUser(eq(message));
         doNothing()
                 .when(telegramBot)
-                .startCommandReceived(eq(chat.getId()), eq(update.getMessage().getChat().getFirstName()));
+                .startCommandReceived(eq(chat.getId()),
+                        eq(update.getMessage().getChat().getFirstName()));
 
         // Then
         assertThatCode(() -> telegramBot.processStartAction(update))
@@ -49,7 +51,8 @@ class TelegramBot_processStartAction_Test extends MockitoExtensionBaseMockTests 
         verify(telegramBot, times(1))
                 .registerUser(eq(message));
         verify(telegramBot, times(1))
-                .startCommandReceived(eq(chat.getId()), eq(update.getMessage().getChat().getFirstName()));
+                .startCommandReceived(eq(chat.getId()),
+                        eq(update.getMessage().getChat().getFirstName()));
 
     }
 

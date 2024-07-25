@@ -211,8 +211,7 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/tatko/tatkospringdemobotbackend/TatkoSpringDemoBotBackEndApplication.class
-                        </exclude>
+                        <exclude>com/tatko/tatkospringdemobotbackend/TatkoSpringDemoBotBackEndApplication.class</exclude>
                         <exclude>com/tatko/tatkospringdemobotbackend/config/**.class</exclude>
                         <exclude>com/tatko/tatkospringdemobotbackend/entity/**.class</exclude>
                     </excludes>

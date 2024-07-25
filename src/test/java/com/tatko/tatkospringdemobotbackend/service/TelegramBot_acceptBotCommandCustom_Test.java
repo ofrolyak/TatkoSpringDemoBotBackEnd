@@ -14,7 +14,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class TelegramBot_acceptBotCommandCustom_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot_acceptBotCommandCustom_Test
+        extends MockitoExtensionBaseMockTests {
 
     @Spy
     BotCommandCustom botCommandCustom;

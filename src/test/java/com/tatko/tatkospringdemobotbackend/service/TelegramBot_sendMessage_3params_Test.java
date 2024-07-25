@@ -56,7 +56,8 @@ class TelegramBot_sendMessage_3params_Test extends MockitoExtensionBaseMockTests
                 .when(telegramBot)
                 .execute(any(SendMessage.class));
 
-        assertThatThrownBy(() -> telegramBot.sendMessage(chatId, message, replyKeyboardMarkup))
+        assertThatThrownBy(() -> telegramBot.sendMessage(
+                chatId, message, replyKeyboardMarkup))
                 .isInstanceOf(TelegramApiException.class);
 
     }
