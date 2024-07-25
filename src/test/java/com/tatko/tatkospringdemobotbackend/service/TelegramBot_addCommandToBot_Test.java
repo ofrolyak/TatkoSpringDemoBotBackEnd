@@ -46,7 +46,8 @@ class TelegramBot_addCommandToBot_Test
     }
 
     @Test
-    void addPreparedBotCommandsToBot_SneakyThrows_Test() throws TelegramApiException {
+    void addPreparedBotCommandsToBot_SneakyThrows_Test()
+            throws TelegramApiException {
 
         // Action
         doThrow(TelegramApiException.class)
