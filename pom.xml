@@ -211,9 +211,9 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/tatko/tatkospringdemobotbackend/TatkoSpringDemoBotBackEndApplication.class</exclude>
-                        <exclude>com/tatko/tatkospringdemobotbackend/config/**.class</exclude>
-                        <exclude>com/tatko/tatkospringdemobotbackend/entity/**.class</exclude>
+                        <exclude>com/tatko/telegram/bot/TatkoSpringDemoBotBackEndApplication.class</exclude>
+                        <exclude>com/tatko/telegram/bot/config/**.class</exclude>
+                        <exclude>com/tatko/telegram/bot/entity/**.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
