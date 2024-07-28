@@ -29,7 +29,6 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 /**
  * Telegram Bot service.
  */
@@ -321,6 +320,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Get Bot UserName.
+     *
      * @return Bot UserName
      */
     @Override
@@ -330,6 +330,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     /**
      * Get Bot Token.
+     *
      * @return Bot Token
      */
     @Override

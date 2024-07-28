@@ -1,7 +1,6 @@
 package com.tatko.telegram.bot;
 
 import org.jeasy.random.EasyRandom;
-
 /**
  * Expansion functionality for EasyRandom functionality.
  */

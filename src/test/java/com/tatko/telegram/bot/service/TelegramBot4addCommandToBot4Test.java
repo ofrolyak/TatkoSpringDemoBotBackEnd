@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 /**
  * JUnit class for TelegramBot class addCommandToBot method.
  */

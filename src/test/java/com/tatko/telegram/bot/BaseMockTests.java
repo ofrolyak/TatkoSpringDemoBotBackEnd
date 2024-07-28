@@ -1,7 +1,6 @@
 package com.tatko.telegram.bot;
 
 import lombok.Getter;
-
 /**
  * Parent for all JUnit classes.
  */

@@ -10,7 +10,6 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
 /**
  * JUnit class for TelegramBot class acceptBotCommandCustom method.
  */

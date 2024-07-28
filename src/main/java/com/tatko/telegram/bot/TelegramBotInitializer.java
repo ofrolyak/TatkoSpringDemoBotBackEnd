@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
 /**
  * TelegramBotInitializer class is provide functionality to create and
  * configure Telegram Bot.
@@ -29,6 +28,7 @@ public class TelegramBotInitializer {
 
     /**
      * Create registered Telegram bot.
+     *
      * @throws TelegramApiException Possible checked TelegramApiException
      */
     public void createRegisterBot() throws TelegramApiException {
