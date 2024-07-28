@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
-
 /**
  * JUnit class for TelegramBot class buildBotCommands method.
  */

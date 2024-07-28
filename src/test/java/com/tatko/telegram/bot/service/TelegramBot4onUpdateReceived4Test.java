@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
 /**
  * JUnit class for TelegramBot class onUpdateReceived method.
  */

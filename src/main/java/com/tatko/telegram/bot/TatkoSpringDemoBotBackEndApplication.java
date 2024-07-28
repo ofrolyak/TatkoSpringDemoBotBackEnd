@@ -2,7 +2,6 @@ package com.tatko.telegram.bot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /**
  * This class is MAIN class for this Spring Boot Application.
  */

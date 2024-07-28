@@ -11,11 +11,10 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 /**
  * JUnit class for TelegramBot class sendMessage method (3 params).
  */
-class TelegramBot4sendMessage43params_Test
+class TelegramBot4sendMessage43params4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -55,7 +54,8 @@ class TelegramBot4sendMessage43params_Test
         // Before
         final long chatId = getGen().nextLong();
         final String message = getGen().nextString();
-        final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        final ReplyKeyboardMarkup replyKeyboardMarkup
+                = new ReplyKeyboardMarkup();
 
         Mockito.doThrow(TelegramApiException.class)
                 .when(telegramBot)

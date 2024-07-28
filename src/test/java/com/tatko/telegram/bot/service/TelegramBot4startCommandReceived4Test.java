@@ -6,7 +6,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
-
 /**
  * JUnit class for TelegramBot class startCommandReceived method.
  */
@@ -31,7 +30,8 @@ class TelegramBot4startCommandReceived4Test
                         ArgumentMatchers.anyString());
 
         // Action
-        telegramBot.startCommandReceived(getGen().nextLong(), getGen().nextString());
+        telegramBot.startCommandReceived(
+                getGen().nextLong(), getGen().nextString());
 
         // Then
         Mockito.verify(telegramBot, Mockito.times(1))

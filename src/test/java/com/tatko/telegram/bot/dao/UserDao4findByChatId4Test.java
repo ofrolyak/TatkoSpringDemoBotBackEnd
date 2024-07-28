@@ -11,7 +11,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
 /**
  * JUnit class for UserDao class findByChatId method.
  */

@@ -72,7 +72,8 @@ class TelegramBot4processReceivedMessage4Test
         // When
         Mockito.doNothing()
                 .when(telegramBot)
-                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                .acceptBotCommandCustom(
+                        ArgumentMatchers.any(BotCommandCustom.class),
                         ArgumentMatchers.any(Update.class));
 
         // Action
@@ -80,10 +81,13 @@ class TelegramBot4processReceivedMessage4Test
 
         // Then
         Mockito.verify(telegramBot, Mockito.times(1))
-                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                .acceptBotCommandCustom(
+                        ArgumentMatchers.any(BotCommandCustom.class),
                         ArgumentMatchers.any(Update.class));
         Mockito.verify(telegramBot, Mockito.never())
-                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
+                .sendMessage(
+                        ArgumentMatchers.anyLong(),
+                        ArgumentMatchers.anyString());
     }
 
 }

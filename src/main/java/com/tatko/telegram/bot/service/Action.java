@@ -4,7 +4,6 @@ package com.tatko.telegram.bot.service;
  * Actions.
  */
 public enum Action {
-
     /**
      * START message.
      */
