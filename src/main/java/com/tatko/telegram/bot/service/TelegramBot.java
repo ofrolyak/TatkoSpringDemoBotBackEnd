@@ -32,6 +32,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 /**
  * Telegram Bot service.
  */
+
 @NoArgsConstructor
 @Component
 @Slf4j
@@ -299,7 +300,7 @@ public class TelegramBot extends TelegramLongPollingBot {
      *
      * @param chatId Identifier for Telegram chat.
      * @param message Prepared message instance for Telegram chat.
-     * @param replyKeyboardMarkup
+     * @param replyKeyboardMarkup ReplyKeyboardMarkup instance.
      */
     @SneakyThrows
     @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,

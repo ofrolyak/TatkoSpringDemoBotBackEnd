@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 /**
  * JUnit class for UserDao class save method.
  */
+
 class UserDao4save4Test extends MockitoExtensionBaseMockTests {
 
     /**
@@ -27,7 +28,7 @@ class UserDao4save4Test extends MockitoExtensionBaseMockTests {
     private UserDao userDao;
 
     @Test
-    void save_Test() {
+    void save4Test() {
 
         // Before
         final User user = getGen().nextObject(User.class);

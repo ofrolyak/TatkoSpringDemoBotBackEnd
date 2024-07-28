@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 /**
  * JUnit class for TelegramBot class processHelpAction method.
  */
+
 class TelegramBot4processHelpAction4Test
         extends MockitoExtensionBaseMockTests {
 

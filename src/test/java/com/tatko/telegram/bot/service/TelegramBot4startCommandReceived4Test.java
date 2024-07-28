@@ -9,6 +9,7 @@ import org.mockito.Spy;
 /**
  * JUnit class for TelegramBot class startCommandReceived method.
  */
+
 class TelegramBot4startCommandReceived4Test
         extends MockitoExtensionBaseMockTests {
 

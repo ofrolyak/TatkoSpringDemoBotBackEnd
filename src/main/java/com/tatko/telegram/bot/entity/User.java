@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 /**
  * User entity.
  */
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

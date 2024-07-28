@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * Configuration for Telegram Bot.
  */
+
 @Configuration
 @PropertySource("application.yaml")
 @Data

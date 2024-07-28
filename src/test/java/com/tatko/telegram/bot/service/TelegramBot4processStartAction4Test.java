@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class processStartAction method.
  */
+
 class TelegramBot4processStartAction4Test
         extends MockitoExtensionBaseMockTests {
 

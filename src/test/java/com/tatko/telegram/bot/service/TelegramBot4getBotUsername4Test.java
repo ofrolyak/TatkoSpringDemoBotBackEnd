@@ -11,6 +11,7 @@ import org.mockito.Spy;
 /**
  * JUnit class for TelegramBot class getBotUsername method.
  */
+
 class TelegramBot4getBotUsername4Test extends MockitoExtensionBaseMockTests {
 
     /**

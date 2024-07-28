@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 /**
  * JUnit class for TelegramBot class sendMessage method (2 params).
  */
+
 class TelegramBot4sendMessage42params4Test
         extends MockitoExtensionBaseMockTests {
 

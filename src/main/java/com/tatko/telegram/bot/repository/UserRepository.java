@@ -8,6 +8,7 @@ import com.tatko.telegram.bot.entity.User;
 /**
  * Repository for User entity.
  */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
