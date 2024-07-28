@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class acceptBotCommandCustom method.
  */
+
 class TelegramBot4acceptBotCommandCustom4Test
         extends MockitoExtensionBaseMockTests {
 

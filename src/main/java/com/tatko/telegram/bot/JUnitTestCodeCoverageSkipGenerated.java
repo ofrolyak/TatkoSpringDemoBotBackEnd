@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * This annotation is used to remove method/class from JaCoCo report.
  */
+
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})

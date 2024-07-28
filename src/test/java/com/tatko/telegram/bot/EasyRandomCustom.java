@@ -4,6 +4,7 @@ import org.jeasy.random.EasyRandom;
 /**
  * Expansion functionality for EasyRandom functionality.
  */
+
 public class EasyRandomCustom extends EasyRandom {
 
     /**

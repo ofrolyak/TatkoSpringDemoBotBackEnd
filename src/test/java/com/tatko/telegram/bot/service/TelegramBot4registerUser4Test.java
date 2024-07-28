@@ -16,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 /**
  * JUnit class for TelegramBot class registerUser method.
  */
+
 class TelegramBot4registerUser4Test
         extends MockitoExtensionBaseMockTests {
 

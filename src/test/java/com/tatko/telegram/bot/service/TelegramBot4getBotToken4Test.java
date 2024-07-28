@@ -11,6 +11,7 @@ import org.mockito.Spy;
 /**
  * JUnit class for TelegramBot class getBotToken method.
  */
+
 class TelegramBot4getBotToken4Test extends MockitoExtensionBaseMockTests {
 
     /**

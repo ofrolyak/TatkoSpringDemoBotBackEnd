@@ -10,6 +10,7 @@ import com.tatko.telegram.bot.repository.UserRepository;
 /**
  * Data Access Object for User entity.
  */
+
 @Service
 @Setter
 public class UserDao {

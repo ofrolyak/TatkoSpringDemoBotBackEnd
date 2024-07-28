@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class processNoAction method.
  */
+
 class TelegramBot4processNoAction4Test
         extends MockitoExtensionBaseMockTests {
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 /**
  * Parent for all JUnit classes.
  */
+
 @Getter
 public class BaseMockTests {
 
