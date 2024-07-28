@@ -10,11 +10,12 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 /**
- * JUnit class for TelegramBot class processStartAction method.
+ * JUnit class for TelegramBot class processHelpAction method.
  */
-class TelegramBot_processStartAction_Test
+class TelegramBot4processHelpAction4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -26,36 +27,34 @@ class TelegramBot_processStartAction_Test
 
 
     @Test
-    void processStartAction4Test() {
+    void processHelpAction4Test() {
 
         // Before
         final Update update = new Update();
         final Message message = new Message();
         final Chat chat = new Chat();
-        chat.setId(gen.nextLong());
+        chat.setId(getGen().nextLong());
         message.setChat(chat);
         final BotCommandCustom botCommandCustom
-                = telegramBot.getBotCommandsSet().stream().findAny().get();
+                = telegramBot.getBotCommandsSet().stream()
+                .findAny().get();
         message.setText(botCommandCustom.getMessageText());
         update.setMessage(message);
 
         // When
         Mockito.doNothing()
                 .when(telegramBot)
-                .registerUser(ArgumentMatchers.eq(message));
-        Mockito.doNothing()
-                .when(telegramBot)
-                .startCommandReceived(ArgumentMatchers.eq(chat.getId()),
-                        ArgumentMatchers.eq(update.getMessage().getChat().getFirstName()));
+                .sendMessage(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.anyString(),
+                        ArgumentMatchers.any(ReplyKeyboardMarkup.class));
 
         // Then
-        Assertions.assertThatCode(() -> telegramBot.processStartAction(update))
+        Assertions.assertThatCode(() -> telegramBot.processHelpAction(update))
                 .doesNotThrowAnyException();
         Mockito.verify(telegramBot, Mockito.times(1))
-                .registerUser(ArgumentMatchers.eq(message));
-        Mockito.verify(telegramBot, Mockito.times(1))
-                .startCommandReceived(ArgumentMatchers.eq(chat.getId()),
-                        ArgumentMatchers.eq(update.getMessage().getChat().getFirstName()));
+                .sendMessage(ArgumentMatchers.eq(chat.getId()),
+                        ArgumentMatchers.anyString(),
+                        ArgumentMatchers.any(ReplyKeyboardMarkup.class));
 
     }
 

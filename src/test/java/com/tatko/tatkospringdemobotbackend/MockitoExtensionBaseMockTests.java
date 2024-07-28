@@ -9,11 +9,5 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class MockitoExtensionBaseMockTests extends BaseMockTests {
 
-    /**
-     * Generator for random entities.
-     */
-    public EasyRandomCustom gen = new EasyRandomCustom();
-
-
 
 }

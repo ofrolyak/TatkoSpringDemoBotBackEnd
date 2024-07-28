@@ -23,7 +23,7 @@ package com.tatko.tatkospringdemobotbackend;
 /**
  * JUnit test for TelegramBotInitializer class init method.
  */
-class TelegramBotInitializer_init_Test extends BaseMockTests {
+class TelegramBotInitializer4init4Test extends BaseMockTests {
 
 //    @MockBean
 //    UserDao userDao;

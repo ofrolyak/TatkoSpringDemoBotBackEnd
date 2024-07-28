@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class onUpdateReceived method.
  */
-class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot4onUpdateReceived4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * TelegramBot instance with injected mocks.
@@ -60,13 +60,13 @@ class TelegramBot_onUpdateReceived_Test extends MockitoExtensionBaseMockTests {
         // Before
         final Update update = new Update();
         final Message message = new Message();
-        message.setText(gen.nextString());
+        message.setText(getGen().nextString());
         update.setMessage(message);
 
         // When
         Mockito.doNothing()
                 .when(telegramBot)
-                        .processReceivedMessage(ArgumentMatchers.any(Update.class));
+                .processReceivedMessage(ArgumentMatchers.any(Update.class));
 
         // Action
         telegramBot.onUpdateReceived(update);

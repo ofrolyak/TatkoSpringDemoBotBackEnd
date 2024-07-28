@@ -13,7 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class processReceivedMessage method.
  */
-class TelegramBot_processReceivedMessage_Test
+class TelegramBot4processReceivedMessage4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -31,7 +31,7 @@ class TelegramBot_processReceivedMessage_Test
         final Update update = new Update();
         final Message message = new Message();
         final Chat chat = new Chat();
-        chat.setId(gen.nextLong());
+        chat.setId(getGen().nextLong());
         message.setChat(chat);
         message.setText("sth");
         update.setMessage(message);
@@ -39,17 +39,20 @@ class TelegramBot_processReceivedMessage_Test
         // When
         Mockito.doNothing()
                 .when(telegramBot)
-                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
+                .sendMessage(ArgumentMatchers.anyLong(),
+                        ArgumentMatchers.anyString());
 
         // Action
         telegramBot.processReceivedMessage(update);
 
         // Then
         Mockito.verify(telegramBot, Mockito.never())
-                .acceptBotCommandCustom(ArgumentMatchers.any(BotCommandCustom.class),
+                .acceptBotCommandCustom(
+                        ArgumentMatchers.any(BotCommandCustom.class),
                         ArgumentMatchers.any(Update.class));
         Mockito.verify(telegramBot, Mockito.times(1))
-                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
+                .sendMessage(ArgumentMatchers.anyLong(),
+                        ArgumentMatchers.anyString());
     }
 
     @Test
@@ -59,7 +62,7 @@ class TelegramBot_processReceivedMessage_Test
         final Update update = new Update();
         final Message message = new Message();
         final Chat chat = new Chat();
-        chat.setId(gen.nextLong());
+        chat.setId(getGen().nextLong());
         message.setChat(chat);
         final BotCommandCustom botCommandCustom
                 = telegramBot.getBotCommandsSet().stream().findAny().get();

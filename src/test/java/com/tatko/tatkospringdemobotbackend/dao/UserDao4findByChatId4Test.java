@@ -15,25 +15,25 @@ import org.mockito.Mockito;
 /**
  * JUnit class for UserDao class findByChatId method.
  */
-class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
+class UserDao4findByChatId4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * User Repository itself.
      */
     @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     /**
      * User Dao itself.
      */
     @InjectMocks
-    UserDao userDao;
+    private UserDao userDao;
 
     @Test
     void findByChatId4UserIsNotFound4Test() {
 
         // Before
-        final long id = gen.nextInt();
+        final long id = getGen().nextInt();
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
@@ -49,8 +49,8 @@ class UserDao_findByChatId_Test extends MockitoExtensionBaseMockTests {
     void findByChatId4UserIsFound4Test() {
 
         // Before
-        final long id = gen.nextInt();
-        final User user = gen.nextObject(User.class);
+        final long id = getGen().nextInt();
+        final User user = getGen().nextObject(User.class);
 
         // When
         Mockito.when(userRepository.findByChatId(ArgumentMatchers.anyLong()))
