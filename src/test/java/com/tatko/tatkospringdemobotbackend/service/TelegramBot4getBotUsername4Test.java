@@ -12,26 +12,26 @@ import org.mockito.Spy;
 /**
  * JUnit class for TelegramBot class getBotUsername method.
  */
-class TelegramBot_getBotUsername_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot4getBotUsername4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * Mock for TelegramBotConfig instance.
      */
     @Mock
-    TelegramBotConfig telegramBotConfig;
+    private TelegramBotConfig telegramBotConfig;
 
     /**
      * TelegramBot instance with injected mocks.
      */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
     @Test
     void getBotUsername4Test() {
 
         // Before
-        final String telegramBotName = gen.nextString();
+        final String telegramBotName = getGen().nextString();
 
         // When
         Mockito.when(telegramBotConfig.getTelegramBotName())

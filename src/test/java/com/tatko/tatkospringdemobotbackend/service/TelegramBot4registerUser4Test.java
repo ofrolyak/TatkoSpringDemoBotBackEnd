@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 /**
  * JUnit class for TelegramBot class registerUser method.
  */
-class TelegramBot_registerUser_Test
+class TelegramBot4registerUser4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -42,7 +42,7 @@ class TelegramBot_registerUser_Test
         final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        final User user = gen.nextObject(User.class);
+        final User user = getGen().nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
@@ -52,7 +52,8 @@ class TelegramBot_registerUser_Test
         telegramBot.registerUser(message);
 
         // Then
-        Mockito.verify(userDao, Mockito.never()).save(ArgumentMatchers.any(User.class));
+        Mockito.verify(userDao, Mockito.never())
+                .save(ArgumentMatchers.any(User.class));
 
     }
 
@@ -64,7 +65,7 @@ class TelegramBot_registerUser_Test
         final Chat chat = new Chat();
         chat.setId(0L);
         message.setChat(chat);
-        final User user = gen.nextObject(User.class);
+        final User user = getGen().nextObject(User.class);
 
         // When
         Mockito.when(userDao.findByChatId(ArgumentMatchers.anyLong()))
@@ -76,7 +77,8 @@ class TelegramBot_registerUser_Test
         telegramBot.registerUser(message);
 
         // Then
-        Mockito.verify(userDao, Mockito.times(1)).save(ArgumentMatchers.any(User.class));
+        Mockito.verify(userDao, Mockito.times(1))
+                .save(ArgumentMatchers.any(User.class));
 
     }
 

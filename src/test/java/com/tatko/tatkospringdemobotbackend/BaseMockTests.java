@@ -1,10 +1,13 @@
 package com.tatko.tatkospringdemobotbackend;
 
+import lombok.Getter;
+
 /**
  * Parent for all JUnit classes.
  */
+@Getter
 public class BaseMockTests {
 
-    public EasyRandomCustom gen = new EasyRandomCustom();
+    private final EasyRandomCustom gen = new EasyRandomCustom();
 
 }

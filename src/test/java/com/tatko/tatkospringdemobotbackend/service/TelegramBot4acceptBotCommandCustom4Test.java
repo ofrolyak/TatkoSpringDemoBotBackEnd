@@ -14,21 +14,21 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * JUnit class for TelegramBot class acceptBotCommandCustom method.
  */
-class TelegramBot_acceptBotCommandCustom_Test
+class TelegramBot4acceptBotCommandCustom4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
      * Spy for BotCommandCustom.
      */
     @Spy
-    BotCommandCustom botCommandCustom;
+    private BotCommandCustom botCommandCustom;
 
     /**
      * TelegramBot instance with injected mocks.
      */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
     @Test
     void acceptBotCommandCustom4Test() {
@@ -37,11 +37,12 @@ class TelegramBot_acceptBotCommandCustom_Test
         final Update update = new Update();
         final Message message = new Message();
         final Chat chat = new Chat();
-        chat.setId(gen.nextLong());
+        chat.setId(getGen().nextLong());
         message.setChat(chat);
         message.setText("sth");
         update.setMessage(message);
-        final Consumer<Update> updateConsumer = updateParam -> System.out.println(updateParam.toString());
+        final Consumer<Update> updateConsumer
+                = updateParam -> System.out.println(updateParam.toString());
 
         // When
         Mockito.doReturn(updateConsumer)

@@ -12,14 +12,14 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 /**
  * JUnit class for TelegramBot class buildBotCommands method.
  */
-class TelegramBot_buildBotCommands_Test extends MockitoExtensionBaseMockTests {
+class TelegramBot4buildBotCommands4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * TelegramBot instance with injected mocks.
      */
     @Spy
     @InjectMocks
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
 
     @Test

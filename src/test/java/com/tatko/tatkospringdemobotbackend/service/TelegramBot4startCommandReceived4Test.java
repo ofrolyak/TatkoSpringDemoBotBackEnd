@@ -10,7 +10,7 @@ import org.mockito.Spy;
 /**
  * JUnit class for TelegramBot class startCommandReceived method.
  */
-class TelegramBot_startCommandReceived_Test
+class TelegramBot4startCommandReceived4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -27,14 +27,16 @@ class TelegramBot_startCommandReceived_Test
         // When
         Mockito.doNothing()
                 .when(telegramBot)
-                .sendMessage(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
+                .sendMessage(ArgumentMatchers.anyLong(),
+                        ArgumentMatchers.anyString());
 
         // Action
-        telegramBot.startCommandReceived(gen.nextLong(), gen.nextString());
+        telegramBot.startCommandReceived(getGen().nextLong(), getGen().nextString());
 
         // Then
         Mockito.verify(telegramBot, Mockito.times(1))
-                .startCommandReceived(ArgumentMatchers.anyLong(), ArgumentMatchers.anyString());
+                .startCommandReceived(ArgumentMatchers.anyLong(),
+                        ArgumentMatchers.anyString());
 
 
     }
