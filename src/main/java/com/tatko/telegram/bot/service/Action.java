@@ -25,6 +25,10 @@ public enum Action {
      */
     SETTINGS,
     /**
+     * REGISTER message.
+     */
+    REGISTER,
+    /**
      * ANOTHER message.
      */
     ANOTHER
