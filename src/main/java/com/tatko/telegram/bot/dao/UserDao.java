@@ -1,16 +1,17 @@
 package com.tatko.telegram.bot.dao;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.tatko.telegram.bot.entity.User;
+import com.tatko.telegram.bot.repository.UserRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.tatko.telegram.bot.entity.User;
-import com.tatko.telegram.bot.repository.UserRepository;
+
 /**
  * Data Access Object for User entity.
  */
-
 @Service
 @Setter
 public class UserDao {
@@ -40,6 +41,15 @@ public class UserDao {
      */
     public User save(final User user) {
         return userRepository.save(user);
+    }
+
+    /**
+     * Return list of all users.
+     *
+     * @return List of users.
+     */
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
 }

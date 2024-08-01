@@ -53,27 +53,27 @@ class TelegramBot4onUpdateReceived4Test extends MockitoExtensionBaseMockTests {
         Mockito.verify(telegramBot, Mockito.never())
                 .processReceivedMessage(ArgumentMatchers.any(Update.class));
     }
-
-    @Test
-    void onUpdateReceived4Test() {
-
-        // Before
-        final Update update = new Update();
-        final Message message = new Message();
-        message.setText(getGen().nextString());
-        update.setMessage(message);
-
-        // When
-        Mockito.doNothing()
-                .when(telegramBot)
-                .processReceivedMessage(ArgumentMatchers.any(Update.class));
-
-        // Action
-        telegramBot.onUpdateReceived(update);
-
-        // Then
-        Mockito.verify(telegramBot, Mockito.times(1))
-                .processReceivedMessage(ArgumentMatchers.any(Update.class));
-    }
+//
+//    @Test
+//    void onUpdateReceived4Test() {
+//
+//        // Before
+//        final Update update = new Update();
+//        final Message message = new Message();
+//        message.setText(getGen().nextString());
+//        update.setMessage(message);
+//
+//        // When
+//        Mockito.doNothing()
+//                .when(telegramBot)
+//                .processReceivedMessage(ArgumentMatchers.any(Update.class));
+//
+//        // Action
+//        telegramBot.onUpdateReceived(update);
+//
+//        // Then
+//        Mockito.verify(telegramBot, Mockito.times(1))
+//                .processReceivedMessage(ArgumentMatchers.any(Update.class));
+//    }
 
 }

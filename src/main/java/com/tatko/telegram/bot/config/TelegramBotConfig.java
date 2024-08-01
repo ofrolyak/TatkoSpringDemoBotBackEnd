@@ -25,4 +25,10 @@ public class TelegramBotConfig {
     @Value("${telegram.bot.token}")
     private String telegramBotToken;
 
+    /**
+     * Telegram Bot Owner.
+     */
+    @Value("${telegram.bot.owner}")
+    private long telegramBotOwner;
+
 }

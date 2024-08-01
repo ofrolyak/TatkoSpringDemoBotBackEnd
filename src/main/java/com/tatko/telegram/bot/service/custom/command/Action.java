@@ -1,4 +1,4 @@
-package com.tatko.telegram.bot.service;
+package com.tatko.telegram.bot.service.custom.command;
 
 /**
  * Actions.
@@ -24,6 +24,14 @@ public enum Action {
      * SETTINGS message.
      */
     SETTINGS,
+    /**
+     * REGISTER message.
+     */
+    REGISTER,
+    /**
+     * SEND message.
+     */
+    SEND,
     /**
      * ANOTHER message.
      */

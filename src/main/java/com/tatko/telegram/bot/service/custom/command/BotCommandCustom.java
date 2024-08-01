@@ -1,7 +1,6 @@
-package com.tatko.telegram.bot.service;
+package com.tatko.telegram.bot.service.custom.command;
 
-import java.util.function.Consumer;
-
+import com.tatko.telegram.bot.service.TelegramBot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BotCommandCustom {
+public abstract class BotCommandCustom {
 
     /**
      * Action.
@@ -31,8 +30,11 @@ public class BotCommandCustom {
     private String description;
 
     /**
-     * Consumer that process this action.
+     * Do some action after receive update from Telegram user.
+     *
+     * @param telegramBot Telegram Bot instance.
+     * @param update Received update from Telegram user.
      */
-    private Consumer<Update> consumer;
+    public abstract void doAction(TelegramBot telegramBot, Update update);
 
 }
