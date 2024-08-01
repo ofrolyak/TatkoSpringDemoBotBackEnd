@@ -2,7 +2,7 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.BusinessUtility;
 import com.tatko.telegram.bot.dao.UserDao;
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,11 @@ public class BotCommandCustomSendBroadcastAction extends BotCommandCustom {
     /**
      * Do action for this action.
      *
-     * @param telegramBot Telegram Bot instance.
+     * @param telegramBotService Telegram Bot instance.
      * @param update      Received update from Telegram user.
      */
     @Override
-    public void doAction(final TelegramBot telegramBot, final Update update) {
+    public void doAction(final TelegramBotService telegramBotService, final Update update) {
         if (businessUtility.isTelegramBotAdmin(
                 update.getMessage().getChatId())) {
             // Broadcast
@@ -51,10 +51,10 @@ public class BotCommandCustomSendBroadcastAction extends BotCommandCustom {
             var users = userDao.findAll();
             for (var user : users) {
                 log.debug("Sending user: {}", user);
-                telegramBot.sendMessage(user.getChatId(), textToSend);
+                telegramBotService.sendMessage(user.getChatId(), textToSend);
             }
         } else {
-            telegramBot.sendMessage(update.getMessage().getChatId(),
+            telegramBotService.sendMessage(update.getMessage().getChatId(),
                     "You are not the owner of this chat.");
         }
 

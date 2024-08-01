@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  * JUnit class for TelegramBot class sendMessage method (3 params).
  */
 
-class TelegramBot4sendMessage43params4Test
+class TelegramBotService4SendMessage43Params4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -23,7 +23,7 @@ class TelegramBot4sendMessage43params4Test
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
 
     @SneakyThrows
@@ -38,14 +38,14 @@ class TelegramBot4sendMessage43params4Test
 
         // When
         Mockito.doReturn(null)
-                .when(telegramBot)
+                .when(telegramBotService)
                 .execute(ArgumentMatchers.any(SendMessage.class));
 
         // Action
-        telegramBot.sendMessage(chatId, message, replyKeyboardMarkup);
+        telegramBotService.sendMessage(chatId, message, replyKeyboardMarkup);
 
         // Then
-        Mockito.verify(telegramBot, Mockito.times(1))
+        Mockito.verify(telegramBotService, Mockito.times(1))
                 .execute(ArgumentMatchers.any(SendMessage.class));
     }
 
@@ -59,10 +59,10 @@ class TelegramBot4sendMessage43params4Test
                 = new ReplyKeyboardMarkup();
 
         Mockito.doThrow(TelegramApiException.class)
-                .when(telegramBot)
+                .when(telegramBotService)
                 .execute(ArgumentMatchers.any(SendMessage.class));
 
-        Assertions.assertThatThrownBy(() -> telegramBot.sendMessage(
+        Assertions.assertThatThrownBy(() -> telegramBotService.sendMessage(
                 chatId, message, replyKeyboardMarkup))
                 .isInstanceOf(TelegramApiException.class);
 

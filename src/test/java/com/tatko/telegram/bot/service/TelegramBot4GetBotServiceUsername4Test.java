@@ -12,7 +12,7 @@ import org.mockito.Spy;
  * JUnit class for TelegramBot class getBotUsername method.
  */
 
-class TelegramBot4getBotUsername4Test extends MockitoExtensionBaseMockTests {
+class TelegramBot4GetBotServiceUsername4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * Mock for TelegramBotConfig instance.
@@ -25,7 +25,7 @@ class TelegramBot4getBotUsername4Test extends MockitoExtensionBaseMockTests {
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
     @Test
     void getBotUsername4Test() {
@@ -38,7 +38,7 @@ class TelegramBot4getBotUsername4Test extends MockitoExtensionBaseMockTests {
                 .thenReturn(telegramBotName);
 
         // Then
-        Assertions.assertThat(telegramBot.getBotUsername())
+        Assertions.assertThat(telegramBotService.getBotUsername())
                 .isEqualTo(telegramBotName);
 
     }

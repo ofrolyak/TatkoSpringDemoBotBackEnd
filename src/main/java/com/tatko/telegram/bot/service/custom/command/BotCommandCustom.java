@@ -1,6 +1,6 @@
 package com.tatko.telegram.bot.service.custom.command;
 
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,9 +32,9 @@ public abstract class BotCommandCustom {
     /**
      * Do some action after receive update from Telegram user.
      *
-     * @param telegramBot Telegram Bot instance.
+     * @param telegramBotService Telegram Bot instance.
      * @param update Received update from Telegram user.
      */
-    public abstract void doAction(TelegramBot telegramBot, Update update);
+    public abstract void doAction(TelegramBotService telegramBotService, Update update);
 
 }

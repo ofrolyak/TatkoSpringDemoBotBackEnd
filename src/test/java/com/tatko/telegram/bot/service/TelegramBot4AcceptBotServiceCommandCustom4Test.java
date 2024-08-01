@@ -16,7 +16,7 @@ import java.util.function.Consumer;
  * JUnit class for TelegramBot class acceptBotCommandCustom method.
  */
 
-class TelegramBot4acceptBotCommandCustom4Test
+class TelegramBot4AcceptBotServiceCommandCustom4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -30,7 +30,7 @@ class TelegramBot4acceptBotCommandCustom4Test
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
     @Test
     void acceptBotCommandCustom4Test() {
@@ -49,14 +49,14 @@ class TelegramBot4acceptBotCommandCustom4Test
         // When
         Mockito.doNothing()
                 .when(botCommandCustom)
-                .doAction(ArgumentMatchers.eq(telegramBot), ArgumentMatchers.eq(update));
+                .doAction(ArgumentMatchers.eq(telegramBotService), ArgumentMatchers.eq(update));
 
         // Action
-        telegramBot.acceptBotCommandCustom(botCommandCustom, update);
+        telegramBotService.acceptBotCommandCustom(botCommandCustom, update);
 
         // Verify
         Mockito.verify(botCommandCustom, Mockito.times(1))
-                .doAction(ArgumentMatchers.eq(telegramBot), ArgumentMatchers.eq(update));
+                .doAction(ArgumentMatchers.eq(telegramBotService), ArgumentMatchers.eq(update));
 
     }
 

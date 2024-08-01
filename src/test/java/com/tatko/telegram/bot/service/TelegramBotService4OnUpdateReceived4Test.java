@@ -12,14 +12,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  * JUnit class for TelegramBot class onUpdateReceived method.
  */
 
-class TelegramBot4onUpdateReceived4Test extends MockitoExtensionBaseMockTests {
+class TelegramBotService4OnUpdateReceived4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * TelegramBot instance with injected mocks.
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
 
     @Test
@@ -30,10 +30,10 @@ class TelegramBot4onUpdateReceived4Test extends MockitoExtensionBaseMockTests {
         update.setMessage(null);
 
         // Action
-        telegramBot.onUpdateReceived(update);
+        telegramBotService.onUpdateReceived(update);
 
         // Then
-        Mockito.verify(telegramBot, Mockito.never())
+        Mockito.verify(telegramBotService, Mockito.never())
                 .processReceivedMessage(ArgumentMatchers.any(Update.class));
     }
 
@@ -47,10 +47,10 @@ class TelegramBot4onUpdateReceived4Test extends MockitoExtensionBaseMockTests {
         update.setMessage(message);
 
         // Action
-        telegramBot.onUpdateReceived(update);
+        telegramBotService.onUpdateReceived(update);
 
         // Then
-        Mockito.verify(telegramBot, Mockito.never())
+        Mockito.verify(telegramBotService, Mockito.never())
                 .processReceivedMessage(ArgumentMatchers.any(Update.class));
     }
 //

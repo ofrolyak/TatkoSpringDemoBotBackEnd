@@ -12,21 +12,21 @@ import java.util.List;
  * JUnit class for TelegramBot class buildBotCommands method.
  */
 
-class TelegramBot4buildBotCommands4Test extends MockitoExtensionBaseMockTests {
+class TelegramBot4BuildBotServiceCommands4Test extends MockitoExtensionBaseMockTests {
 
     /**
      * TelegramBot instance with injected mocks.
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
 
     @Test
     void buildBotCommands4verifySize4Test() {
 
         // Action
-        final List<BotCommand> botCommands = telegramBot.buildBotCommands();
+        final List<BotCommand> botCommands = telegramBotService.buildBotCommands();
 
         // Then
         Assertions.assertThat(botCommands)
@@ -37,7 +37,7 @@ class TelegramBot4buildBotCommands4Test extends MockitoExtensionBaseMockTests {
     void buildBotCommands4verifyContent4Test() {
 
         // Action
-        final List<BotCommand> botCommands = telegramBot.buildBotCommands();
+        final List<BotCommand> botCommands = telegramBotService.buildBotCommands();
         final List<String> collect = botCommands.stream()
                 .map(BotCommand::getCommand)
                 .toList();

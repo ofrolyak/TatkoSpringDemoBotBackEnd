@@ -16,7 +16,7 @@ import java.util.Collections;
  * JUnit class for TelegramBot class addCommandToBot method.
  */
 
-class TelegramBot4addCommandToBot4Test
+class TelegramBot4AddCommandToBotService4Test
         extends MockitoExtensionBaseMockTests {
 
     /**
@@ -24,7 +24,7 @@ class TelegramBot4addCommandToBot4Test
      */
     @Spy
     @InjectMocks
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
 
     @SneakyThrows
@@ -33,17 +33,17 @@ class TelegramBot4addCommandToBot4Test
 
         // When
         Mockito.doReturn(Collections.emptyList())
-                .when(telegramBot)
+                .when(telegramBotService)
                 .buildBotCommands();
         Mockito.doReturn(null)
-                .when(telegramBot)
+                .when(telegramBotService)
                 .execute(ArgumentMatchers.any(SetMyCommands.class));
 
         // Action
-        telegramBot.addPreparedBotCommandsToBot();
+        telegramBotService.addPreparedBotCommandsToBot();
 
         // Then
-        Mockito.verify(telegramBot, Mockito.times(1))
+        Mockito.verify(telegramBotService, Mockito.times(1))
                 .execute(ArgumentMatchers.any(SetMyCommands.class));
 
     }
@@ -54,12 +54,12 @@ class TelegramBot4addCommandToBot4Test
 
         // Action
         Mockito.doThrow(TelegramApiException.class)
-                .when(telegramBot)
+                .when(telegramBotService)
                 .execute(ArgumentMatchers.any(SetMyCommands.class));
 
         // Then
         Assertions.assertThatThrownBy(()
-                        -> telegramBot.addPreparedBotCommandsToBot())
+                        -> telegramBotService.addPreparedBotCommandsToBot())
                 .isInstanceOf(TelegramApiException.class);
 
     }

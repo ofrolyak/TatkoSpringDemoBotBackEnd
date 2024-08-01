@@ -2,7 +2,7 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.constant.Constant;
 import com.tatko.telegram.bot.service.KeyboardMarkupHolder;
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -52,12 +52,12 @@ public class BotCommandCustomRegisterAction extends BotCommandCustom {
     @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
             backoff = @Backoff(delay = Constant.RETRYABLE_BACKOFF_DELAY))
     @Override
-    public void doAction(final TelegramBot telegramBot, final Update update) {
+    public void doAction(final TelegramBotService telegramBotService, final Update update) {
 
 
         final long chatId = update.getMessage().getChat().getId();
 
-        telegramBot.execute(buildSendMessage(chatId,
+        telegramBotService.execute(buildSendMessage(chatId,
                 "Do you really want to register?",
                 KeyboardMarkupHolder.INLINE_KEYBOARD_MARKUP));
 

@@ -8,6 +8,8 @@ import java.util.Set;
 import com.tatko.telegram.bot.StaticUtility;
 import com.tatko.telegram.bot.config.TelegramBotConfig;
 import com.tatko.telegram.bot.constant.Constant;
+import com.tatko.telegram.bot.repository.AdRepository;
+import com.tatko.telegram.bot.repository.UserRepository;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustom;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustomDeleteMyDataAction;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustomGetMyDataAction;
@@ -23,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
@@ -39,8 +42,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @NoArgsConstructor
 @Component
 @Slf4j
-public class TelegramBot extends TelegramLongPollingBot {
+public class TelegramBotService extends TelegramLongPollingBot {
 
+    @Autowired
+    AdRepository adRepository;
+    @Autowired
+    UserRepository userRepository;
 
     /**
      * TelegramBotConfig itself .
@@ -102,8 +109,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                         "Головне в нашому житті - не тупікувати!!!"));
 
     }
-
-
 
     /**
      * Process received callback.
@@ -299,5 +304,19 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return telegramBotConfig.getTelegramBotToken();
     }
+
+    @Scheduled(cron = "${telegram.bot.ad.scheduler}")
+    public void sentAds() {
+
+        var ads = adRepository.findAll();
+        var users = userRepository.findAll();
+
+        for (var ad : ads) {
+            for (var user : users) {
+                sendMessage(user.getChatId(), ad.getAd());
+            }
+        }
+    }
+
 
 }

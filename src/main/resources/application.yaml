@@ -28,6 +28,8 @@ telegram:
     name: ${TELEGRAM_BOT_NAME}
     token: ${TELEGRAM_BOT_TOKEN}
     owner: ${TELEGRAM_BOT_OWNER}
+    ad:
+      scheduler: 0 * * * * *
 
 logging:
   level:
