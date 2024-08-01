@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,28 +22,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "ADS")
-public class Ad {
+@Table(name = "BOT_COMMAND_MAP")
+public class BotCommandMap {
 
     /**
      * ID.
      */
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "ad_generator")
-    @SequenceGenerator(name = "ad_generator", sequenceName = "ad_seq",
-            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /**
-     * First Name.
-     */
-    @Column(name = "AD", nullable = false)
-    private String ad;
+    @Column(name = "USER_ROLE_ID", nullable = false)
+    private Long userRoleId;
 
-    @Column(name = "DELIVERED_TIME", nullable = false)
-    private LocalDateTime deliveredTime;
+    @Column(name = "BOT_COMMAND_ID", nullable = false)
+    private Long botCommandId;
 
     @Column(name = "CREATING_TIME", nullable = false)
     private LocalDateTime creatingTime;

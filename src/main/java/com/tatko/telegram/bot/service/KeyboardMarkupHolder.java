@@ -20,11 +20,6 @@ public class KeyboardMarkupHolder {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Created and filled ReplyKeyboardMarkup instance.
-     */
-    public static final ReplyKeyboardMarkup REPLY_KEYBOARD_MARKUP_INSTANCE
-            = buildReplyKeyboardMarkup();
 
     /**
      * Created and filled InlineKeyboardMarkup instance.

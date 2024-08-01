@@ -5,6 +5,7 @@ import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -19,13 +20,16 @@ public class BotCommandCustomStartAction extends BotCommandCustom {
      * Constructor.
      */
     @Autowired
-    private UserDao userDao;
+    UserDao userDao;
+
+    @Autowired
+    ApplicationContext applicationContext;
 
     /**
      * Constructor.
      */
     public BotCommandCustomStartAction() {
-        super(Action.START, "/start", "get welcome message");
+        super("START", "/start", "get welcome message");
     }
 
     /**

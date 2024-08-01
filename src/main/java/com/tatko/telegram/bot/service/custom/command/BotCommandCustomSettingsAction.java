@@ -13,7 +13,7 @@ public class BotCommandCustomSettingsAction extends BotCommandCustom {
      * Constructor.
      */
     public BotCommandCustomSettingsAction() {
-        super(Action.SETTINGS,
+        super( "SETTINGS",
                 "/settings", "settings and preferences");
     }
 

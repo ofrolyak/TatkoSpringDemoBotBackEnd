@@ -1,6 +1,5 @@
 package com.tatko.telegram.bot.service.custom.command;
 
-import com.tatko.telegram.bot.service.KeyboardMarkupHolder;
 import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ public class BotCommandCustomHelpAction extends BotCommandCustom {
      * Constructor.
      */
     public BotCommandCustomHelpAction() {
-        super(Action.HELP,
+        super("HELP",
                 "/help", "how to use this bot");
     }
 
@@ -27,10 +26,10 @@ public class BotCommandCustomHelpAction extends BotCommandCustom {
     @Override
     public void doAction(final TelegramBotService telegramBotService, final Update update) {
         final long chatId = update.getMessage().getChatId();
-        telegramBotService.sendMessage(chatId,
-                "This is bot for demonstration how to Spring Boot"
-                        + " works with Telegram.",
-                KeyboardMarkupHolder.REPLY_KEYBOARD_MARKUP_INSTANCE);
+//        telegramBotService.sendMessage(chatId,
+//                "This is bot for demonstration how to Spring Boot"
+//                        + " works with Telegram.",
+//                KeyboardMarkupHolder.REPLY_KEYBOARD_MARKUP_INSTANCE);
     }
 
 }

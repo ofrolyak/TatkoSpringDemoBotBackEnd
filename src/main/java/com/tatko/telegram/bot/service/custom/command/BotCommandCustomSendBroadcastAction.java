@@ -29,7 +29,7 @@ public class BotCommandCustomSendBroadcastAction extends BotCommandCustom {
      * Constructor.
      */
     public BotCommandCustomSendBroadcastAction() {
-        super(Action.SEND,
+        super( "SEND",
                 "/send", "send to all users");
     }
 

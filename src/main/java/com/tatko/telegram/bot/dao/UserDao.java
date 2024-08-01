@@ -1,13 +1,13 @@
 package com.tatko.telegram.bot.dao;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.repository.UserRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Data Access Object for User entity.
