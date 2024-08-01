@@ -1,7 +1,7 @@
 package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.service.KeyboardMarkupHolder;
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -21,13 +21,13 @@ public class BotCommandCustomHelpAction extends BotCommandCustom {
     /**
      * Do action for this action.
      *
-     * @param telegramBot Telegram Bot instance.
+     * @param telegramBotService Telegram Bot instance.
      * @param update Received update from Telegram user.
      */
     @Override
-    public void doAction(final TelegramBot telegramBot, final Update update) {
+    public void doAction(final TelegramBotService telegramBotService, final Update update) {
         final long chatId = update.getMessage().getChatId();
-        telegramBot.sendMessage(chatId,
+        telegramBotService.sendMessage(chatId,
                 "This is bot for demonstration how to Spring Boot"
                         + " works with Telegram.",
                 KeyboardMarkupHolder.REPLY_KEYBOARD_MARKUP_INSTANCE);

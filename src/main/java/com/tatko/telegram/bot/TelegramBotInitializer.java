@@ -1,6 +1,6 @@
 package com.tatko.telegram.bot;
 
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -25,7 +25,7 @@ public class TelegramBotInitializer {
      * TelegramBot itself.
      */
     @Autowired
-    private TelegramBot telegramBot;
+    private TelegramBotService telegramBotService;
 
     /**
      * Create registered Telegram bot.
@@ -35,7 +35,7 @@ public class TelegramBotInitializer {
     public void createRegisterBot() throws TelegramApiException {
         final TelegramBotsApi telegramBotsApi
                 = new TelegramBotsApi(DefaultBotSession.class);
-        telegramBotsApi.registerBot(telegramBot);
+        telegramBotsApi.registerBot(telegramBotService);
     }
 
     /**
@@ -47,7 +47,7 @@ public class TelegramBotInitializer {
         log.info("Initializing TelegramBot");
         try {
             createRegisterBot();
-            telegramBot.addPreparedBotCommandsToBot();
+            telegramBotService.addPreparedBotCommandsToBot();
         } catch (TelegramApiException e) {
             log.error("Initializing TelegramBot Error: ", e);
             throw new TelegramApiException(e);

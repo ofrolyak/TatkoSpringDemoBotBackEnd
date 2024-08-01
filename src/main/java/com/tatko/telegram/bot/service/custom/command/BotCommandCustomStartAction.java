@@ -2,7 +2,7 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.dao.UserDao;
 import com.tatko.telegram.bot.entity.User;
-import com.tatko.telegram.bot.service.TelegramBot;
+import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,12 +52,12 @@ public class BotCommandCustomStartAction extends BotCommandCustom {
     /**
      * React on START action.
      *
-     * @param telegramBot Telegram Bot instance.
+     * @param telegramBotService Telegram Bot instance.
      * @param chatId Chat identifier in Telegram Bot.
      * @param name   Name for Telegram user.
      */
     public void startCommandReceived(
-            final TelegramBot telegramBot, final long chatId,
+            final TelegramBotService telegramBotService, final long chatId,
             final String name) {
 
         log.info("Starting command received: {}", name);
@@ -65,22 +65,22 @@ public class BotCommandCustomStartAction extends BotCommandCustom {
         final String message = "Hi " + name + " from " + chatId
                 + "! Nice to meet you!!!" + "\uD83C\uDF4C";
 
-        telegramBot.sendMessage(chatId, message);
+        telegramBotService.sendMessage(chatId, message);
     }
 
     /**
      * Do action for this action.
      *
-     * @param telegramBot Telegram Bot instance.
+     * @param telegramBotService Telegram Bot instance.
      * @param update Received update from Telegram user.
      */
     @Override
-    public void doAction(final TelegramBot telegramBot, final Update update) {
+    public void doAction(final TelegramBotService telegramBotService, final Update update) {
         final Message message = update.getMessage();
         final long chatId = update.getMessage().getChatId();
         final String firstName = update.getMessage().getChat().getFirstName();
         registerUser(message);
-        startCommandReceived(telegramBot, chatId, firstName);
+        startCommandReceived(telegramBotService, chatId, firstName);
     }
 
 }
