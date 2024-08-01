@@ -13,12 +13,23 @@ import java.util.List;
 public class KeyboardMarkupHolder {
 
     /**
+     * DUMMY for HideUtilityClassConstructor by CheckStyle.
+     */
+    @SuppressWarnings("unused")
+    public final void foo() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Created and filled ReplyKeyboardMarkup instance.
      */
-    public final static ReplyKeyboardMarkup replyKeyboardMarkupInstance
+    public static final ReplyKeyboardMarkup REPLY_KEYBOARD_MARKUP_INSTANCE
             = buildReplyKeyboardMarkup();
 
-    public final static InlineKeyboardMarkup inlineKeyboardMarkup
+    /**
+     * Created and filled InlineKeyboardMarkup instance.
+     */
+    public static final InlineKeyboardMarkup INLINE_KEYBOARD_MARKUP
             = buildInlineKeyboardMarkup();
 
     /**
@@ -53,7 +64,8 @@ public class KeyboardMarkupHolder {
      */
     private static InlineKeyboardMarkup buildInlineKeyboardMarkup() {
 
-        final InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        final InlineKeyboardMarkup inlineKeyboardMarkup
+                = new InlineKeyboardMarkup();
         final List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         final List<InlineKeyboardButton> rowInLine = new ArrayList<>();
 

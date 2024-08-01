@@ -213,6 +213,7 @@
                     <excludes>
                         <exclude>com/tatko/telegram/bot/TatkoSpringDemoBotBackEndApplication.class</exclude>
                         <exclude>com/tatko/telegram/bot/config/**.class</exclude>
+                        <exclude>com/tatko/telegram/bot/constant/**.class</exclude>
                         <exclude>com/tatko/telegram/bot/entity/**.class</exclude>
                     </excludes>
                 </configuration>

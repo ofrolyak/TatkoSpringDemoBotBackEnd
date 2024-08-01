@@ -1,7 +1,5 @@
 package com.tatko.telegram.bot.service;
 
-import java.util.Collections;
-
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
@@ -12,6 +10,8 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.Collections;
 /**
  * JUnit class for TelegramBot class addCommandToBot method.
  */

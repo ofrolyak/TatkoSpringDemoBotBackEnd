@@ -19,7 +19,7 @@ public class TatkoSpringDemoBotBackEndApplication {
     }
 
     /**
-     * DUMMY for hideutilityclassconstructor by CheckStyle.
+     * DUMMY for HideUtilityClassConstructor by CheckStyle.
      */
     @SuppressWarnings("unused")
     public final void foo() {

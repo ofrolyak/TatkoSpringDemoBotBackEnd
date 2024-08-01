@@ -25,8 +25,9 @@ spring:
 
 telegram:
   bot:
-    name: TatkoSpringDemoBot
+    name: ${TELEGRAM_BOT_NAME}
     token: ${TELEGRAM_BOT_TOKEN}
+    owner: ${TELEGRAM_BOT_OWNER}
 
 logging:
   level:

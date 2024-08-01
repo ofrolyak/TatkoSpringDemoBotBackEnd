@@ -1,7 +1,5 @@
 package com.tatko.telegram.bot.dao;
 
-import java.util.Optional;
-
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.repository.UserRepository;
@@ -11,6 +9,8 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.util.Optional;
 /**
  * JUnit class for UserDao class findByChatId method.
  */

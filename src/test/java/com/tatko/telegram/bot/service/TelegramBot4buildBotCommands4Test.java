@@ -1,13 +1,13 @@
 package com.tatko.telegram.bot.service;
 
-import java.util.List;
-
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+
+import java.util.List;
 /**
  * JUnit class for TelegramBot class buildBotCommands method.
  */
@@ -30,7 +30,7 @@ class TelegramBot4buildBotCommands4Test extends MockitoExtensionBaseMockTests {
 
         // Then
         Assertions.assertThat(botCommands)
-                .hasSize(5);
+                .hasSize(7);
     }
 
     @Test
@@ -45,7 +45,7 @@ class TelegramBot4buildBotCommands4Test extends MockitoExtensionBaseMockTests {
         // Then
         Assertions.assertThat(collect)
                 .containsExactlyInAnyOrder("/start", "/getmydata",
-                        "/deletemydata", "/help", "/settings");
+                        "/deletemydata", "/help", "/settings", "/register", "/send");
     }
 
 }

@@ -1,15 +1,17 @@
 package com.tatko.telegram.bot.service;
 
-import java.util.function.Consumer;
-
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
+import com.tatko.telegram.bot.service.custom.command.BotCommandCustom;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.util.function.Consumer;
 /**
  * JUnit class for TelegramBot class acceptBotCommandCustom method.
  */
@@ -45,15 +47,16 @@ class TelegramBot4acceptBotCommandCustom4Test
                 = updateParam -> System.out.println(updateParam.toString());
 
         // When
-        Mockito.doReturn(updateConsumer)
+        Mockito.doNothing()
                 .when(botCommandCustom)
-                .getConsumer();
+                .doAction(ArgumentMatchers.eq(telegramBot), ArgumentMatchers.eq(update));
 
         // Action
         telegramBot.acceptBotCommandCustom(botCommandCustom, update);
 
         // Verify
-        Mockito.verify(botCommandCustom, Mockito.times(1)).getConsumer();
+        Mockito.verify(botCommandCustom, Mockito.times(1))
+                .doAction(ArgumentMatchers.eq(telegramBot), ArgumentMatchers.eq(update));
 
     }
 
