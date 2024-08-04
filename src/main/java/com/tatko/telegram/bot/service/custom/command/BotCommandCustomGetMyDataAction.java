@@ -13,7 +13,7 @@ public class BotCommandCustomGetMyDataAction extends BotCommandCustom {
      * Constructor.
      */
     public BotCommandCustomGetMyDataAction() {
-        super(Action.GET_MY_DATA,
+        super("GET_MY_DATA",
                 "/getmydata", "get your data");
     }
 

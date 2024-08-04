@@ -21,7 +21,7 @@ public class BotCommandCustomRegisterAction extends BotCommandCustom {
      * Constructor.
      */
     public BotCommandCustomRegisterAction() {
-        super(Action.REGISTER,
+        super("REGISTER",
                 "/register", "register user");
     }
 

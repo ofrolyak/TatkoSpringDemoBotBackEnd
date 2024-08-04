@@ -2,19 +2,19 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Slf4j
-@Component("botCommandCustomDeleteMyDataAction")
-public class BotCommandCustomDeleteMyDataAction extends BotCommandCustom {
+@Service
+public class BotCommandCustomMyDataAction extends BotCommandCustom {
 
     /**
      * Constructor.
      */
-    public BotCommandCustomDeleteMyDataAction() {
-        super("DELETE_MY_DATA",
-                "/deletemydata", "delete your data");
+    public BotCommandCustomMyDataAction() {
+        super("MY_DATA",
+                "/mydata", "handle my data");
     }
 
     @Override

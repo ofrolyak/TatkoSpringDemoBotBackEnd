@@ -28,12 +28,19 @@ telegram:
     name: ${TELEGRAM_BOT_NAME}
     token: ${TELEGRAM_BOT_TOKEN}
     owner: ${TELEGRAM_BOT_OWNER}
-    ad:
-      scheduler: 0 * * * * *
+    scheduler:
+      cron: 0 * * * * *
+      ad:
+        frequency:
+          hour: 1
+      message:
+        frequency:
+          hour: 1
+
 
 logging:
   level:
-    root: info
+    root: debug
     org:
       hibernate:
         sql: debug

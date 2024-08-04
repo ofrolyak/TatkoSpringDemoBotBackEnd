@@ -4,6 +4,7 @@ import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 /**
  * Service information for specific action.
@@ -12,12 +13,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public abstract class BotCommandCustom {
 
     /**
      * Action.
      */
-    private Action action;
+    private String name;
 
     /**
      * Message text that referring for this action.
