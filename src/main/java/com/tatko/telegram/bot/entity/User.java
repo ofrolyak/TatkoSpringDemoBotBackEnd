@@ -11,12 +11,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 /**
  * User entity.
  */
 
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,6 +31,7 @@ public class User {
      * ID.
      */
     @Id
+    @ToString.Exclude
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "user_generator")
@@ -65,5 +68,12 @@ public class User {
      */
     @Column(name = "REGISTERED_AT", nullable = false)
     private LocalDateTime registeredAt;
+
+    /**
+     * User Role Id for this User.
+     */
+    @ToString.Exclude
+    @Column(name = "USER_ROLE_ID", nullable = false)
+    private Long userRoleId;
 
 }

@@ -14,9 +14,12 @@ import java.util.Optional;
 @Repository
 public interface AdRepository extends JpaRepository<Ad, Long> {
 
-    Optional<Ad> findFirstByDeliveredTimeIsNullOrDeliveredTimeIsBefore(LocalDateTime localDateTime);
-
-
-
+    /**
+     * Find Ad entity based on Delivered timestamp.
+     * @param localDateTime
+     * @return Optional of Ad entity.
+     */
+    Optional<Ad> findFirstByDeliveredTimeIsNullOrDeliveredTimeIsBefore(
+            LocalDateTime localDateTime);
 
 }

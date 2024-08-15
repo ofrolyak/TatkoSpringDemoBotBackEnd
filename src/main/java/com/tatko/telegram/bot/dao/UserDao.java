@@ -52,4 +52,22 @@ public class UserDao {
         return userRepository.findAll();
     }
 
+    /**
+     * Delete User entity.
+     * @param user User entity.
+     */
+    public void delete(final User user) {
+        userRepository.delete(user);
+    }
+
+    /**
+     * Find User entity by user id.
+     * @param id User id
+     * @return Optional of User entity
+     */
+    public Optional<User> findById(final long id) {
+        return userRepository.findById(id);
+    }
+
+
 }

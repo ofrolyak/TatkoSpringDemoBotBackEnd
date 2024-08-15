@@ -43,9 +43,15 @@ public class Ad {
     @Column(name = "AD", nullable = false)
     private String ad;
 
+    /**
+     * Delivered Timestamp.
+     */
     @Column(name = "DELIVERED_TIME", nullable = false)
     private LocalDateTime deliveredTime;
 
+    /**
+     * Creating timestamp.
+     */
     @Column(name = "CREATING_TIME", nullable = false)
     private LocalDateTime creatingTime;
 
