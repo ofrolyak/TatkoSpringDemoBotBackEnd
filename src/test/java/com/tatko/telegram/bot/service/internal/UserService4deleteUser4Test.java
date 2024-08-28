@@ -43,7 +43,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
         // When
         doReturn(user)
                 .when(userService)
-                .findUser(eq(user));
+                .findUserByUser(eq(user));
         doReturn(userArch)
                 .when(userArchDao)
                 .save(eq(userArch));
@@ -56,7 +56,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
 
         // Verify
         verify(userService, times(1))
-                .findUser(eq(user));
+                .findUserByUser(eq(user));
         verify(userArchDao, times(1))
                 .save(eq(userArch));
         verify(userDao, times(1))
@@ -75,7 +75,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
         // When
         doThrow(UserNotFoundException.class)
                 .when(userService)
-                .findUser(eq(user));
+                .findUserByUser(eq(user));
 
         // Action
         assertThatCode(() -> userService.deleteUser(user))
@@ -83,7 +83,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
 
         // Verify
         verify(userService, times(1))
-                .findUser(eq(user));
+                .findUserByUser(eq(user));
         verify(userArchDao, times(0))
                 .save(eq(userArch));
         verify(userDao, times(0))
