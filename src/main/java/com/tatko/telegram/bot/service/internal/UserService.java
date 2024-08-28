@@ -9,6 +9,7 @@ import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.entity.UserArch;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation1Param;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
+import com.tatko.telegram.bot.util.StaticUtility;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -17,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.time.LocalDateTime;
 
 @Service
 @Slf4j
@@ -44,6 +43,7 @@ public class UserService {
 
     /**
      * Deliver text message to specific user.
+     *
      * @param sendMessageOperation2Params
      * @param textMessage
      * @param chatId
@@ -63,6 +63,7 @@ public class UserService {
 
     /**
      * Deliver text message to specific user.
+     *
      * @param sendMessageOperation2Params
      * @param textMessage
      * @param user
@@ -82,6 +83,7 @@ public class UserService {
 
     /**
      * Deliver specific SendMessage structure.
+     *
      * @param sendMessageOperation1Param
      * @param sendMessage
      */
@@ -98,6 +100,7 @@ public class UserService {
 
     /**
      * Deliver text message to all users.
+     *
      * @param sendMessageOperation2Params
      * @param textMessage
      */
@@ -118,7 +121,27 @@ public class UserService {
     }
 
     /**
+     * Deliver.
+     * @param sendMessageOperation1Param
+     * @param textMessage
+     * @param user
+     */
+    public void deliverMessageWithButtonToUser(
+            final SendMessageOperation1Param sendMessageOperation1Param,
+            final String textMessage, final User user) {
+
+        SendMessage sendMessage
+                = StaticUtility.buildSendMessage(textMessage, user);
+
+        CallbackProcessorService.andButtonToSendMessage(sendMessage);
+
+        deliverToUser(sendMessageOperation1Param, sendMessage);
+
+    }
+
+    /**
      * Deliver text message to all users.
+     *
      * @param sendMessageOperation1Param
      * @param textMessage
      */
@@ -132,17 +155,8 @@ public class UserService {
 
         log.debug("Found {} users", users.size());
 
-        users.forEach(user -> {
-
-            SendMessage sendMessage = SendMessage.builder()
-                    .text(textMessage)
-                    .chatId(user.getChatId())
-                    .build();
-
-            CallbackProcessorService.andButtonToSendMessage(sendMessage);
-
-            deliverToUser(sendMessageOperation1Param, sendMessage);
-        });
+        users.forEach(user -> deliverMessageWithButtonToUser(
+                sendMessageOperation1Param, textMessage, user));
 
         log.debug("Delivered textMessage {}", textMessage);
     }
@@ -155,30 +169,21 @@ public class UserService {
     public void registerUser(final Message message) {
 
         if (userDao.findByChatId(message.getChatId()).isEmpty()) {
-
-            final User user = User.builder()
-                    .chatId(message.getChatId())
-                    .firstName(message.getChat().getFirstName())
-                    .lastName(message.getChat().getLastName())
-                    .userName(message.getChat().getUserName())
-                    .registeredAt(LocalDateTime.now())
-                    .userRoleId(businessUtility
-                            .isTelegramBotAdmin(message.getChatId()) ? 2L : 1L)
-                    .build();
-
+            User user = businessUtility.buildUserByMessage(message);
             userDao.save(user);
         }
     }
 
     /**
      * Delete user based on User instance.
+     *
      * @param user
      */
     @Transactional
     public void deleteUser(final User user) {
 
         // Verify if user exists
-        findUser(user);
+        findUserByUser(user);
 
         UserArch userArch = new UserArch();
 
@@ -192,10 +197,11 @@ public class UserService {
 
     /**
      * Find User entity by User entity.
+     *
      * @param user
      * @return User entity.
      */
-    public User findUser(final User user) {
+    public User findUserByUser(final User user) {
         return userDao.findById(user.getId())
                 .orElseThrow(UserNotFoundException::new);
     }
