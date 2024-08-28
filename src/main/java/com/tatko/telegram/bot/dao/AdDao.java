@@ -13,16 +13,31 @@ import java.util.Optional;
 @Slf4j
 public class AdDao {
 
+    /**
+     * Autowired by Spring AdRepository bean.
+     */
     @Autowired
     private AdRepository adRepository;
 
-    public Ad save(Ad ad) {
+    /**
+     * Save Ad entity.
+     * @param ad Ad entity to save.
+     * @return Saved Ad entity.
+     */
+    public Ad save(final Ad ad) {
         return adRepository.save(ad);
     }
 
-    public Optional<Ad> findAdToDeliver(LocalDateTime localDateTime) {
+    /**
+     * Find Ad to deliver.
+     * @param localDateTime
+     * @return Optional of Ad entity.
+     */
+    public Optional<Ad> findAdToDeliver(final LocalDateTime localDateTime) {
         log.debug("findAdToDeliver");
-        Optional<Ad> adOptional = adRepository.findFirstByDeliveredTimeIsNullOrDeliveredTimeIsBefore(localDateTime);
+        Optional<Ad> adOptional = adRepository
+                .findFirstByDeliveredTimeIsNullOrDeliveredTimeIsBefore(
+                        localDateTime);
         log.debug("adOptional: {}", adOptional);
         return adOptional;
     }

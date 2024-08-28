@@ -1,25 +1,28 @@
 package com.tatko.telegram.bot.service.custom.command;
 
-import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Slf4j
-@Service
+@Component
 public class BotCommandCustomSettingsAction extends BotCommandCustom {
 
     /**
      * Constructor.
      */
     public BotCommandCustomSettingsAction() {
-        super( "SETTINGS",
-                "/settings", "settings and preferences");
+        super("SETTINGS", "/settings", "settings and preferences");
     }
 
+    /**
+     * Do action for this action.
+     *
+     * @param update Received update from Telegram user.
+     */
     @Override
-    public void doAction(final TelegramBotService telegramBotService, final Update update) {
-        // NOP
+    public void doAction(final Update update) {
+        super.addKeyboardAndSendMessage(update);
     }
 
 }

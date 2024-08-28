@@ -33,12 +33,21 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * User Role Name.
+     */
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    /**
+     * User Role Description.
+     */
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
+    /**
+     * User Role Creating timestamp.
+     */
     @Column(name = "CREATING_TIME", nullable = false)
     private LocalDateTime creatingTime;
 

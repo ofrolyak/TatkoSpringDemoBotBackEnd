@@ -20,6 +20,9 @@ spring:
         hbm2ddl:
           auto: none
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  # todo Have to be removed
+  main:
+    allow-circular-references: true
   profiles:
     active: prod
 

@@ -1,5 +1,6 @@
 package com.tatko.telegram.bot;
 
+import com.tatko.telegram.bot.service.TelegramBotConfiguratorService;
 import com.tatko.telegram.bot.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
 /**
  * TelegramBotInitializer class is provide functionality to create and
  * configure Telegram Bot.
@@ -26,6 +28,12 @@ public class TelegramBotInitializer {
      */
     @Autowired
     private TelegramBotService telegramBotService;
+
+    /**
+     * Autowired by Spring TelegramBotConfiguratorService bean.
+     */
+    @Autowired
+    private TelegramBotConfiguratorService telegramBotConfiguratorService;
 
     /**
      * Create registered Telegram bot.
@@ -47,7 +55,8 @@ public class TelegramBotInitializer {
         log.info("Initializing TelegramBot");
         try {
             createRegisterBot();
-            telegramBotService.addPreparedBotCommandsToBot();
+            //telegramBotService.addPreparedBotCommandsToBot();
+            telegramBotConfiguratorService.addPreparedBotCommandsToBot();
         } catch (TelegramApiException e) {
             log.error("Initializing TelegramBot Error: ", e);
             throw new TelegramApiException(e);
