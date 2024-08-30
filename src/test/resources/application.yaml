@@ -3,6 +3,8 @@ telegram:
     name: TELEGRAM_BOT_NAME_STUB
     token: TELEGRAM_BOT_TOKEN_STUB
     owner: TELEGRAM_BOT_TOKEN_STUB
+    scheduler:
+      cron: "*/1 * * * * *"
 
 logging:
   level:

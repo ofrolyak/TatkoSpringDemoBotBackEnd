@@ -1,24 +1,20 @@
 package com.tatko.telegram.bot.service.processor;
 
-import com.tatko.telegram.bot.constant.Constant;
 import com.tatko.telegram.bot.dao.UserDao;
 import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.exception.UserNotFoundException;
-import com.tatko.telegram.bot.service.internal.UserService;
 import com.tatko.telegram.bot.service.business.AdService;
 import com.tatko.telegram.bot.service.business.DateFactService;
-import com.tatko.telegram.bot.service.custom.storage.BotCommandCustomSetStorage;
 import com.tatko.telegram.bot.service.custom.button.KeyButton;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustom;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
-import lombok.SneakyThrows;
+import com.tatko.telegram.bot.service.custom.storage.BotCommandCustomSetStorage;
+import com.tatko.telegram.bot.service.internal.UserService;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Optional;
 
@@ -79,12 +75,14 @@ public class TextMessageProcessorService {
      * @param update           Update instance from Telegram Bot.
      */
     public void acceptBotCommandCustom(
-            final BotCommandCustom botCommandCustom, final Update update) {
+            @NotNull final BotCommandCustom botCommandCustom,
+            final @NotNull Update update) {
         botCommandCustom.doAction(update);
     }
 
     /**
      * Process received message.
+     *
      * @param update Update instance that has been gotten from Telegram user.
      * @param sendMessageOperation2Params
      */
@@ -110,28 +108,39 @@ public class TextMessageProcessorService {
     /**
      * Process Direct case.
      *
-     * @param update Update instance.
+     * @param update                      Update instance.
      * @param sendMessageOperation2Params
      */
     void onUpdateReceivedDirect(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
 
-        Optional<BotCommandCustom> firstEqual
-                = botCommandCustomSetStorage.getBotCommandCustomSet()
-                .stream()
-                .filter(botCommandCustom
-                        -> update.getMessage().getText()
-                        .equals(botCommandCustom.getMessageText()))
-                .findFirst();
+//        Optional<BotCommandCustom> firstEqual
+//                = botCommandCustomSetStorage.getBotCommandCustomSet()
+//                .stream()
+//                .filter(botCommandCustom
+//                        -> update.getMessage().getText()
+//                        .equals(botCommandCustom.getMessageText()))
+//                .findFirst();
 
-        if (firstEqual.isPresent()) {
+        Optional<BotCommandCustom> botCommandCustomOptional
+                = parseBotCommandCustom(update.getMessage().getText());
+
+        if (botCommandCustomOptional.isPresent()) {
             // Text message
             processReceivedMessage(update, sendMessageOperation2Params);
         }
 
     }
 
+    private boolean isCondition(
+            final Update update, final BotCommandCustom botCommandCustom) {
+        boolean condition1 = update.getMessage().getText()
+                .startsWith(botCommandCustom.getMessageText());
+        boolean condition2 = update.getMessage().getText().length()
+                > botCommandCustom.getMessageText().length() + 1;
+        return condition1 && condition2;
+    }
 
     /**
      * Process Contains case.
@@ -140,29 +149,26 @@ public class TextMessageProcessorService {
      */
     void onUpdateReceivedContains(final Update update) {
 
-        Optional<BotCommandCustom> first
+        Optional<BotCommandCustom> botCommandCustomOptional
                 = botCommandCustomSetStorage.getBotCommandCustomSet().stream()
                 .filter(botCommandCustom
-                        -> update.getMessage().getText().length()
-                        > botCommandCustom.getMessageText().length() + 1)
-                .filter(botCommandCustom
-                        -> update.getMessage().getText()
-                        .startsWith(botCommandCustom.getMessageText()))
+                        -> isCondition(update, botCommandCustom))
                 .findFirst();
 
-        first.ifPresent(botCommandCustom
+        botCommandCustomOptional.ifPresent(botCommandCustom
                 -> botCommandCustom.doAction(update));
 
     }
 
     /**
      * Process received command message based on update instance.
+     *
      * @param update
      * @param sendMessageOperation2Params
      */
-    @SneakyThrows
-    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
-            backoff = @Backoff(delay = Constant.RETRYABLE_BACKOFF_DELAY))
+    //@SneakyThrows
+//    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
+//            backoff = @Backoff(delay = Constant.RETRYABLE_BACKOFF_DELAY))
     public void processReceivedCommand(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
@@ -174,6 +180,7 @@ public class TextMessageProcessorService {
 
     /**
      * Process received text message based on update instance.
+     *
      * @param update
      * @param sendMessageOperation2Params
      */

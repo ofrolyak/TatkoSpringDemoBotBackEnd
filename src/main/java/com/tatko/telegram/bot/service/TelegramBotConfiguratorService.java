@@ -1,33 +1,31 @@
 package com.tatko.telegram.bot.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import com.tatko.telegram.bot.service.custom.storage.ServiceDataUserStorage;
-import com.tatko.telegram.bot.service.internal.UserService;
-import com.tatko.telegram.bot.util.BusinessUtility;
 import com.tatko.telegram.bot.dao.UserDao;
 import com.tatko.telegram.bot.dao.UserRoleDao;
 import com.tatko.telegram.bot.entity.User;
-import com.tatko.telegram.bot.entity.UserRole;
-import com.tatko.telegram.bot.exception.UserNotFoundException;
-import com.tatko.telegram.bot.exception.UserRoleNotFoundException;
-import com.tatko.telegram.bot.service.custom.storage.BotCommandCustomSetStorage;
 import com.tatko.telegram.bot.service.custom.operation.OperationMarkerInterface;
 import com.tatko.telegram.bot.service.custom.operation.SetBotCommandsListOperation;
+import com.tatko.telegram.bot.service.custom.storage.BotCommandCustomSetStorage;
 import com.tatko.telegram.bot.service.custom.storage.ExecutorMapStorage;
+import com.tatko.telegram.bot.service.custom.storage.ServiceDataUserStorage;
+import com.tatko.telegram.bot.service.internal.UserRoleService;
+import com.tatko.telegram.bot.service.internal.UserService;
+import com.tatko.telegram.bot.util.BusinessUtility;
+import com.tatko.telegram.bot.util.StaticUtility;
 import lombok.Getter;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 @Slf4j
 @Service
-public class TelegramBotConfiguratorService {
+public final class TelegramBotConfiguratorService {
 
     /**
      * Autowired by Spring ExecutorMapStorage bean.
@@ -60,33 +58,56 @@ public class TelegramBotConfiguratorService {
     private UserService userService;
 
     /**
+     * Autowired by Spring BotCommandCustomSetStorage bean.
+     */
+    @Autowired
+    private BotCommandCustomSetStorage botCommandCustomSetStorage;
+
+    /**
+     * Autowired by Spring UserRoleService bean.
+     */
+    @Autowired
+    private UserRoleService userRoleService;
+
+    /**
      * ThreadLocal holder for structure for specific user activity.
      */
     @Getter
     private final ThreadLocal<ServiceDataUserStorage> serviceDataUserThreadLocal
             = new ThreadLocal<>();
 
+    /**
+     * getSetBotCommandsListOperation.
+     *
+     * @return SetBotCommandsListOperation instance.
+     */
+    SetBotCommandsListOperation getSetBotCommandsListOperation() {
+
+        Map<Class<? extends OperationMarkerInterface>,
+                OperationMarkerInterface> executorMap
+                = executorMapStorage.getExecutorMap();
+
+        SetBotCommandsListOperation setBotCommandsListOperation
+                = getOperationByClass(executorMap,
+                SetBotCommandsListOperation.class);
+
+        return setBotCommandsListOperation;
+    }
 
     /**
      * Add prepared bot commands to Telegram bot.
      */
-    @SneakyThrows
+    //@SneakyThrows
     public void addPreparedBotCommandsToBot() {
 
         SetBotCommandsListOperation setBotCommandsListOperation
-                = getOperationByClass(executorMapStorage.getExecutorMap(),
-                SetBotCommandsListOperation.class);
+                = getSetBotCommandsListOperation();
 
-        addBotCommandListToBot(botCommandCustomSetStorage.getBotCommandList(),
-                setBotCommandsListOperation);
+        List<BotCommand> botCommandList
+                = botCommandCustomSetStorage.getBotCommandList();
+
+        addBotCommandListToBot(botCommandList, setBotCommandsListOperation);
     }
-
-    /**
-     * Autowired by Spring BotCommandCustomSetStorage bean.
-     */
-    @Autowired
-    private BotCommandCustomSetStorage botCommandCustomSetStorage;
-
 
     /**
      * Add prepared bot commands to Telegram bot.
@@ -94,7 +115,7 @@ public class TelegramBotConfiguratorService {
      * @param botCommandList
      * @param setBotCommandsListOperation
      */
-    @SneakyThrows
+    //@SneakyThrows
     public void addBotCommandListToBot(
             final List<BotCommand> botCommandList,
             final SetBotCommandsListOperation setBotCommandsListOperation) {
@@ -102,7 +123,15 @@ public class TelegramBotConfiguratorService {
         setBotCommandsListOperation.setBotCommandsList(botCommandList);
     }
 
-    private <T> T getOperationByClass(
+    /**
+     * Get Operation By Class.
+     *
+     * @param operationMarkerInterface
+     * @param clazz
+     * @param <T>
+     * @return Operation By Class.
+     */
+    <T> T getOperationByClass(
             final Map<Class<? extends OperationMarkerInterface>, ? extends
                     OperationMarkerInterface> operationMarkerInterface,
             final Class<T> clazz) {
@@ -135,52 +164,26 @@ public class TelegramBotConfiguratorService {
      */
     public void configureServiceData(final Update update) {
 
-        long chatId;
-
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            chatId = update.getMessage().getChatId();
-        } else if (update.hasCallbackQuery()) {
-            chatId = update.getCallbackQuery().getMessage().getChatId();
-        } else {
-            throw new IllegalArgumentException();
-        }
-
         ServiceDataUserStorage serviceDataUserStorage
                 = new ServiceDataUserStorage();
-        serviceDataUserStorage.setBroken(false);
-
-        final User user;
-        User userRegistered;
 
         try {
-            userRegistered = userDao.findByChatId(chatId)
-                    .orElseThrow(UserNotFoundException::new);
-        } catch (UserNotFoundException e) {
-            try {
-                userService.registerUser(update.getMessage());
-                userRegistered = userDao.findByChatId(
-                                update.getMessage().getChatId())
-                        .orElseThrow(UserNotFoundException::new);
-                this.configureServiceData(update);
-            } catch (Exception e1) {
-                serviceDataUserStorage.setBroken(true);
-                return;
-            }
+
+            long chatId = StaticUtility.readChatId(update);
+            serviceDataUserStorage.setChatId(chatId);
+
+            final User user = userService.getRegisteredUser(update);
+            serviceDataUserStorage.setUser(user);
+
+            serviceDataUserStorage.setAdmin(
+                    businessUtility.isTelegramBotAdmin(chatId));
+
+            serviceDataUserStorage.setUserRole(
+                    userRoleService.getUserRoleByUser(user));
+
+        } catch (Exception e) {
+            serviceDataUserStorage.setBroken(true);
         }
-
-        user = userRegistered;
-
-        serviceDataUserStorage.setAdmin(
-                businessUtility.isTelegramBotAdmin(chatId));
-        serviceDataUserStorage.setUser(user);
-
-        UserRole userRoleCurrent = userRoleDao.findAll().stream()
-                .filter(userRole
-                        -> userRole.getId().equals(user.getUserRoleId()))
-                .findFirst()
-                .orElseThrow(UserRoleNotFoundException::new);
-
-        serviceDataUserStorage.setUserRole(userRoleCurrent);
 
         serviceDataUserThreadLocal.set(serviceDataUserStorage);
 

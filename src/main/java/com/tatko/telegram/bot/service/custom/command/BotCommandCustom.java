@@ -2,8 +2,8 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.service.TelegramBotConfiguratorService;
 import com.tatko.telegram.bot.service.custom.button.KeyButton;
-import com.tatko.telegram.bot.service.custom.storage.KeyButtonMapStorage;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation3Params;
+import com.tatko.telegram.bot.service.custom.storage.KeyButtonMapStorage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

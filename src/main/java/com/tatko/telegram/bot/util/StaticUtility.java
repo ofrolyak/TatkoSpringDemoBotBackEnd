@@ -3,6 +3,7 @@ package com.tatko.telegram.bot.util;
 import com.tatko.telegram.bot.entity.User;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class StaticUtility {
@@ -80,6 +81,28 @@ public class StaticUtility {
                 .text(textMessage)
                 .chatId(user.getChatId())
                 .build();
+    }
+
+    /**
+     * Read and define chatId based on Update instance.
+     *
+     * @param update
+     * @return chatId value.
+     */
+    public static long readChatId(final Update update) {
+
+        long chatId;
+
+        if (update.hasMessage()
+                && update.getMessage().hasText()) {
+            chatId = update.getMessage().getChatId();
+        } else if (update.hasCallbackQuery()) {
+            chatId = update.getCallbackQuery().getMessage().getChatId();
+        } else {
+            throw new IllegalArgumentException();
+        }
+
+        return chatId;
     }
 
 }

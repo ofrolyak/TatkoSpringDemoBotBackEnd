@@ -40,14 +40,18 @@ public class TelegramBotProcessorService {
         log.info("Received update: {}", update);
 
         // Parse received message from Telegram User
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage()
+                && update.getMessage().hasText()) {
             textMessageProcessorService.processReceivedTextMessage(update,
                     telegramBotConfiguratorService.getOperationByClass(
                             SendMessageOperation2Params.class));
         } else if (update.hasCallbackQuery()) {
             // Callback message (for example user click on button)
             callbackProcessorService.processReceivedCallback(update);
+        } else {
+            throw new IllegalArgumentException();
         }
+
 
     }
 

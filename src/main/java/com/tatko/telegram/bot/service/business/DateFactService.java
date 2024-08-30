@@ -1,10 +1,11 @@
 package com.tatko.telegram.bot.service.business;
 
-import com.tatko.telegram.bot.service.processor.CallbackProcessorService;
-import com.tatko.telegram.bot.service.external.NumbersApiService;
-import com.tatko.telegram.bot.service.internal.UserService;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation1Param;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
+import com.tatko.telegram.bot.service.external.NumbersApiService;
+import com.tatko.telegram.bot.service.internal.UserService;
+import com.tatko.telegram.bot.service.processor.CallbackProcessorService;
+import com.tatko.telegram.bot.util.StaticUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,12 @@ public class DateFactService {
     @Autowired
     private UserService userService;
 
-    private Mono<String> getDateFactForThisDay() {
+    /**
+     * Get Mono instance.
+     *
+     * @return Mono objects.
+     */
+    Mono<String> getDateFactForThisDay() {
 
         int day = LocalDate.now().getDayOfMonth();
         int month = LocalDate.now().getMonthValue();
@@ -67,36 +73,8 @@ public class DateFactService {
 
         Mono<String> stringMono = getDateFactForThisDay();
 
-        stringMono.subscribe(dataFact -> {
-
-//            SendMessage sendMessage = SendMessage.builder()
-//                    .text(dataFact)
-//                    .build();
-//
-//            CallbackProcessorService.andButtonToSendMessage(sendMessage);
-
-            userService.deliverToUsers(sendMessageOperation1Param, dataFact);
-        });
-
-        log.info("Date fact sent");
-
-    }
-
-    /**
-     * Send next date fact to user.
-     * @param sendMessageOperation2Params
-     * @param chatId
-     */
-    public void sendNextDateFact(
-            final SendMessageOperation2Params sendMessageOperation2Params,
-            final long chatId) {
-
-        log.info("Sending date fact to user: {}", chatId);
-
-        Mono<String> stringMono = getDateFactForThisDay();
-
-        stringMono.subscribe(dataFact -> userService
-                .deliverToUser(sendMessageOperation2Params, dataFact, chatId));
+        stringMono.subscribe(dataFact ->
+            userService.deliverToUsers(sendMessageOperation1Param, dataFact));
 
         log.info("Date fact sent");
 
@@ -117,14 +95,13 @@ public class DateFactService {
 
         stringMono.subscribe(dataFact -> {
 
-            SendMessage sendMessage = SendMessage.builder()
-                    .text(dataFact)
-                    .chatId(chatId)
-                    .build();
+            SendMessage sendMessage
+                    = StaticUtility.buildSendMessage(chatId, dataFact);
 
             CallbackProcessorService.andButtonToSendMessage(sendMessage);
 
-            userService.deliverToUser(sendMessageOperation1Param, sendMessage);
+            userService.deliverToUser(
+                    sendMessageOperation1Param, sendMessage);
         });
 
 

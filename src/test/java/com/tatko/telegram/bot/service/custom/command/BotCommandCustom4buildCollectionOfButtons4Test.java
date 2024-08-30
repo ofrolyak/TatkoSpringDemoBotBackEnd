@@ -2,9 +2,9 @@ package com.tatko.telegram.bot.service.custom.command;
 
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import com.tatko.telegram.bot.entity.UserRole;
-import com.tatko.telegram.bot.service.custom.storage.ServiceDataUserStorage;
 import com.tatko.telegram.bot.service.TelegramBotConfiguratorService;
 import com.tatko.telegram.bot.service.custom.storage.KeyButtonMapStorage;
+import com.tatko.telegram.bot.service.custom.storage.ServiceDataUserStorage;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
