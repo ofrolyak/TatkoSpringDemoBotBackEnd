@@ -3,7 +3,6 @@ package com.tatko.telegram.bot.service.internal;
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import com.tatko.telegram.bot.dao.UserDao;
 import com.tatko.telegram.bot.entity.User;
-import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation1Param;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

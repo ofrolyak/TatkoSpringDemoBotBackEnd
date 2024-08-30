@@ -1,9 +1,9 @@
 package com.tatko.telegram.bot.service;
 
-import com.tatko.telegram.bot.service.processor.TelegramBotProcessorService;
-import com.tatko.telegram.bot.util.StaticUtility;
 import com.tatko.telegram.bot.config.TelegramBotConfig;
 import com.tatko.telegram.bot.constant.Constant;
+import com.tatko.telegram.bot.service.processor.TelegramBotProcessorService;
+import com.tatko.telegram.bot.util.StaticUtility;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,46 +45,11 @@ public class TelegramBotService extends TelegramLongPollingBot {
     @Autowired
     private TelegramBotProcessorService telegramBotProcessorService;
 
-
-
-
     /**
      * TelegramBotConfig itself .
      */
     @Autowired
     private TelegramBotConfig telegramBotConfig;
-
-//    /**
-//     * Init some structure.
-//     */
-//    @PostConstruct
-//    public void postConstruct() {
-//
-//        initExecutorMap();
-//
-//    }
-
-//    /**
-//     * Executors map.
-//     */
-//    @Getter
-//    private static final Map<Class<? extends OperationMarkerInterface>,
-//            OperationMarkerInterface> EXECUTOR_MAP = new HashMap<>();
-
-//    /**
-//     * Init EXECUTOR_MAP structure.
-//     */
-//    public void initExecutorMap() {
-//        EXECUTOR_MAP.put(SendMessageOperation2Params.class,
-//                sendMessageOperation2ParamsOperation);
-//        EXECUTOR_MAP.put(SendMessageOperation1Param.class,
-//                sendMessageSendMessage1ParamOperation);
-//        EXECUTOR_MAP.put(SendMessageOperation3Params.class,
-//                sendMessageSendMessage3ParamsOperation);
-//        EXECUTOR_MAP.put(SetBotCommandsListOperation.class,
-//                setBotCommandsListOperation);
-//    }
-
 
     /**
      * Get Bot UserName.

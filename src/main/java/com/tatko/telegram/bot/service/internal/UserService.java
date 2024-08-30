@@ -1,14 +1,15 @@
 package com.tatko.telegram.bot.service.internal;
 
-import com.tatko.telegram.bot.exception.UserNotFoundException;
-import com.tatko.telegram.bot.service.processor.CallbackProcessorService;
-import com.tatko.telegram.bot.util.BusinessUtility;
 import com.tatko.telegram.bot.dao.UserArchDao;
 import com.tatko.telegram.bot.dao.UserDao;
 import com.tatko.telegram.bot.entity.User;
 import com.tatko.telegram.bot.entity.UserArch;
+import com.tatko.telegram.bot.exception.BaseException;
+import com.tatko.telegram.bot.exception.UserNotFoundException;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation1Param;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
+import com.tatko.telegram.bot.service.processor.CallbackProcessorService;
+import com.tatko.telegram.bot.util.BusinessUtility;
 import com.tatko.telegram.bot.util.StaticUtility;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Service
 @Slf4j
@@ -204,6 +206,36 @@ public class UserService {
     public User findUserByUser(final User user) {
         return userDao.findById(user.getId())
                 .orElseThrow(UserNotFoundException::new);
+    }
+
+    /**
+     * Get registered user or create if it has not registered yet.
+     *
+     * @param update
+     * @return Registered User instance.
+     */
+    public User getRegisteredUser(final Update update) {
+
+        User userRegistered;
+
+        final long chatId = update.getMessage().getChatId();
+
+        try {
+            userRegistered = userDao.findByChatId(chatId)
+                    .orElseThrow(UserNotFoundException::new);
+        } catch (UserNotFoundException e) {
+            try {
+                registerUser(update.getMessage());
+                userRegistered = userDao.findByChatId(chatId)
+                        .orElseThrow(UserNotFoundException::new);
+            } catch (Exception e1) {
+                log.error("Error: ", e1);
+                throw new BaseException();
+            }
+        }
+
+        return userRegistered;
+
     }
 
 }

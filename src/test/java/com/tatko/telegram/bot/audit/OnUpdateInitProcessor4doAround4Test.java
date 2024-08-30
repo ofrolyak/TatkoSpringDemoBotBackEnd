@@ -4,7 +4,6 @@ import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import com.tatko.telegram.bot.service.TelegramBotConfiguratorService;
 import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.weaver.reflect.JoinPointMatchImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -12,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

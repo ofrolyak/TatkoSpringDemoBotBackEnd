@@ -2,8 +2,8 @@ package com.tatko.telegram.bot.service.business;
 
 import com.tatko.telegram.bot.dao.AdDao;
 import com.tatko.telegram.bot.entity.Ad;
-import com.tatko.telegram.bot.service.internal.UserService;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
+import com.tatko.telegram.bot.service.internal.UserService;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,18 @@ public class AdService {
     @Autowired
     private AdDao adDao;
 
-    private void refreshDeliveredDateForAd(@NotNull final Ad ad) {
+    /**
+     * Frequency parameter for Ad scheduler.
+     */
+    @Value("${telegram.bot.scheduler.ad.frequency.hour}")
+    private int telegramBotSchedulerAdFrequencyHour;
+
+    /**
+     * refreshDeliveredDateForAd.
+     *
+     * @param ad
+     */
+    void refreshDeliveredDateForAd(@NotNull final Ad ad) {
 
         log.debug("Refreshing delivered dates for ad {}", ad);
 
@@ -40,6 +51,7 @@ public class AdService {
 
     /**
      * Deliver Ad to all users.
+     *
      * @param sendMessageOperation2Params
      * @param ad
      */
@@ -55,12 +67,6 @@ public class AdService {
 
         log.debug("Ad {} has been delivered", ad);
     }
-
-    /**
-     * Frequency parameter for Ad scheduler.
-     */
-    @Value("${telegram.bot.scheduler.ad.frequency.hour}")
-    private int telegramBotSchedulerAdFrequencyHour;
 
     /**
      * Sent the next Ad to all users.

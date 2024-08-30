@@ -4,7 +4,6 @@ import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;

@@ -5,9 +5,7 @@ import com.tatko.telegram.bot.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
@@ -32,5 +30,17 @@ public class ServiceDataUserStorage {
      * UserRole instance for user that make activity in Telegram bot.
      */
     private UserRole userRole;
+
+    /**
+     * ChatId for current user.
+     */
+    private long chatId;
+
+    /**
+     * Constructor itself.
+     */
+    public ServiceDataUserStorage() {
+        this.isBroken = false;
+    }
 
 }

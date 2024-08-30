@@ -19,7 +19,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static reactor.core.publisher.Mono.when;
 
 class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
 

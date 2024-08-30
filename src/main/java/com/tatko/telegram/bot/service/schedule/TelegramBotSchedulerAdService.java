@@ -1,7 +1,7 @@
 package com.tatko.telegram.bot.service.schedule;
 
-import com.tatko.telegram.bot.service.business.AdService;
 import com.tatko.telegram.bot.service.TelegramBotConfiguratorService;
+import com.tatko.telegram.bot.service.business.AdService;
 import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation2Params;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

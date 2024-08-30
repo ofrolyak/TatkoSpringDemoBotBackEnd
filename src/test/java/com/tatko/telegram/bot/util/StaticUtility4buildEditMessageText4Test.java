@@ -2,10 +2,7 @@ package com.tatko.telegram.bot.util;
 
 import com.tatko.telegram.bot.MockitoExtensionBaseMockTests;
 import org.junit.jupiter.api.Test;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

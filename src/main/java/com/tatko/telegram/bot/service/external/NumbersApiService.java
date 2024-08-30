@@ -1,10 +1,12 @@
 package com.tatko.telegram.bot.service.external;
 
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
+@Getter
 public class NumbersApiService {
 
     /**
@@ -12,13 +14,31 @@ public class NumbersApiService {
      */
     private final WebClient webClient;
 
+//    /**
+//     * Constructor itself.
+//     * @param webClientBuilder
+//     */
+//    public NumbersApiService(final WebClient.Builder webClientBuilder) {
+//        this.webClient
+//                = webClientBuilder.baseUrl("http://numbersapi.com").build();
+//    }
+
     /**
      * Constructor itself.
-     * @param webClientBuilder
+     *
+     * @param webClientParam
      */
-    public NumbersApiService(final WebClient.Builder webClientBuilder) {
-        this.webClient
-                = webClientBuilder.baseUrl("http://numbersapi.com").build();
+    public NumbersApiService(final WebClient webClientParam) {
+        this.webClient = webClientParam;
+    }
+
+    /**
+     * Constructor itself.
+     */
+    public NumbersApiService() {
+        this.webClient = WebClient.builder()
+                .baseUrl("http://numbersapi.com")
+                .build();
     }
 
     /**
