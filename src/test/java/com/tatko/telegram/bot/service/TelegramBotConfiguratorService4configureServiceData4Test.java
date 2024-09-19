@@ -40,8 +40,8 @@ class TelegramBotConfiguratorService4configureServiceData4Test
         // Before
         long chatId = getGen().nextLong();;
         boolean isTelegramBotAdmin = getGen().nextBoolean();;
-        User user = getGen().nextObject(User.class);
-        UserRole userRole = getGen().nextObject(UserRole.class);
+        User user = getGen().nextUser();
+        UserRole userRole = getGen().nextUserRole();
 
         // When
         doReturn(true)
@@ -146,7 +146,7 @@ class TelegramBotConfiguratorService4configureServiceData4Test
 
         // Before
         long chatId = getGen().nextLong();;
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doReturn(true)
@@ -186,7 +186,7 @@ class TelegramBotConfiguratorService4configureServiceData4Test
         // Before
         long chatId = getGen().nextLong();;
         boolean isTelegramBotAdmin = getGen().nextBoolean();;
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doReturn(true)

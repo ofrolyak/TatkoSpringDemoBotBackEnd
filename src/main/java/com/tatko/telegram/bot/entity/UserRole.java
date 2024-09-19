@@ -2,9 +2,11 @@ package com.tatko.telegram.bot.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * User entity.
@@ -51,5 +54,16 @@ public class UserRole {
     @Column(name = "CREATING_TIME", nullable = false)
     private LocalDateTime creatingTime;
 
+    /**
+     * Set for User entities.
+     */
+    @OneToMany(mappedBy = "userRole", fetch = FetchType.EAGER)
+    private Set<User> users;
+
+    /**
+     * Set for UserArch entities.
+     */
+    @OneToMany(mappedBy = "userRole", fetch = FetchType.EAGER)
+    private Set<UserArch> usersArch;
 
 }

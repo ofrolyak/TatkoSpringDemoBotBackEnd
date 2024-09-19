@@ -37,10 +37,16 @@ public class DateFactService {
      */
     Mono<String> getDateFactForThisDay() {
 
+        log.debug("Process getDateFactForThisDay");
         int day = LocalDate.now().getDayOfMonth();
         int month = LocalDate.now().getMonthValue();
-
-        return numbersApiService.getDateFactForDay(month, day);
+        log.debug("Process getDateFactForThisDay for day {}, month {}",
+                day, month);
+        Mono<String> dateFactForDay
+                = numbersApiService.getDateFactForDay(month, day);
+        log.debug("Process finished getDateFactForThisDay dateFactForDay: {}",
+                dateFactForDay);
+        return dateFactForDay;
 
     }
 

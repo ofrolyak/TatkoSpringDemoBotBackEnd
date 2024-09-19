@@ -39,7 +39,7 @@ class UserService4getRegisteredUser4Test
 
         // Before
         long chatId = getGen().nextLong();;
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doReturn(messageMock)
@@ -66,7 +66,7 @@ class UserService4getRegisteredUser4Test
 
         // Before
         long chatId = getGen().nextLong();;
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doReturn(messageMock)
@@ -96,7 +96,7 @@ class UserService4getRegisteredUser4Test
 
         // Before
         long chatId = getGen().nextLong();;
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doReturn(messageMock)

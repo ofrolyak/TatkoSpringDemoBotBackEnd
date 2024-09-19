@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Aspect
 @Component
 @Slf4j
@@ -39,12 +42,18 @@ public class OnUpdateInitProcessor {
     public Object doAround(final ProceedingJoinPoint proceedingJoinPoint)
             throws Throwable {
 
-        log.debug("Audit @Around advice: {}", proceedingJoinPoint);
+        log.debug("Audit @Around advice started: {}", proceedingJoinPoint);
 
         Object[] args = proceedingJoinPoint.getArgs();
+
+        log.debug("args: {}", Arrays.stream(args).map(Object::toString)
+                .collect(Collectors.joining(",")));
+
         Update update = (Update) args[0];
 
         telegramBotConfiguratorService.configureServiceData(update);
+
+        log.debug("Audit @Around advice finished: {}", proceedingJoinPoint);
 
         return proceedingJoinPoint.proceed();
 

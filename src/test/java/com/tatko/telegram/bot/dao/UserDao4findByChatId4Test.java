@@ -23,7 +23,7 @@ class UserDao4findByChatId4Test extends MockitoExtensionBaseMockTests {
     void save4successAndExist4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
         long chatId = getGen().nextLong();
 
         // When
@@ -46,7 +46,7 @@ class UserDao4findByChatId4Test extends MockitoExtensionBaseMockTests {
     void save4successAndNotExist4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
         long chatId = getGen().nextLong();
 
         // When

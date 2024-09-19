@@ -3,6 +3,8 @@ package com.tatko.telegram.bot.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,10 +64,17 @@ public class UserArch {
     @Column(name = "REGISTERED_AT", nullable = false)
     private LocalDateTime registeredAt;
 
+//    /**
+//     * User Role Id for this User.
+//     */
+//    @Column(name = "USER_ROLE_ID", nullable = false)
+//    private Long userRoleId;
+
     /**
-     * User Role Id for this User.
+     * UserRole entity.
      */
-    @Column(name = "USER_ROLE_ID", nullable = false)
-    private Long userRoleId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ROLE_ID", nullable = false)
+    private UserRole userRole;
 
 }

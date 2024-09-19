@@ -24,7 +24,7 @@ class UserDao4findById4Test extends MockitoExtensionBaseMockTests {
     void userExists4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         when(userRepository.findById(eq(user.getId())))
@@ -45,7 +45,7 @@ class UserDao4findById4Test extends MockitoExtensionBaseMockTests {
     void userNotExists4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         when(userRepository.findById(eq(user.getId())))

@@ -1,5 +1,6 @@
 package com.tatko.telegram.bot;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
@@ -7,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
+@Slf4j
 public class TatkoSpringDemoBotBackEndApplication {
 
     /**
@@ -14,8 +16,10 @@ public class TatkoSpringDemoBotBackEndApplication {
      * @param args Input arguments.
      */
     public static void main(final String[] args) {
+        log.info("TatkoSpringDemoBotBackEndApplication started");
         SpringApplication.run(
             TatkoSpringDemoBotBackEndApplication.class, args);
+        log.info("TatkoSpringDemoBotBackEndApplication finished");
     }
 
     /**

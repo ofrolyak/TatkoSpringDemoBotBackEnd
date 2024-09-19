@@ -21,7 +21,7 @@ class UserArchDao4save4Test extends MockitoExtensionBaseMockTests {
     void save4success4Test() {
 
         // Before
-        UserArch userArch = getGen().nextObject(UserArch.class);
+        UserArch userArch = getGen().nextUserArch();
 
         // When
         Mockito.when(userArchRepository.save(Mockito.eq(userArch)))

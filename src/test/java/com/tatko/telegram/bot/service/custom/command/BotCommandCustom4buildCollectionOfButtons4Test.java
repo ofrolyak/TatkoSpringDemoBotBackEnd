@@ -31,8 +31,8 @@ class BotCommandCustom4buildCollectionOfButtons4Test extends MockitoExtensionBas
     void success4empty4Test() {
 
         // Before
-        UserRole userRole = getGen().nextObject(UserRole.class);
-        ServiceDataUserStorage serviceDataUserStorage = getGen().nextObject(ServiceDataUserStorage.class);
+        UserRole userRole = getGen().nextUserRole();
+        ServiceDataUserStorage serviceDataUserStorage = getGen().nextServiceDataUserStorage();
         serviceDataUserStorage.setUserRole(userRole);
 
 

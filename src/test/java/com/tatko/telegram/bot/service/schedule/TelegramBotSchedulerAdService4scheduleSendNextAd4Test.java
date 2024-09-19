@@ -22,7 +22,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitConfig(ScheduledConfig.class)
-class TelegramBotSchedulerAdService4scheduleSendNextAd4Test extends SpringBootTestBaseMockTests {
+class TelegramBotSchedulerAdService4scheduleSendNextAd4Test
+        extends SpringBootTestBaseMockTests {
 
     @MockBean
     TelegramBotConfiguratorService telegramBotConfiguratorService;

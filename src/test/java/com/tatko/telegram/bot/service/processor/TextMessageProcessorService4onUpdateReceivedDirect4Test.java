@@ -32,13 +32,7 @@ class TextMessageProcessorService4onUpdateReceivedDirect4Test extends MockitoExt
     void givenSpecific4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        message.setText(getGen().nextString());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
         // When
         doReturn(Optional.empty())
@@ -60,13 +54,7 @@ class TextMessageProcessorService4onUpdateReceivedDirect4Test extends MockitoExt
     void givenNotSpecific4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        message.setText(getGen().nextString());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
         // When
         doReturn(Optional.of(sendMessageOperation2Params))

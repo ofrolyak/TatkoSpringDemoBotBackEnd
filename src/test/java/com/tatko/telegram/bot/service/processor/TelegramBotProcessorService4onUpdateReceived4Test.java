@@ -38,13 +38,7 @@ class TelegramBotProcessorService4onUpdateReceived4Test extends MockitoExtension
     void textMessageCase4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(getGen().nextString());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
         // When
         doNothing()
@@ -70,7 +64,8 @@ class TelegramBotProcessorService4onUpdateReceived4Test extends MockitoExtension
     void callbackMessageCase4Test() {
 
         // Before
-        Update update = new Update();
+        Update update = getGen().nextUpdate();
+        update.setMessage(null);
         update.setCallbackQuery(new CallbackQuery());
 
         // When
@@ -93,7 +88,7 @@ class TelegramBotProcessorService4onUpdateReceived4Test extends MockitoExtension
     void failure1Case4Test() {
 
         // Before
-        Update update = new Update();
+        Update update = getGen().nextUpdate();
         update.setMessage(null);
 
         // Action
@@ -106,10 +101,8 @@ class TelegramBotProcessorService4onUpdateReceived4Test extends MockitoExtension
     void failure2Case4Test() {
 
         // Before
-        Message message = new Message();
-        message.setText(null);
-        Update update = new Update();
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.setMessage(null);
 
         // Action
         assertThatCode(() -> telegramBotProcessorService.onUpdateReceived(update))
@@ -121,7 +114,8 @@ class TelegramBotProcessorService4onUpdateReceived4Test extends MockitoExtension
     void failure3Case4Test() {
 
         // Before
-        Update update = new Update();
+        Update update = getGen().nextUpdate();
+        update.setMessage(null);
         update.setCallbackQuery(null);
 
         // Action

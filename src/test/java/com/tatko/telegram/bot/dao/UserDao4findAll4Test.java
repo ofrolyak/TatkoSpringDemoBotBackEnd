@@ -42,7 +42,7 @@ class UserDao4findAll4Test extends MockitoExtensionBaseMockTests {
     void save4success4exist4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         Mockito.when(userRepository.findAll())

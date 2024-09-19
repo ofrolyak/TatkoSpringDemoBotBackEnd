@@ -8,7 +8,9 @@ import com.tatko.telegram.bot.service.custom.command.BotCommandCustom;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustomServiceAction;
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustomSettingsAction;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,7 @@ import static com.tatko.telegram.bot.service.custom.button.KeyButton.SEND_NEXT_D
 
 @Getter
 @Component
+@Slf4j
 public class KeyButtonMapStorage {
 
     /**
@@ -41,7 +44,11 @@ public class KeyButtonMapStorage {
      * Building date structure.
      */
     @PostConstruct
+    @Transactional
     public void init() {
+
+        log.info("Process init");
+
         keyButtonMap.putAll(Map.of(userRoleDao.findById(2L)
                         .orElseThrow(UserRoleNotFoundException::new),
                 Map.of(BotCommandCustomServiceAction.class,
@@ -52,6 +59,9 @@ public class KeyButtonMapStorage {
                         Set.of(),
                         BotCommandCustomSettingsAction.class,
                         Set.of(GET_MY_DATA, DELETE_MY_DATA))));
+
+        log.info("Finished process init");
+
     }
 
 }

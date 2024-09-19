@@ -19,7 +19,7 @@ class UserDao4delete4Test extends MockitoExtensionBaseMockTests {
     void save4successAndExist4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         Mockito.doNothing()

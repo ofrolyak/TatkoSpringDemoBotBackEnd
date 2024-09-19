@@ -60,8 +60,8 @@ class UserService4deliverToUsers2Params4Test extends MockitoExtensionBaseMockTes
         SendMessageOperation2Params sendMessageOperation2Params
                 = mock(SendMessageOperation2Params.class);
         String textMessage = getGen().nextObject(String.class);
-        User user1 = getGen().nextObject(User.class);
-        User user2 = getGen().nextObject(User.class);
+        User user1 = getGen().nextUser();
+        User user2 = getGen().nextUser();
 
         // When
         when(userDao.findAll())

@@ -33,14 +33,9 @@ class BotCommandCustomStartAction4doAction4Test extends MockitoExtensionBaseMock
     void success4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        chat.setFirstName("firstName");
-        message.setChat(chat);
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
+        // When
         doReturn((SendMessageOperation2Params) (a, b) -> {})
                 .when(telegramBotConfiguratorService)
                 .getOperationByClass(eq(SendMessageOperation2Params.class));

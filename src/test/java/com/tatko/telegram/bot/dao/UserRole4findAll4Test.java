@@ -42,7 +42,7 @@ class UserRole4findAll4Test extends MockitoExtensionBaseMockTests {
     void save4success4exist4Test() {
 
         // Before
-        UserRole userRole = getGen().nextObject(UserRole.class);
+        UserRole userRole = getGen().nextUserRole();
 
         // When
         Mockito.when(userRoleRepository.findAll())
