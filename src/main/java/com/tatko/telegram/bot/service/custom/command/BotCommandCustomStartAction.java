@@ -35,6 +35,8 @@ public class BotCommandCustomStartAction extends BotCommandCustom {
                 + "! Nice to meet you!!!" + "\uD83C\uDF4C";
 
         sendMessageOperation2Params.execute(chatId, message);
+
+        log.debug("Finished startCommandReceived");
     }
 
     /**
@@ -44,12 +46,14 @@ public class BotCommandCustomStartAction extends BotCommandCustom {
      */
     @Override
     public void doAction(final Update update) {
+        log.debug("doAction for update {}", update);
         final long chatId = update.getMessage().getChatId();
         final String firstName = update.getMessage().getChat().getFirstName();
         startCommandReceived(getTelegramBotConfiguratorService()
                         .getOperationByClass(
                                 SendMessageOperation2Params.class),
                 chatId, firstName);
+        log.debug("Finished doAction for update {}", update);
     }
 
 }

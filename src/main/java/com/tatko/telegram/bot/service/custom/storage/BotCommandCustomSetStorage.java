@@ -7,6 +7,7 @@ import com.tatko.telegram.bot.service.custom.command.BotCommandCustomSettingsAct
 import com.tatko.telegram.bot.service.custom.command.BotCommandCustomStartAction;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 @Getter
 @Component
+@Slf4j
 public class BotCommandCustomSetStorage {
 
     /**
@@ -37,6 +39,8 @@ public class BotCommandCustomSetStorage {
     @PostConstruct
     public void init() {
 
+        log.info("Process init");
+
         botCommandCustomSet.add(applicationContext.getBean(
                 BotCommandCustomStartAction.class));
         botCommandCustomSet.add(applicationContext.getBean(
@@ -46,6 +50,8 @@ public class BotCommandCustomSetStorage {
         botCommandCustomSet.add(applicationContext.getBean(
                 BotCommandCustomHelpAction.class));
 
+        log.info("Finished process init");
+
     }
 
     /**
@@ -54,11 +60,17 @@ public class BotCommandCustomSetStorage {
      */
     public List<BotCommand> getBotCommandList() {
 
-        return botCommandCustomSet.stream()
+        log.info("Process getBotCommandList");
+
+        List<BotCommand> list = botCommandCustomSet.stream()
                 .map(botCommandCustom
                         -> new BotCommand(botCommandCustom.getMessageText(),
                         botCommandCustom.getDescription()))
                 .toList();
+
+        log.info("Finished process getBotCommandList: {}", list);
+
+        return list;
     }
 
 }

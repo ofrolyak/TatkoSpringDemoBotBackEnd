@@ -8,6 +8,7 @@ import com.tatko.telegram.bot.service.custom.operation.SendMessageOperation3Para
 import com.tatko.telegram.bot.service.custom.operation.SetBotCommandsListOperation;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class ExecutorMapStorage {
 
     /**
@@ -43,7 +45,11 @@ public class ExecutorMapStorage {
             = new SendMessageOperation2Params() {
         @Override
         public void execute(final long a, final String b) {
+            log.debug("Process SendMessageOperation2Params "
+                    + "for a: {}, b: {}", a, b);
             telegramBotService.sendMessage(a, b);
+            log.debug("Finished process SendMessageOperation2Params "
+                    + "for a: {}, b: {}", a, b);
         }
     };
 
@@ -56,7 +62,10 @@ public class ExecutorMapStorage {
             = new SendMessageOperation1Param() {
         @Override
         public void execute(final SendMessage a) {
+            log.debug("Process SendMessageOperation1Param for a: {}", a);
             telegramBotService.sendMessage(a);
+            log.debug("Finished process SendMessageOperation1Param "
+                    + "for a: {}", a);
         }
     };
 
@@ -70,7 +79,11 @@ public class ExecutorMapStorage {
         @Override
         public void execute(final long a, final String b,
                             final ReplyKeyboardMarkup c) {
+            log.debug("Process SendMessageOperation3Params "
+                    + "for a: {}, b: {}, c: {}", a, b, c);
             telegramBotService.sendMessage(a, b, c);
+            log.debug("Finished process SendMessageOperation3Params "
+                    + "for a: {}, b: {}, c: {}", a, b, c);
         }
     };
 
@@ -82,7 +95,11 @@ public class ExecutorMapStorage {
             setBotCommandsListOperation = new SetBotCommandsListOperation() {
         @Override
         public void setBotCommandsList(final List<BotCommand> botCommandList) {
+            log.debug("Process SetBotCommandsListOperation "
+                    + "for botCommandList: {}", botCommandList);
             telegramBotService.setBotCommandsList(botCommandList);
+            log.debug("Finished process SetBotCommandsListOperation "
+                    + "for botCommandList: {}", botCommandList);
         }
     };
 
@@ -92,6 +109,8 @@ public class ExecutorMapStorage {
     @PostConstruct
     public void init() {
 
+        log.info("Process init");
+
         executorMap.put(SendMessageOperation2Params.class,
                 sendMessageOperation2ParamsOperation);
         executorMap.put(SendMessageOperation1Param.class,
@@ -100,6 +119,8 @@ public class ExecutorMapStorage {
                 sendMessageSendMessage3ParamsOperation);
         executorMap.put(SetBotCommandsListOperation.class,
                 setBotCommandsListOperation);
+
+        log.info("Finished process init");
 
     }
 

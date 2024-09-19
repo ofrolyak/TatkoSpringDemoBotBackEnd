@@ -22,7 +22,7 @@ class BotCommandCustomServiceAction4doAction4Test extends MockitoExtensionBaseMo
     void success4Test() {
 
         // Before
-        Update update = new Update();
+        Update update = getGen().nextUpdate();
 
         // When
         Mockito.doNothing()

@@ -35,7 +35,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
     void success4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
         UserArch userArch = new UserArch();
         BeanUtils.copyProperties(user, userArch);
 
@@ -67,7 +67,7 @@ class UserService4deleteUser4Test extends MockitoExtensionBaseMockTests {
     void userNotFoundException4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
         UserArch userArch = new UserArch();
         BeanUtils.copyProperties(user, userArch);
 

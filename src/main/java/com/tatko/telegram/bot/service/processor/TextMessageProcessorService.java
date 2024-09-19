@@ -61,10 +61,16 @@ public class TextMessageProcessorService {
      */
     public Optional<BotCommandCustom> parseBotCommandCustom(
             final String messageText) {
-        return botCommandCustomSetStorage.getBotCommandCustomSet().stream()
+        log.debug("Process parseBotCommandCustom for {}", messageText);
+        Optional<BotCommandCustom> botCommandCustomOptional
+                = botCommandCustomSetStorage.getBotCommandCustomSet().stream()
                 .filter(botCommand
                         -> botCommand.getMessageText().equals(messageText))
                 .findFirst();
+        log.debug("Finished process parseBotCommandCustom for {} "
+                        + "=> botCommandCustomOptional: {}",
+                messageText, botCommandCustomOptional);
+        return botCommandCustomOptional;
     }
 
     /**
@@ -77,7 +83,11 @@ public class TextMessageProcessorService {
     public void acceptBotCommandCustom(
             @NotNull final BotCommandCustom botCommandCustom,
             final @NotNull Update update) {
+        log.debug("Process acceptBotCommandCustom for {}, {}",
+                botCommandCustom, update);
         botCommandCustom.doAction(update);
+        log.debug("Finished process acceptBotCommandCustom for {}, {}",
+                botCommandCustom, update);
     }
 
     /**
@@ -89,6 +99,9 @@ public class TextMessageProcessorService {
     public void processReceivedMessage(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
+
+        log.debug("Process processReceivedMessage for {}, {}",
+                update, sendMessageOperation2Params);
 
         final long chatId = update.getMessage().getChatId();
         final String messageText = update.getMessage().getText();
@@ -103,6 +116,9 @@ public class TextMessageProcessorService {
                 () -> sendMessageOperation2Params.execute(chatId,
                         "Головне в нашому житті - не тупікувати!!!"));
 
+        log.debug("Finished process processReceivedMessage for {}, {}",
+                update, sendMessageOperation2Params);
+
     }
 
     /**
@@ -114,6 +130,9 @@ public class TextMessageProcessorService {
     void onUpdateReceivedDirect(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
+
+        log.debug("Process onUpdateReceivedDirect for {}, {}",
+                update, sendMessageOperation2Params);
 
 //        Optional<BotCommandCustom> firstEqual
 //                = botCommandCustomSetStorage.getBotCommandCustomSet()
@@ -131,15 +150,26 @@ public class TextMessageProcessorService {
             processReceivedMessage(update, sendMessageOperation2Params);
         }
 
+        log.debug("Finished process onUpdateReceivedDirect for {}, {}",
+                update, sendMessageOperation2Params);
+
     }
 
     private boolean isCondition(
             final Update update, final BotCommandCustom botCommandCustom) {
+
+        log.debug("Process isCondition for {}, {}", update, botCommandCustom);
+
         boolean condition1 = update.getMessage().getText()
                 .startsWith(botCommandCustom.getMessageText());
         boolean condition2 = update.getMessage().getText().length()
                 > botCommandCustom.getMessageText().length() + 1;
-        return condition1 && condition2;
+        boolean condition = condition1 && condition2;
+
+        log.debug("Process isCondition: condition1={}, condition2={}, "
+                + "condition={}", condition1, condition2, condition);
+
+        return condition;
     }
 
     /**
@@ -149,6 +179,8 @@ public class TextMessageProcessorService {
      */
     void onUpdateReceivedContains(final Update update) {
 
+        log.debug("Process onUpdateReceivedContains for {}", update);
+
         Optional<BotCommandCustom> botCommandCustomOptional
                 = botCommandCustomSetStorage.getBotCommandCustomSet().stream()
                 .filter(botCommandCustom
@@ -157,6 +189,8 @@ public class TextMessageProcessorService {
 
         botCommandCustomOptional.ifPresent(botCommandCustom
                 -> botCommandCustom.doAction(update));
+
+        log.debug("Finished process onUpdateReceivedContains for {}", update);
 
     }
 
@@ -172,10 +206,18 @@ public class TextMessageProcessorService {
     public void processReceivedCommand(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
+
+        log.debug("Process processReceivedCommand for {}, {}",
+                update, sendMessageOperation2Params);
+
         // direct case
         onUpdateReceivedDirect(update, sendMessageOperation2Params);
         // contains case
         onUpdateReceivedContains(update);
+
+        log.debug("Finished process processReceivedCommand for {}, {}",
+                update, sendMessageOperation2Params);
+
     }
 
     /**
@@ -187,27 +229,44 @@ public class TextMessageProcessorService {
     public void processReceivedTextMessage(
             final Update update,
             final SendMessageOperation2Params sendMessageOperation2Params) {
+
+        log.debug("Process processReceivedTextMessage for {}, {}",
+                update, sendMessageOperation2Params);
+
         if (update.getMessage().getText()
                 .equals(KeyButton.SEND_NEXT_DATE_FACT.getLabel())) {
+            log.debug("Process processReceivedTextMessage for {} case",
+                    KeyButton.SEND_NEXT_DATE_FACT);
             dateFactService.sendNextDateFact(sendMessageOperation2Params);
         } else if (update.getMessage().getText()
                 .equals(KeyButton.SEND_AD.getLabel())) {
+            log.debug("Process processReceivedTextMessage for {} case",
+                    KeyButton.SEND_AD);
             adService.sendNextAd(sendMessageOperation2Params);
         } else if (update.getMessage().getText()
                 .equals(KeyButton.GET_MY_DATA.getLabel())) {
+            log.debug("Process processReceivedTextMessage for {} case",
+                    KeyButton.GET_MY_DATA);
             User user = userDao.findByChatId(update.getMessage().getChatId())
                     .orElseThrow(UserNotFoundException::new);
             userService.deliverToUser(
                     sendMessageOperation2Params, user.toString(), user);
         } else if (update.getMessage().getText()
                 .equals(KeyButton.DELETE_MY_DATA.getLabel())) {
+            log.debug("Process processReceivedTextMessage for {} case",
+                    KeyButton.DELETE_MY_DATA);
             User user = userDao.findByChatId(update.getMessage().getChatId())
                     .orElseThrow(UserNotFoundException::new);
             userService.deleteUser(user);
         } else {
+            log.debug("Process processReceivedTextMessage for {} case", "ELSE");
             // Command message
             processReceivedCommand(update, sendMessageOperation2Params);
         }
+
+        log.debug("Finished process processReceivedTextMessage for {}, {}",
+                update, sendMessageOperation2Params);
+
     }
 
 

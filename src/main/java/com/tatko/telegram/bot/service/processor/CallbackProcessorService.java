@@ -40,6 +40,9 @@ public class CallbackProcessorService {
      */
     public static void andButtonToSendMessage(final SendMessage sendMessage) {
 
+        log.debug("Process andButtonToSendMessage for sendMessage {}",
+                sendMessage);
+
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
@@ -55,6 +58,10 @@ public class CallbackProcessorService {
         inlineKeyboardMarkup.setKeyboard(rowsInline);
 
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+
+        log.debug("Finished process andButtonToSendMessage for sendMessage {}",
+                sendMessage);
+
     }
 
     /**
@@ -66,6 +73,8 @@ public class CallbackProcessorService {
 //    @Retryable(retryFor = TelegramApiException.class, maxAttempts = 2,
 //            backoff = @Backoff(delay = Constant.RETRYABLE_BACKOFF_DELAY))
     public void processReceivedCallback(final Update update) {
+
+        log.debug("Process processReceivedCallback for update {}", update);
 
         final String callbackQuery = update.getCallbackQuery().getData();
         final long chatId = update.getCallbackQuery().getMessage()
@@ -79,6 +88,8 @@ public class CallbackProcessorService {
                             chatId);
         }
 
+        log.debug("Finished process processReceivedCallback for update {}",
+                update);
 
     }
 

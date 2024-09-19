@@ -21,7 +21,7 @@ class UserDao4save4Test extends MockitoExtensionBaseMockTests {
     void save4success4Test() {
 
         // Before
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         Mockito.when(userRepository.save(Mockito.eq(user)))

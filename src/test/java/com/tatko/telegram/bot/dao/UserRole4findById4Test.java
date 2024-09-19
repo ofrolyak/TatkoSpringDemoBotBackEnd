@@ -46,7 +46,7 @@ class UserRole4findById4Test extends MockitoExtensionBaseMockTests {
 
         // Before
         long userRoleId = getGen().nextLong();
-        UserRole userRole = getGen().nextObject(UserRole.class);
+        UserRole userRole = getGen().nextUserRole();
 
         // When
         Mockito.when(userRoleRepository.findById(eq(userRoleId)))

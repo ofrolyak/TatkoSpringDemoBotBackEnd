@@ -36,11 +36,8 @@ class CallbackProcessorService4processReceivedCallback4Test extends MockitoExten
     void processReceivedCallback4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
+        Update update = getGen().nextUpdate();
+        Message message = getGen().nextMessage();
         CallbackQuery callbackQuery = new CallbackQuery();
         callbackQuery.setMessage(message);
         callbackQuery.setData("fake");
@@ -59,11 +56,8 @@ class CallbackProcessorService4processReceivedCallback4Test extends MockitoExten
     void processReceivedCallback4GetNextDateFactCase4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
+        Update update = getGen().nextUpdate();
+        Message message = getGen().nextMessage();
         CallbackQuery callbackQuery = new CallbackQuery();
         callbackQuery.setMessage(message);
         callbackQuery.setData(GET_NEXT_DATE_FACT.getLabel());

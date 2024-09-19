@@ -38,12 +38,7 @@ class TextMessageProcessorService4onUpdateReceivedContains4Test extends MockitoE
         // Before
         BotCommandCustomHelpAction botCommandCustomHelpAction
                 = mock(BotCommandCustomHelpAction.class);
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
         // When
         when(botCommandCustomSetStorage.getBotCommandCustomSet())
@@ -64,7 +59,7 @@ class TextMessageProcessorService4onUpdateReceivedContains4Test extends MockitoE
 //        // Before
 //        BotCommandCustomHelpAction botCommandCustomHelpAction
 //                = mock(BotCommandCustomHelpAction.class);
-//        Update update = new Update();
+//        Update update = getGen().nextUpdate();
 //        Message message = new Message();
 //        Chat chat = new Chat();
 //        chat.setId(1L);
@@ -92,13 +87,8 @@ class TextMessageProcessorService4onUpdateReceivedContains4Test extends MockitoE
     void g1iven4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        message.setText(new BotCommandCustomHelpAction().getMessageText() + SPACE + "blablabla");
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(new BotCommandCustomHelpAction().getMessageText() + SPACE + "blablabla");
 
         // When
         when(botCommandCustomSetStorage.getBotCommandCustomSet())
@@ -122,13 +112,8 @@ class TextMessageProcessorService4onUpdateReceivedContains4Test extends MockitoE
     void g1iven44Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        message.setText(new BotCommandCustomHelpAction().getMessageText() + SPACE);
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(new BotCommandCustomHelpAction().getMessageText() + SPACE);
 
         // When
         when(botCommandCustomSetStorage.getBotCommandCustomSet())

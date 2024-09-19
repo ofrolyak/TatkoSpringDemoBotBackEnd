@@ -52,6 +52,7 @@ public class TelegramBotProcessorService {
             throw new IllegalArgumentException();
         }
 
+        log.info("Finished process received update: {}", update);
 
     }
 

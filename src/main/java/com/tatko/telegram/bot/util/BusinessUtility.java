@@ -26,7 +26,12 @@ public class BusinessUtility {
      * @return If chatId is Admin.
      */
     public boolean isTelegramBotAdmin(final Long chatId) {
-        return chatId.equals(telegramBotConfig.getTelegramBotOwner());
+        log.debug("Verify if chatId={} is a telegram bot admin", chatId);
+        boolean isTelegramBotAdmin
+                = chatId.equals(telegramBotConfig.getTelegramBotOwner());
+        log.debug("chatId={}, isTelegramBotAdmin={}",
+                chatId, isTelegramBotAdmin);
+        return isTelegramBotAdmin;
     }
 
     /**
@@ -36,14 +41,17 @@ public class BusinessUtility {
      * @return User instance.
      */
     public User buildUserByMessage(final Message message) {
-        return User.builder()
+        log.debug("Process buildUserByMessage for {}", message);
+        User user = User.builder()
                 .chatId(message.getChatId())
                 .firstName(message.getChat().getFirstName())
                 .lastName(message.getChat().getLastName())
                 .userName(message.getChat().getUserName())
                 .registeredAt(LocalDateTime.now())
-                .userRoleId(isTelegramBotAdmin(message.getChatId()) ? 2L : 1L)
+                //.userRoleId(isTelegramBotAdmin(message.getChatId()) ? 2L : 1L)
                 .build();
+        log.debug("Process buildUserByMessage for {}, user={}", message, user);
+        return user;
     }
 
 }

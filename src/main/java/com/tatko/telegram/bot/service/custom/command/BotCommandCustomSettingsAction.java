@@ -22,7 +22,9 @@ public class BotCommandCustomSettingsAction extends BotCommandCustom {
      */
     @Override
     public void doAction(final Update update) {
+        log.debug("doAction for update {}", update);
         super.addKeyboardAndSendMessage(update);
+        log.debug("Finished doAction for update {}", update);
     }
 
 }

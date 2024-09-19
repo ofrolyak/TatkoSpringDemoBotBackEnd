@@ -25,7 +25,10 @@ public class AdDao {
      * @return Saved Ad entity.
      */
     public Ad save(final Ad ad) {
-        return adRepository.save(ad);
+        log.debug("Saving ad: {}", ad);
+        Ad entitySaved = adRepository.save(ad);
+        log.debug("Saved entity entitySaved: {}", entitySaved);
+        return entitySaved;
     }
 
     /**
@@ -34,11 +37,13 @@ public class AdDao {
      * @return Optional of Ad entity.
      */
     public Optional<Ad> findAdToDeliver(final LocalDateTime localDateTime) {
-        log.debug("findAdToDeliver");
+        log.debug("Start to process findAdToDeliver for localDateTime: {}",
+                localDateTime);
         Optional<Ad> adOptional = adRepository
                 .findFirstByDeliveredTimeIsNullOrDeliveredTimeIsBefore(
                         localDateTime);
-        log.debug("adOptional: {}", adOptional);
+        log.debug("Finish to process findAdToDeliver, adOptional: {}",
+                adOptional);
         return adOptional;
     }
 

@@ -25,6 +25,8 @@ public class BotCommandCustomHelpAction extends BotCommandCustom {
     @Override
     public void doAction(final Update update) {
 
+        log.debug("doAction for update {}", update);
+
         final long chatId = update.getMessage().getChatId();
 
         getTelegramBotConfiguratorService().getOperationByClass(
@@ -32,6 +34,9 @@ public class BotCommandCustomHelpAction extends BotCommandCustom {
                 .execute(chatId,
                         "This is bot for demonstration how to Spring Boot"
                                 + " works with Telegram.");
+
+        log.debug("Finished doAction for update {}", update);
+
     }
 
 }

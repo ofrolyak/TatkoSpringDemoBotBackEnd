@@ -132,12 +132,17 @@ public class UserService {
             final SendMessageOperation1Param sendMessageOperation1Param,
             final String textMessage, final User user) {
 
+        log.debug("Process deliverMessageWithButtonToUser for user {}", user);
+
         SendMessage sendMessage
                 = StaticUtility.buildSendMessage(textMessage, user);
 
         CallbackProcessorService.andButtonToSendMessage(sendMessage);
 
         deliverToUser(sendMessageOperation1Param, sendMessage);
+
+        log.debug("Finished process deliverMessageWithButtonToUser for user {}",
+                user);
 
     }
 
@@ -170,10 +175,17 @@ public class UserService {
      */
     public void registerUser(final Message message) {
 
+        log.debug("Process register user for message {}", message);
+
         if (userDao.findByChatId(message.getChatId()).isEmpty()) {
+
             User user = businessUtility.buildUserByMessage(message);
+            log.info("Register user {}", user);
             userDao.save(user);
         }
+
+        log.debug("Finished process register user for message {}", message);
+
     }
 
     /**
@@ -183,6 +195,8 @@ public class UserService {
      */
     @Transactional
     public void deleteUser(final User user) {
+
+        log.debug("Process delete user {}", user);
 
         // Verify if user exists
         findUserByUser(user);
@@ -195,6 +209,8 @@ public class UserService {
 
         userDao.delete(user);
 
+        log.debug("Finished process delete user {}", user);
+
     }
 
     /**
@@ -204,8 +220,11 @@ public class UserService {
      * @return User entity.
      */
     public User findUserByUser(final User user) {
-        return userDao.findById(user.getId())
+        log.debug("Process findUserByUser {}", user);
+        User user1 = userDao.findById(user.getId())
                 .orElseThrow(UserNotFoundException::new);
+        log.debug("Finished process findUserByUser {}", user);
+        return user1;
     }
 
     /**
@@ -216,6 +235,8 @@ public class UserService {
      */
     public User getRegisteredUser(final Update update) {
 
+        log.debug("Process getRegisteredUser {}", update);
+
         User userRegistered;
 
         final long chatId = update.getMessage().getChatId();
@@ -223,16 +244,21 @@ public class UserService {
         try {
             userRegistered = userDao.findByChatId(chatId)
                     .orElseThrow(UserNotFoundException::new);
+            log.debug("User found userRegistered: {}", userRegistered);
         } catch (UserNotFoundException e) {
             try {
                 registerUser(update.getMessage());
                 userRegistered = userDao.findByChatId(chatId)
                         .orElseThrow(UserNotFoundException::new);
+                log.debug("User found once more userRegistered: {}",
+                        userRegistered);
             } catch (Exception e1) {
                 log.error("Error: ", e1);
                 throw new BaseException();
             }
         }
+
+        log.debug("Finished process getRegisteredUser {}", update);
 
         return userRegistered;
 

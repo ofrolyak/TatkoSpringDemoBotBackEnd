@@ -30,7 +30,7 @@ class TelegramBotService4onUpdateReceived4Test extends SpringBootTestBaseMockTes
     void process4Test() {
 
         // Before
-        Update update = new Update();
+        Update update = getGen().nextUpdate();
 
         // When
         doNothing()

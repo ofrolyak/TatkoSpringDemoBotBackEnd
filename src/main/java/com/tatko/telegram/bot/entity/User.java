@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -69,11 +71,18 @@ public class User {
     @Column(name = "REGISTERED_AT", nullable = false)
     private LocalDateTime registeredAt;
 
+//    /**
+//     * User Role Id for this User.
+//     */
+//    @ToString.Exclude
+//    @Column(name = "USER_ROLE_ID", nullable = false)
+//    private Long userRoleId;
+
     /**
-     * User Role Id for this User.
+     * UserRole entity.
      */
-    @ToString.Exclude
-    @Column(name = "USER_ROLE_ID", nullable = false)
-    private Long userRoleId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ROLE_ID", nullable = false)
+    private UserRole userRole;
 
 }

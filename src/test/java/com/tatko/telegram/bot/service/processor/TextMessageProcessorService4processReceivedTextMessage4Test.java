@@ -50,13 +50,8 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processSendNextDateFact4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.SEND_NEXT_DATE_FACT.getLabel());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.SEND_NEXT_DATE_FACT.getLabel());
 
         // When
         doNothing()
@@ -75,13 +70,8 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processSendAd4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.SEND_AD.getLabel());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.SEND_AD.getLabel());
 
         // When
         doNothing()
@@ -100,16 +90,11 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processGetMyDataButUserNotFoundException4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.GET_MY_DATA.getLabel());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.GET_MY_DATA.getLabel());
 
         // When
-        when(userDao.findByChatId(chat.getId()))
+        when(userDao.findByChatId(update.getMessage().getChatId()))
                 .thenReturn(Optional.empty());
 
         // Action
@@ -125,17 +110,12 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processGetMyData4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.GET_MY_DATA.getLabel());
-        update.setMessage(message);
-        User user = getGen().nextObject(User.class);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.GET_MY_DATA.getLabel());
+        User user = getGen().nextUser();
 
         // When
-        when(userDao.findByChatId(chat.getId()))
+        when(userDao.findByChatId(update.getMessage().getChatId()))
                 .thenReturn(Optional.of(user));
         doNothing()
                 .when(userService)
@@ -153,16 +133,11 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processDeleteMyDataButUserNotFoundException4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.DELETE_MY_DATA.getLabel());
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.DELETE_MY_DATA.getLabel());
 
         // When
-        when(userDao.findByChatId(chat.getId()))
+        when(userDao.findByChatId(update.getMessage().getChatId()))
                 .thenReturn(Optional.empty());
 
         // Action
@@ -178,17 +153,12 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processDeleteMyData4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText(KeyButton.DELETE_MY_DATA.getLabel());
-        update.setMessage(message);
-        User user = getGen().nextObject(User.class);
+        Update update = getGen().nextUpdate();
+        update.getMessage().setText(KeyButton.DELETE_MY_DATA.getLabel());
+        User user = getGen().nextUser();
 
         // When
-        when(userDao.findByChatId(chat.getId()))
+        when(userDao.findByChatId(update.getMessage().getChatId()))
                 .thenReturn(Optional.of(user));
         doNothing()
                 .when(userService)
@@ -207,13 +177,8 @@ class TextMessageProcessorService4processReceivedTextMessage4Test
     void processFakeKeyButtonLabel4Test() {
 
         // Before
-        final Update update = new Update();
-        final Message message = new Message();
-        final Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        message.setText("fakeKeyButtonLabel");
-        update.setMessage(message);
+        final Update update = getGen().nextUpdate();
+        update.getMessage().setText("fakeKeyButtonLabel");
 
         // When
         doNothing()

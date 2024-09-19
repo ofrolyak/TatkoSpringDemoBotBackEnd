@@ -29,7 +29,7 @@ class UserService4deliverMessageWithButtonToUser4Test
         SendMessageOperation1Param sendMessageOperation1Param
                 = mock(SendMessageOperation1Param.class);
         String textMessage = getGen().nextObject(String.class);
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doNothing()

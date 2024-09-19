@@ -26,9 +26,9 @@ class UserRoleService4getUserRoleByUser4Test extends MockitoExtensionBaseMockTes
     void process4Test() {
 
         // Before
-        UserRole userRole = getGen().nextObject(UserRole.class);
-        User user = getGen().nextObject(User.class);
-        user.setUserRoleId(userRole.getId());
+        UserRole userRole = getGen().nextUserRole();
+        User user = getGen().nextUser();
+        user.setUserRole(userRole);
 
         // When
         doReturn(List.of(userRole))
@@ -48,9 +48,9 @@ class UserRoleService4getUserRoleByUser4Test extends MockitoExtensionBaseMockTes
     void process4UserRoleNotFoundException4Test() {
 
         // Before
-        UserRole userRole = getGen().nextObject(UserRole.class);
-        User user = getGen().nextObject(User.class);
-        user.setUserRoleId(userRole.getId());
+        UserRole userRole = getGen().nextUserRole();
+        User user = getGen().nextUser();
+        user.setUserRole(userRole);
 
         // When
         doReturn(List.of())

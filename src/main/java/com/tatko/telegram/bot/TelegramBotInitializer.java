@@ -41,9 +41,11 @@ public class TelegramBotInitializer {
      * @throws TelegramApiException Possible checked TelegramApiException
      */
     public void createRegisterBot() throws TelegramApiException {
+        log.info("Registering Telegram Bot to Telegram Bot");
         final TelegramBotsApi telegramBotsApi
                 = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(telegramBotService);
+        log.info("Registered Telegram Bot to Telegram Bot");
     }
 
     /**

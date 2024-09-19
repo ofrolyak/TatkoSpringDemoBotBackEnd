@@ -35,15 +35,8 @@ class BotCommandCustom4addKeyboardAndSendMessage4Test extends MockitoExtensionBa
     void success4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        update.setMessage(message);
-
+        Update update = getGen().nextUpdate();
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-
 
         // When
         doReturn(replyKeyboardMarkup)

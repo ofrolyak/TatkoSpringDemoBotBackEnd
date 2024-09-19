@@ -52,8 +52,8 @@ class KeyButtonMapStorage4init4Test extends MockitoExtensionBaseMockTests {
     void postConstruct4successCase4Test() {
 
         // Before
-        UserRole userRole1 = getGen().nextObject(UserRole.class);
-        UserRole userRole2 = getGen().nextObject(UserRole.class);
+        UserRole userRole1 = getGen().nextUserRole();
+        UserRole userRole2 = getGen().nextUserRole();
 
         // When
         when(userRoleDao.findById(eq(1L)))

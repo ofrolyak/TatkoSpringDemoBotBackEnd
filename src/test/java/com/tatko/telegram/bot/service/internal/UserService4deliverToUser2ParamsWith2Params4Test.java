@@ -26,7 +26,7 @@ class UserService4deliverToUser2ParamsWith2Params4Test extends MockitoExtensionB
         SendMessageOperation2Params sendMessageOperation2Params
                 = mock(SendMessageOperation2Params.class);
         String testMessage = getGen().nextString();
-        User user = getGen().nextObject(User.class);
+        User user = getGen().nextUser();
 
         // When
         doNothing()

@@ -35,11 +35,8 @@ class UserService4registerUser4Test extends MockitoExtensionBaseMockTests {
     void notExistUser4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        User user = getGen().nextObject(User.class);
+        Message message = getGen().nextMessage();
+        User user = getGen().nextUser();
 
         // When
         when(userDao.findByChatId(anyLong()))
@@ -61,11 +58,8 @@ class UserService4registerUser4Test extends MockitoExtensionBaseMockTests {
     void existUser4Test() {
 
         // Before
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(1L);
-        message.setChat(chat);
-        User user = getGen().nextObject(User.class);
+        Message message = getGen().nextMessage();
+        User user = getGen().nextUser();
 
         // When
         when(userDao.findByChatId(anyLong()))

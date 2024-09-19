@@ -7,6 +7,7 @@ import com.tatko.telegram.bot.service.custom.storage.KeyButtonMapStorage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -24,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
+@Slf4j
 public abstract class BotCommandCustom {
 
     /**
@@ -79,7 +81,10 @@ public abstract class BotCommandCustom {
      * @return List of String (button's names)
      */
     List<String> buildCollectionOfButtons() {
-        return keyButtonMapStorage.getKeyButtonMap()
+
+        log.debug("Process buildCollectionOfButtons");
+
+        List<String> list = keyButtonMapStorage.getKeyButtonMap()
                 .get(telegramBotConfiguratorService
                         .getServiceDataUserThreadLocal()
                         .get().getUserRole())
@@ -87,6 +92,10 @@ public abstract class BotCommandCustom {
                 .stream()
                 .map(KeyButton::getLabel)
                 .toList();
+
+        log.debug("Finished process buildCollectionOfButtons: {}", list);
+
+        return list;
     }
 
     /**
@@ -94,6 +103,8 @@ public abstract class BotCommandCustom {
      * @return ReplyKeyboardMarkup instance.
      */
     ReplyKeyboardMarkup createReplyKeyboardMarkup() {
+
+        log.debug("Process createReplyKeyboardMarkup");
 
         final ReplyKeyboardMarkup replyKeyboardMarkup
                 = new ReplyKeyboardMarkup();
@@ -108,6 +119,9 @@ public abstract class BotCommandCustom {
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
 
+        log.debug("Finished process createReplyKeyboardMarkup: {}",
+                replyKeyboardMarkup);
+
         return replyKeyboardMarkup;
     }
 
@@ -118,6 +132,8 @@ public abstract class BotCommandCustom {
      * @param update
      */
     void addKeyboardAndSendMessage(final Update update) {
+
+        log.debug("Process addKeyboardAndSendMessage for update: {}", update);
 
         final long chatId = update.getMessage().getChatId();
 
@@ -131,6 +147,9 @@ public abstract class BotCommandCustom {
         sendMessageOperation.execute(chatId,
                 "Invoking business request...",
                 replyKeyboardMarkup);
+
+        log.debug("Finished process addKeyboardAndSendMessage: {}",
+                sendMessageOperation);
 
     }
 

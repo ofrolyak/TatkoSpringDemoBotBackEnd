@@ -27,12 +27,7 @@ class TextMessageProcessorService4processReceivedCommand4Test extends MockitoExt
     void process4Test() {
 
         // Before
-        Update update = new Update();
-        Message message = new Message();
-        Chat chat = new Chat();
-        chat.setId(getGen().nextLong());
-        message.setChat(chat);
-        update.setMessage(message);
+        Update update = getGen().nextUpdate();
 
         // When
         doNothing()
